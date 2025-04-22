@@ -1,6 +1,5 @@
 #pragma once
 
-#include <iterator>
 #include <string>
 
 const std::string EMPTY_ERROR_MSG = "";
