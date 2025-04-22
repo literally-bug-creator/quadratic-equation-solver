@@ -1,4 +1,9 @@
+#include "../include/coefficient_set.h"
+#include "../include/solution.h"
+#include "../include/output.h"
 
 int main(){
-    return 0;
+    CoefficientSet coeffs = get_coefficient_set();
+    Solution solution = get_solution(coeffs);
+    output(solution);
 }
