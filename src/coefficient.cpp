@@ -22,6 +22,10 @@ bool is_valid(const Coefficient &coeff){
     return error_msg == EMPTY_ERROR_MSG;
 }
 
+bool is_equal(const Coefficient &left, const Coefficient &right){
+    return left.value == right.value;
+}
+
 Coefficient add(const Coefficient &augend, const Coefficient &addend){
     double sum = augend.value + addend.value;
     return Coefficient(sum);
@@ -60,4 +64,8 @@ Coefficient get_coefficient(){
     std::cin >> value;
 
     return Coefficient(value);
+}
+
+Coefficient get_zero(){
+    return Coefficient(0.0);
 }
