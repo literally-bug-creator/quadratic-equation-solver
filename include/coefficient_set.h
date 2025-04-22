@@ -8,9 +8,18 @@ struct CoefficientSet{
     const Coefficient b;
     const Coefficient c;
     const std::string error_msg;
+
+    CoefficientSet(
+        const Coefficient &a,
+        const Coefficient &b,
+        const Coefficient &c,
+        std::string error_msg = EMPTY_ERROR_MSG
+    ) : a(a), b(b), c(c), error_msg(error_msg) {}
 };
 
-CoefficientSet get_coefficient_set();
+std::string get_error_msg(const CoefficientSet &coeffs);
+
+bool is_valid(const CoefficientSet &coeffs);
 
 Coefficient get_a(const CoefficientSet &coeffs);
 
@@ -18,6 +27,4 @@ Coefficient get_b(const CoefficientSet &coeffs);
 
 Coefficient get_c(const CoefficientSet &coeffs);
 
-bool has_error(const CoefficientSet &coeffs);
-
-std::string get_error_msg(const CoefficientSet &coeffs);
+CoefficientSet get_coefficient_set();
