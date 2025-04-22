@@ -13,7 +13,7 @@ struct CoefficientSet{
         const Coefficient &a,
         const Coefficient &b,
         const Coefficient &c,
-        std::string error_msg = EMPTY_ERROR_MSG
+        const std::string &error_msg = EMPTY_ERROR_MSG
     ) : a(a), b(b), c(c), error_msg(error_msg) {}
 };
 
