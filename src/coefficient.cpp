@@ -13,8 +13,13 @@ Coefficient get_invalid_coefficient(){
     return Coefficient(DEFAULT_VALUE);
 }
 
+std::string get_error_msg(const Coefficient &coeff){
+    return coeff.error_msg;
+}
+
 bool is_valid(const Coefficient &coeff){
-    return coeff.error_msg != EMPTY_ERROR_MSG;
+    std::string error_msg = get_error_msg(coeff);
+    return error_msg == EMPTY_ERROR_MSG;
 }
 
 Coefficient add(const Coefficient &augend, const Coefficient &addend){

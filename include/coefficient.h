@@ -13,6 +13,8 @@ struct Coefficient{
 
 Coefficient get_invalid_coefficient();
 
+std::string get_error_msg(const Coefficient &coeff);
+
 bool is_valid(const Coefficient &coeff);
 
 Coefficient add(const Coefficient &augend, const Coefficient &addend);
