@@ -1,6 +1,7 @@
 #include "../include/coefficient.h"
 #include <cmath>
 #include <string>
+#include <iostream>
 
 const double DEFAULT_VALUE = 0.0;
 const double ZERO = 0.0;
@@ -47,4 +48,11 @@ Coefficient square_root(const Coefficient &radicand){
 
     double root = sqrt(radicand.value);
     return Coefficient(root);
+}
+
+Coefficient get_coefficient(){
+    double value;
+    std::cin >> value;
+
+    return Coefficient(value);
 }
