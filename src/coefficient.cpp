@@ -9,8 +9,12 @@ const double ZERO = 0.0;
 const std::string DIV_BY_ZERO_MSG = "Низя делить на нуль!";
 const std::string ROOT_FROM_NEG_VALUE_MSG = "Низя брать корень из отрицательного числа!";
 
-Coefficient get_invalid_coefficient(){
-    return Coefficient(DEFAULT_VALUE);
+
+Coefficient input_coefficient(){
+    double value;
+    std::cin >> value;
+
+    return Coefficient(value);
 }
 
 std::string get_error_msg(const Coefficient &coeff){
@@ -22,8 +26,25 @@ bool is_valid(const Coefficient &coeff){
     return error_msg == EMPTY_ERROR_MSG;
 }
 
+std::string to_string(const Coefficient &coeff){
+    return std::to_string(coeff.value);
+}
+
 bool is_equal(const Coefficient &left, const Coefficient &right){
     return left.value == right.value;
+}
+
+bool is_not_equal(const Coefficient &left, const Coefficient &right){
+    return left.value != right.value;
+}
+
+bool is_lower_than(const Coefficient &left, const Coefficient &right){
+    return left.value < right.value;
+}
+
+Coefficient neg(const Coefficient &operand){
+    double neg_value = -operand.value;
+    return Coefficient(neg_value);
 }
 
 Coefficient add(const Coefficient &augend, const Coefficient &addend){
@@ -50,6 +71,11 @@ Coefficient div(const Coefficient &dividend, const Coefficient &divisor){
     return Coefficient(quotient);
 }
 
+Coefficient square(const Coefficient &operand){
+    double value = operand.value * operand.value;
+    return Coefficient(value);
+}
+
 Coefficient square_root(const Coefficient &radicand){
     if (radicand.value < ZERO){
         return Coefficient(DEFAULT_VALUE, ROOT_FROM_NEG_VALUE_MSG);
@@ -59,13 +85,18 @@ Coefficient square_root(const Coefficient &radicand){
     return Coefficient(root);
 }
 
-Coefficient get_coefficient(){
-    double value;
-    std::cin >> value;
-
-    return Coefficient(value);
+Coefficient get_invalid_coefficient(){
+    return Coefficient(DEFAULT_VALUE);
 }
 
 Coefficient get_zero(){
     return Coefficient(0.0);
+}
+
+Coefficient get_two(){
+    return Coefficient(2);
+}
+
+Coefficient get_four(){
+    return Coefficient(4);
 }
