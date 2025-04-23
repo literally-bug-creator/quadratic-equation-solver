@@ -2,8 +2,9 @@
 #include "../include/solution.h"
 #include "../include/output.h"
 
+
 int main(){
-    CoefficientSet coeffs = get_coefficient_set();
+    CoefficientSet coeffs = input_coefficient_set();
     Solution solution = get_solution(coeffs);
     output(solution);
 }
