@@ -1,6 +1,5 @@
 #include "../include/coefficient.h"
 #include <cmath>
-#include <string>
 #include <iostream>
 
 const double DEFAULT_VALUE = 0.0;
