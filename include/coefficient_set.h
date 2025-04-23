@@ -17,9 +17,7 @@ struct CoefficientSet{
     ) : a(a), b(b), c(c), error_msg(error_msg) {}
 };
 
-std::string get_error_msg(const CoefficientSet &coeffs);
-
-bool is_valid(const CoefficientSet &coeffs);
+CoefficientSet input_coefficient_set();
 
 Coefficient get_a(const CoefficientSet &coeffs);
 
@@ -27,4 +25,6 @@ Coefficient get_b(const CoefficientSet &coeffs);
 
 Coefficient get_c(const CoefficientSet &coeffs);
 
-CoefficientSet get_coefficient_set();
+std::string get_error_msg(const CoefficientSet &coeffs);
+
+bool is_valid(const CoefficientSet &coeffs);
