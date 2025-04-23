@@ -1,5 +1,4 @@
 #include "../include/coefficient_set.h"
-#include <string>
 
 const std::string NEW_LINE = "\n";
 
