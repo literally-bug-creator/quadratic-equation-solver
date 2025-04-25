@@ -28,8 +28,6 @@ Coefficient mul(const Coefficient &multiplicand, const Coefficient &multiplier);
 
 Coefficient div(const Coefficient &dividend, const Coefficient &divisor);
 
-Coefficient square(const Coefficient &operand);
-
 Coefficient square_root(const Coefficient &radicand);
 
 Coefficient get_invalid_coefficient();
