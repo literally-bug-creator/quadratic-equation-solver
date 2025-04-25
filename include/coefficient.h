@@ -2,7 +2,17 @@
 
 #include <string>
 
-struct Coefficient;
+const std::string EMPTY_ERROR_MSG = "";
+
+struct Coefficient{
+    const double value;
+    const std::string error_msg;
+
+    Coefficient(
+        const double number,
+        const std::string &error_msg = EMPTY_ERROR_MSG
+    ) : value(number), error_msg(error_msg) {}
+};
 
 Coefficient input_coefficient();
 
