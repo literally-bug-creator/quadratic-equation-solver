@@ -7,19 +7,9 @@ const double ZERO = 0;
 const double TWO = 2;
 const double FOUR = 4;
 
-const std::string EMPTY_ERROR_MSG = "";
 const std::string DIV_BY_ZERO_MSG = "Низя делить на нуль!";
 const std::string ROOT_FROM_NEG_VALUE_MSG = "Низя брать корень из отрицательного числа!";
 
-struct Coefficient{
-    const double value;
-    const std::string error_msg;
-
-    Coefficient(
-        const double number,
-        const std::string &error_msg = EMPTY_ERROR_MSG
-    ) : value(number), error_msg(error_msg) {}
-};
 
 Coefficient input_coefficient(){
     double value;
