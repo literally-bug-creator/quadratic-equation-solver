@@ -2,12 +2,24 @@
 #include <cmath>
 #include <iostream>
 
-const double DEFAULT_VALUE = 0.0;
-const double ZERO = 0.0;
+const double DEFAULT_VALUE = 0;
+const double ZERO = 0;
+const double TWO = 2;
+const double FOUR = 4;
 
+const std::string EMPTY_ERROR_MSG = "";
 const std::string DIV_BY_ZERO_MSG = "Низя делить на нуль!";
 const std::string ROOT_FROM_NEG_VALUE_MSG = "Низя брать корень из отрицательного числа!";
 
+struct Coefficient{
+    const double value;
+    const std::string error_msg;
+
+    Coefficient(
+        const double number,
+        const std::string &error_msg = EMPTY_ERROR_MSG
+    ) : value(number), error_msg(error_msg) {}
+};
 
 Coefficient input_coefficient(){
     double value;
@@ -70,11 +82,6 @@ Coefficient div(const Coefficient &dividend, const Coefficient &divisor){
     return Coefficient(quotient);
 }
 
-Coefficient square(const Coefficient &operand){
-    double value = operand.value * operand.value;
-    return Coefficient(value);
-}
-
 Coefficient square_root(const Coefficient &radicand){
     if (radicand.value < ZERO){
         return Coefficient(DEFAULT_VALUE, ROOT_FROM_NEG_VALUE_MSG);
@@ -89,13 +96,13 @@ Coefficient get_invalid_coefficient(){
 }
 
 Coefficient get_zero(){
-    return Coefficient(0.0);
+    return Coefficient(ZERO);
 }
 
 Coefficient get_two(){
-    return Coefficient(2);
+    return Coefficient(TWO);
 }
 
 Coefficient get_four(){
-    return Coefficient(4);
+    return Coefficient(FOUR);
 }
