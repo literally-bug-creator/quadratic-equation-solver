@@ -2,4 +2,4 @@
 
 #include "solution.h"
 
-void output(const Solution &solution);
+void output( const Solution& solution );

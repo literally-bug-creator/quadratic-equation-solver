@@ -4,41 +4,41 @@
 
 const std::string EMPTY_ERROR_MSG = "";
 
-struct Coefficient{
+struct Coefficient {
     const double value;
     const std::string error_msg;
 
-    Coefficient(
-        const double number,
-        const std::string &error_msg = EMPTY_ERROR_MSG
-    ) : value(number), error_msg(error_msg) {}
+    Coefficient( const double number,
+                 const std::string& error_msg = EMPTY_ERROR_MSG ):
+        value( number ), error_msg( error_msg ) {}
 };
 
 Coefficient input_coefficient();
 
-std::string get_error_msg(const Coefficient &coeff);
+std::string get_error_msg( const Coefficient& coeff );
 
-bool is_valid(const Coefficient &coeff);
+bool is_valid( const Coefficient& coeff );
 
-std::string to_string(const Coefficient &coeff);
+std::string to_string( const Coefficient& coeff );
 
-bool is_equal(const Coefficient &left, const Coefficient &right);
+bool is_equal( const Coefficient& left, const Coefficient& right );
 
-bool is_not_equal(const Coefficient &left, const Coefficient &right);
+bool is_not_equal( const Coefficient& left, const Coefficient& right );
 
-bool is_lower_than(const Coefficient &left, const Coefficient &right);
+bool is_lower_than( const Coefficient& left, const Coefficient& right );
 
-Coefficient neg(const Coefficient &operand);
+Coefficient neg( const Coefficient& operand );
 
-Coefficient add(const Coefficient &augend, const Coefficient &addend);
+Coefficient add( const Coefficient& augend, const Coefficient& addend );
 
-Coefficient sub(const Coefficient &minuend, const Coefficient &subtrahend);
+Coefficient sub( const Coefficient& minuend, const Coefficient& subtrahend );
 
-Coefficient mul(const Coefficient &multiplicand, const Coefficient &multiplier);
+Coefficient mul( const Coefficient& multiplicand,
+                 const Coefficient& multiplier );
 
-Coefficient div(const Coefficient &dividend, const Coefficient &divisor);
+Coefficient div( const Coefficient& dividend, const Coefficient& divisor );
 
-Coefficient square_root(const Coefficient &radicand);
+Coefficient square_root( const Coefficient& radicand );
 
 Coefficient get_invalid_coefficient();
 
