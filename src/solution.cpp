@@ -42,7 +42,7 @@ bool is_quadratic_equation(const CoefficientSet &coeffs){
 }
 
 Coefficient get_discriminant(const Coefficient &a, const Coefficient &b, const Coefficient &c){
-    Coefficient square_b = square(b);
+    Coefficient square_b = mul(b, b);
     Coefficient four = get_four();
     Coefficient semi_discriminant = mul(mul(four, a), c);
     Coefficient discriminant = sub(square_b, semi_discriminant);
