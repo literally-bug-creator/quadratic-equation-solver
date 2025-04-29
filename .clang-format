@@ -28,7 +28,7 @@ BinPackParameters: "false"
 BreakConstructorInitializers: AfterColon
 ConstructorInitializerAllOnOneLineOrOnePerLine: "true"
 DerivePointerAlignment: "false"
-FixNamespaceComments: "true"
+FixNamespaceComments: "false"
 IndentCaseLabels: "false"
 IndentPPDirectives: AfterHash
 IndentWidth: "4"
