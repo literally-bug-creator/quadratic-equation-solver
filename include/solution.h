@@ -7,7 +7,7 @@ enum SolutionType {
     TWO_ROOTS,
     ONE_ROOT,
     NO_ROOTS,
-    ANY_ROOT,
+    INF_ROOTS,
     NO_SOLUTION,
 };
 
