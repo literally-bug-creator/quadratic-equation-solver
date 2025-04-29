@@ -4,21 +4,20 @@
 #include <iostream>
 #include <optional>
 
-const double ZERO = 0;
-
-const std::string INVALID_INPUT_MSG = "Некорректный ввод!";
-const std::string DIV_BY_ZERO_MSG = "Низя делить на нуль!";
-const std::string ROOT_FROM_NEG_MSG =
-    "Низя брать корень из отрицательного числа!";
-
-const Error INVALID_INPUT_ERROR =
-    make_error( INVALID_INPUT, INVALID_INPUT_MSG );
-const Error DIV_BY_ZERO_ERROR =
-    make_error( CALCULATION_ERROR, DIV_BY_ZERO_MSG );
-const Error ROOT_FROM_NEG_ERROR =
-    make_error( CALCULATION_ERROR, ROOT_FROM_NEG_MSG );
-
 namespace {
+    const double ZERO = 0;
+
+    const std::string INVALID_INPUT_MSG = "Некорректный ввод";
+    const std::string DIV_BY_ZERO_MSG = "Деление на ноль";
+    const std::string ROOT_FROM_NEG_MSG = "Корень из отрицательного числа";
+
+    const Error INVALID_INPUT_ERROR =
+        make_error( INVALID_INPUT, INVALID_INPUT_MSG );
+    const Error DIV_BY_ZERO_ERROR =
+        make_error( CALCULATION_ERROR, DIV_BY_ZERO_MSG );
+    const Error ROOT_FROM_NEG_ERROR =
+        make_error( CALCULATION_ERROR, ROOT_FROM_NEG_MSG );
+
     std::optional<double> read_value() {
         double value;
         if ( std::cin >> value ) { return value; }
