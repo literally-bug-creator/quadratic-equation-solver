@@ -1,0 +1,24 @@
+#include <string>
+
+const std::string EMPTY_ERROR_MSG = "";
+
+enum ErrorCode {
+    OK,
+    INVALID_INPUT,
+    CALCULATION_ERROR,
+    SOLUTION_ERROR,
+};
+
+struct Error {
+    const ErrorCode code;
+    const std::string message;
+
+    Error( const ErrorCode code, const std::string& message ):
+        code( code ), message( message ) {}
+};
+
+Error make_error( const ErrorCode code, const std::string& message );
+
+ErrorCode get_error_code( const Error& error );
+
+std::string get_error_message( const Error& error );
