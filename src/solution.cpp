@@ -1,157 +1,117 @@
 #include "../include/solution.h"
 
-const std::string DISCRIMINANT_BELOW_ZERO_MSG = "Дискриминант меньше нуля.";
+#include "../include/number.h"
+
+namespace {
+    const double ZERO_DOUBLE = 0;
+    const double FOUR_DOUBLE = 4;
+    const double TWO_DOUBLE = 4;
+    const Number ZERO_NUMBER = make_number( ZERO_DOUBLE );
+    const Number NULL_NUMBER = make_number( ZERO_DOUBLE, DEFAULT_ERROR, true );
+    const Number FOUR_NUMBER = make_number( FOUR_DOUBLE );
+    const Number TWO_NUMBER = make_number( TWO_DOUBLE );
+
+    const std::string INVALID_NUMBER_KIT_MSG = "Некорректный набор чисел";
+
+    const Error INVALID_NUMBER_KIT_ERROR =
+        make_error( SOLUTION_ERROR, INVALID_NUMBER_KIT_MSG );
+
+    bool has_null( const NumberKit& nums ) {
+        Number a = get_a( nums );
+        Number b = get_b( nums );
+        Number c = get_c( nums );
+
+        return is_null( a ) || is_null( b ) || is_null( c );
+    }
+
+    bool has_error( const NumberKit& nums ) {
+        Error error = get_error( nums );
+
+        return error.code != OK;
+    }
+
+    bool is_valid( const NumberKit& nums ) {
+        return has_error( nums ) || has_null( nums );
+    }
+
+    bool is_quadratic_equation( const NumberKit& nums ) {
+        if ( !is_valid( nums ) ) { return false; }
+
+        return !is_equal( get_a( nums ), ZERO_NUMBER );
+    }
+
+    Number get_discriminant( const NumberKit& nums ) {
+        Number a = get_a( nums );
+        Number b = get_b( nums );
+        Number c = get_c( nums );
+        Number square_b = mul( b, b );
+        Number semi_disc = mul( mul( FOUR_NUMBER, a ), c );
+
+        return sub( square_b, semi_disc );
+    }
+
+    Number get_first_root( const NumberKit& nums, const Number& discriminant ) {
+        Number a = get_a( nums );
+        Number neg_b = neg( get_b( nums ) );
+        Number neg_disc = neg( discriminant );
+        Number two_a = mul( TWO_NUMBER, a );
+
+        return div( add( neg_b, neg_disc ), two_a );
+    }
+
+    Number get_second_root( const NumberKit& nums,
+                            const Number& discriminant ) {
+        Number a = get_a( nums );
+        Number neg_b = neg( get_b( nums ) );
+        Number neg_disc = neg( discriminant );
+        Number two_a = mul( TWO_NUMBER, a );
+
+        return div( sub( neg_b, neg_disc ), two_a );
+    }
+
+    Solution make_solution( const SolutionType& type,
+                            const Number& first_root,
+                            const Number& second_root,
+                            const Error& error ) {
+        return Solution( type, first_root, second_root, error );
+    }
+
+    Solution solve_quadratic_equation( const NumberKit& nums ) {
+        Number discriminant = get_discriminant( nums );
+
+        Number x1 = get_first_root( nums, discriminant );
+        Number x2 = get_second_root( nums, discriminant );
+
+        return make_solution(
+            TWO_ROOTS, x1, x2 ); // Подумать над валидацией корней
+    }
+
+    bool is_linear_equation( const NumberKit& nums ) {
+        if ( !is_valid( nums ) ) { return false; }
+
+        return is_equal( get_a( nums ), ZERO_NUMBER );
+    }
+}
+
+Solution get_solution( const NumberKit& nums ) {
+    if ( is_quadratic_equation( nums ) ) {
+        return solve_quadratic_equation( nums );
+    }
+
+    else if ( is_linear_equation( nums ) ) {
+        return solve_linear_equation( nums );
+    }
+
+    return make_solution(
+        NO_SOLUTION, NULL_NUMBER, NULL_NUMBER, INVALID_NUMBER_KIT_ERROR );
+}
 
 SolutionType get_solution_type( const Solution& solution ) {
     return solution.type;
 }
 
-Coefficient get_first_root( const Solution& solution ) { return solution.x1; }
+Number get_first_root( const Solution& solution ) { return solution.x1; }
 
-Coefficient get_second_root( const Solution& solution ) { return solution.x2; }
+Number get_second_root( const Solution& solution ) { return solution.x2; }
 
-std::string get_error_msg( const Solution& solution ) {
-    return solution.error_msg;
-}
-
-bool is_valid( const Solution& solution ) {
-    std::string error_msg = get_error_msg( solution );
-
-    return error_msg == EMPTY_ERROR_MSG;
-}
-
-Solution get_invalid_solution( const std::string& error_msg ) {
-    SolutionType type = NO_ROOTS;
-    Coefficient x1 = get_invalid_coefficient();
-    Coefficient x2 = get_invalid_coefficient();
-
-    return Solution( type, x1, x2, error_msg );
-}
-
-bool is_quadratic_equation( const CoefficientSet& coeffs ) {
-    Coefficient a = get_a( coeffs );
-    Coefficient b = get_b( coeffs );
-    Coefficient zero = get_zero();
-
-    return is_not_equal( a, zero );
-}
-
-Coefficient get_discriminant( const Coefficient& a,
-                              const Coefficient& b,
-                              const Coefficient& c ) {
-    Coefficient square_b = mul( b, b );
-    Coefficient four = get_four();
-    Coefficient semi_discriminant = mul( mul( four, a ), c );
-    Coefficient discriminant = sub( square_b, semi_discriminant );
-
-    return discriminant;
-}
-
-Coefficient get_x1( const Coefficient& a,
-                    const Coefficient& b,
-                    const Coefficient& discriminant ) {
-    Coefficient two = get_two();
-    Coefficient neg_b = neg( b );
-    Coefficient discriminant_root = square_root( discriminant );
-    Coefficient two_mul_a = mul( a, two );
-    Coefficient x1 = div( add( neg_b, discriminant_root ), two_mul_a );
-
-    return x1;
-}
-
-Coefficient get_x2( const Coefficient& a,
-                    const Coefficient& b,
-                    const Coefficient& discriminant ) {
-    Coefficient two = get_two();
-    Coefficient neg_b = neg( b );
-    Coefficient discriminant_root = square_root( discriminant );
-    Coefficient two_mul_a = mul( a, two );
-    Coefficient x2 = div( sub( neg_b, discriminant_root ), two_mul_a );
-
-    return x2;
-}
-
-Solution get_quadratic_solution( const Coefficient& x1,
-                                 const Coefficient& x2 ) {
-    return Solution( QUADRATIC, x1, x2, EMPTY_ERROR_MSG );
-}
-
-Solution solve_quadratic_equation( const CoefficientSet& coeffs ) {
-    Coefficient a = get_a( coeffs );
-    Coefficient b = get_b( coeffs );
-    Coefficient c = get_c( coeffs );
-    Coefficient discriminant = get_discriminant( a, b, c );
-    Coefficient zero = get_zero();
-
-    if ( is_lower_than( discriminant, zero ) ) {
-        return get_invalid_solution( DISCRIMINANT_BELOW_ZERO_MSG );
-    }
-
-    Coefficient x1 = get_x1( a, b, discriminant );
-    Coefficient x2 = get_x2( a, b, discriminant );
-
-    return get_quadratic_solution( x1, x2 );
-}
-
-bool is_linear_equation( const CoefficientSet& coeffs ) {
-    Coefficient a = get_a( coeffs );
-    Coefficient b = get_b( coeffs );
-    Coefficient zero = get_zero();
-
-    return is_equal( a, zero ) && is_not_equal( b, zero );
-}
-
-Solution get_linear_solution( const Coefficient& x ) {
-    Coefficient x2 = get_invalid_coefficient();
-    return Solution( LINEAR, x, x2, EMPTY_ERROR_MSG );
-}
-
-Solution solve_linear_equation( const CoefficientSet& coeffs ) {
-    Coefficient b = get_b( coeffs );
-    Coefficient c = get_c( coeffs );
-    Coefficient x = neg( div( c, b ) );
-
-    return get_linear_solution( x );
-}
-
-bool is_no_solution( const CoefficientSet& coeffs ) {
-    Coefficient c = get_c( coeffs );
-    Coefficient zero = get_zero();
-
-    return is_not_equal( c, zero );
-}
-
-Solution get_no_solution() {
-    SolutionType type = NO_ROOTS;
-    Coefficient x1 = get_invalid_coefficient();
-    Coefficient x2 = get_invalid_coefficient();
-
-    return Solution( type, x1, x2, EMPTY_ERROR_MSG );
-}
-
-Solution get_any_root_solution() {
-    SolutionType type = ANY_ROOT;
-    Coefficient x1 = get_invalid_coefficient();
-    Coefficient x2 = get_invalid_coefficient();
-
-    return Solution( type, x1, x2, EMPTY_ERROR_MSG );
-}
-
-Solution get_solution( const CoefficientSet& coeffs ) {
-    if ( !is_valid( coeffs ) ) {
-        std::string error_msg = get_error_msg( coeffs );
-        return get_invalid_solution( error_msg );
-    }
-
-    if ( is_quadratic_equation( coeffs ) ) {
-        return solve_quadratic_equation( coeffs );
-    }
-
-    if ( is_linear_equation( coeffs ) ) {
-        return solve_linear_equation( coeffs );
-    }
-
-    if ( is_no_solution( coeffs ) ) { return get_no_solution(); }
-
-    return get_any_root_solution();
-}
+Error get_error( const Solution& solution ) { return solution.error; }
