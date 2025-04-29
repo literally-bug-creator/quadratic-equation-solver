@@ -33,7 +33,7 @@ NumberKit input_number_kit() {
     Number b = input_number();
     Number c = input_number();
 
-    if ( has_error( a, b, c ) || has_null( a, b, c ) ) {
+    if ( has_error( a, b, c ) || has_null( a, b, c ) ) { // Обдумать
         return make_number_kit( a, b, c, INVALID_INPUT_ERROR );
     }
 
