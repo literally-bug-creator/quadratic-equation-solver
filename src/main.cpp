@@ -1,9 +1,9 @@
-#include "../include/coefficient_set.h"
+#include "../include/number_kit.h"
 #include "../include/output.h"
 #include "../include/solution.h"
 
 int main() {
-    CoefficientSet coeffs = input_coefficient_set();
-    Solution solution = get_solution( coeffs );
+    NumberKit nums = input_number_kit();
+    Solution solution = get_solution( nums );
     output( solution );
 }
