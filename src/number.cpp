@@ -4,7 +4,6 @@
 #include <iostream>
 #include <optional>
 
-const double NULL_VALUE = std::nan( "" );
 const double ZERO = 0;
 
 const std::string INVALID_INPUT_MSG = "Некорректный ввод!";
