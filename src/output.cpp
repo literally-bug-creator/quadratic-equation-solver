@@ -4,54 +4,82 @@
 
 const std::string FIRST_ROOT_MSG = "X1 = ";
 const std::string SECOND_ROOT_MSG = "X2 = ";
-const std::string ONE_ROOT_MSG = "X = ";
-const std::string ANY_ROOT_MSG = "Бесконечное множество решений!";
-const std::string NO_ROOT_MSG = "Нет корней!";
+const std::string SINGLE_ROOT_MSG = "X = ";
+const std::string INF_ROOTS_MSG = "Бесконечное множество решений!";
+const std::string NO_ROOTS_MSG = "Нет корней!";
 
-void output_invalid_solution( const Solution& solution ) {
-    std::string msg = get_error_msg( solution );
-    std::cout << msg << std::endl;
+namespace {
+    bool has_error( const Solution& solution ) {
+        Error error = get_error( solution );
+        return get_error_code( error ) != OK;
+    }
+
+    void output_error_solution( const Solution& solution ) {
+        Error error = get_error( solution );
+        std::string error_msg = get_error_message( error );
+
+        std::cout << error_msg << std::endl;
+    }
+
+    bool has_same_roots( const Solution& solution ) {
+        Number x1 = get_first_root( solution );
+        Number x2 = get_second_root( solution );
+
+        return is_equal( x1, x2 );
+    }
+
+    void output_two_roots( const Solution& solution ) {
+        Number x1 = get_first_root( solution );
+        Number x2 = get_second_root( solution );
+
+        std::cout << FIRST_ROOT_MSG << to_string( x1 ) << std::endl;
+        std::cout << SECOND_ROOT_MSG << to_string( x2 ) << std::endl;
+    }
+
+    void output_single_root( const Solution& solution ) {
+        Number x = get_first_root( solution );
+
+        std::cout << SINGLE_ROOT_MSG << to_string( x ) << std::endl;
+    }
+
+    void output_inf_roots( const Solution& solution ) {
+        std::cout << INF_ROOTS_MSG << std::endl;
+    }
+
+    void output_no_roots( const Solution& solution ) {
+        std::cout << NO_ROOTS_MSG << std::endl;
+    }
+
+    void output_solution( const Solution& solution ) {
+        SolutionType type = get_solution_type( solution );
+
+        if ( ( type == TWO_ROOTS ) && ( !has_same_roots( solution ) ) ) {
+            output_two_roots( solution );
+        }
+
+        else if ( ( type == TWO_ROOTS ) && ( has_same_roots( solution ) ) ) {
+            output_single_root( solution );
+        }
+
+        else if ( type == ONE_ROOT ) {
+            output_single_root( solution );
+        }
+
+        else if ( type == INF_ROOTS ) {
+            output_inf_roots( solution );
+        }
+
+        else {
+            output_no_roots( solution );
+        }
+    }
 }
-
-void output_quadratic_solution( const Solution& solution ) {
-    Coefficient x1 = get_first_root( solution );
-    Coefficient x2 = get_second_root( solution );
-
-    std::cout << FIRST_ROOT_MSG << to_string( x1 ) << std::endl;
-    std::cout << SECOND_ROOT_MSG << to_string( x2 ) << std::endl;
-}
-
-void output_linear_solution( const Solution& solution ) {
-    Coefficient x1 = get_first_root( solution );
-
-    std::cout << ONE_ROOT_MSG << to_string( x1 ) << std::endl;
-}
-
-void output_any_root_solution() { std::cout << ANY_ROOT_MSG << std::endl; }
-
-void output_no_root_solution() { std::cout << NO_ROOT_MSG << std::endl; }
 
 void output( const Solution& solution ) {
-    if ( !is_valid( solution ) ) {
-        output_invalid_solution( solution );
+    if ( has_error( solution ) ) {
+        output_error_solution( solution );
         return;
     }
 
-    SolutionType type = get_solution_type( solution );
-
-    if ( type == QUADRATIC ) {
-        output_quadratic_solution( solution );
-    }
-
-    else if ( type == LINEAR ) {
-        output_linear_solution( solution );
-    }
-
-    else if ( type == ANY_ROOT ) {
-        output_any_root_solution();
-    }
-
-    else {
-        output_no_root_solution();
-    }
+    output_solution( solution );
 }
