@@ -50,40 +50,57 @@ namespace {
         return sub( square_b, semi_disc );
     }
 
-    Number get_first_root( const NumberKit& nums, const Number& discriminant ) {
+    Number get_first_root( const NumberKit& nums ) {
         Number a = get_a( nums );
         Number neg_b = neg( get_b( nums ) );
-        Number neg_disc = neg( discriminant );
+        Number disc = get_discriminant( nums );
+        Number neg_disc = neg( disc );
         Number two_a = mul( TWO_NUMBER, a );
 
         return div( add( neg_b, neg_disc ), two_a );
     }
 
-    Number get_second_root( const NumberKit& nums,
-                            const Number& discriminant ) {
+    Number get_second_root( const NumberKit& nums ) {
         Number a = get_a( nums );
         Number neg_b = neg( get_b( nums ) );
-        Number neg_disc = neg( discriminant );
+        Number disc = get_discriminant( nums );
+        Number neg_disc = neg( disc );
         Number two_a = mul( TWO_NUMBER, a );
 
         return div( sub( neg_b, neg_disc ), two_a );
     }
 
-    Solution make_solution( const SolutionType& type,
-                            const Number& first_root,
-                            const Number& second_root,
-                            const Error& error ) {
-        return Solution( type, first_root, second_root, error );
+    bool has_no_roots( const NumberKit& nums ) {
+        Number a = get_a( nums );
+        Number b = get_b( nums );
+        Number c = get_c( nums );
+
+        return is_equal( a, ZERO_NUMBER ) && is_equal( b, ZERO_NUMBER ) &&
+               !is_equal( c, ZERO_NUMBER );
+    }
+
+    bool has_inf_roots( const NumberKit& nums ) {
+        Number a = get_a( nums );
+        Number b = get_b( nums );
+        Number c = get_c( nums );
+
+        return is_equal( a, ZERO_NUMBER ) && is_equal( b, ZERO_NUMBER ) &&
+               is_equal( c, ZERO_NUMBER );
     }
 
     Solution solve_quadratic_equation( const NumberKit& nums ) {
-        Number discriminant = get_discriminant( nums );
+        if ( has_no_roots( nums ) ) {
+            return make_solution( NO_ROOTS, NULL_NUMBER, NULL_NUMBER );
+        }
 
-        Number x1 = get_first_root( nums, discriminant );
-        Number x2 = get_second_root( nums, discriminant );
+        else if ( has_inf_roots( nums ) ) {
+            return make_solution( INF_ROOTS, NULL_NUMBER, NULL_NUMBER );
+        }
 
-        return make_solution(
-            TWO_ROOTS, x1, x2 ); // Подумать над валидацией корней
+        Number x1 = get_first_root( nums );
+        Number x2 = get_second_root( nums );
+
+        return make_solution( TWO_ROOTS, x1, x2 );
     }
 
     bool is_linear_equation( const NumberKit& nums ) {
@@ -91,6 +108,32 @@ namespace {
 
         return is_equal( get_a( nums ), ZERO_NUMBER );
     }
+
+    Number get_root( const NumberKit& nums ) {
+        Number b = get_b( nums );
+        Number neg_c = neg( get_c( nums ) );
+
+        return div( neg_c, b );
+    }
+
+    Solution solve_linear_equation( const NumberKit& nums ) {
+        if ( has_no_roots( nums ) ) {
+            return make_solution( NO_ROOTS, NULL_NUMBER, NULL_NUMBER );
+        }
+
+        else if ( has_inf_roots( nums ) ) {
+            return make_solution( INF_ROOTS, NULL_NUMBER, NULL_NUMBER );
+        }
+
+        return make_solution( ONE_ROOT, get_root( nums ), NULL_NUMBER );
+    }
+}
+
+Solution make_solution( const SolutionType& type,
+                        const Number& first_root,
+                        const Number& second_root,
+                        const Error& error ) {
+    return Solution( type, first_root, second_root, error );
 }
 
 Solution get_solution( const NumberKit& nums ) {
