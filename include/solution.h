@@ -7,8 +7,7 @@ enum SolutionType {
     TWO_ROOTS,
     ONE_ROOT,
     NO_ROOTS,
-    INF_ROOTS,
-    NO_SOLUTION,
+    INF_ROOTS
 };
 
 struct Solution {
