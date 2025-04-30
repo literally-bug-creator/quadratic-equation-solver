@@ -42,13 +42,9 @@ namespace {
         std::cout << SINGLE_ROOT_MSG << to_string( x ) << std::endl;
     }
 
-    void output_inf_roots( const Solution& solution ) {
-        std::cout << INF_ROOTS_MSG << std::endl;
-    }
+    void output_inf_roots() { std::cout << INF_ROOTS_MSG << std::endl; }
 
-    void output_no_roots( const Solution& solution ) {
-        std::cout << NO_ROOTS_MSG << std::endl;
-    }
+    void output_no_roots() { std::cout << NO_ROOTS_MSG << std::endl; }
 
     void output_solution( const Solution& solution ) {
         SolutionType type = get_solution_type( solution );
@@ -66,11 +62,11 @@ namespace {
         }
 
         else if ( type == INF_ROOTS ) {
-            output_inf_roots( solution );
+            output_inf_roots();
         }
 
         else {
-            output_no_roots( solution );
+            output_no_roots();
         }
     }
 }
