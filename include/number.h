@@ -4,6 +4,7 @@
 
 #include "error.h"
 
+const std::string EMPTY_ERROR_MSG = "";
 const Error DEFAULT_ERROR = make_error( OK, EMPTY_ERROR_MSG );
 
 struct Number {
