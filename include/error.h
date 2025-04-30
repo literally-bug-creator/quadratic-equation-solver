@@ -1,6 +1,6 @@
-#include <string>
+#pragma once
 
-const std::string EMPTY_ERROR_MSG = "";
+#include <string>
 
 enum ErrorCode {
     OK,
