@@ -5,7 +5,7 @@
 namespace {
     const double ZERO_DOUBLE = 0;
     const double FOUR_DOUBLE = 4;
-    const double TWO_DOUBLE = 4;
+    const double TWO_DOUBLE = 2;
     const Number ZERO_NUMBER = make_number( ZERO_DOUBLE );
     const Number NULL_NUMBER = make_number( ZERO_DOUBLE, DEFAULT_ERROR, true );
     const Number FOUR_NUMBER = make_number( FOUR_DOUBLE );
@@ -31,7 +31,7 @@ namespace {
     }
 
     bool is_valid( const NumberKit& nums ) {
-        return has_error( nums ) || has_null( nums );
+        return !( has_error( nums ) || has_null( nums ) );
     }
 
     bool is_quadratic_equation( const NumberKit& nums ) {
@@ -51,23 +51,22 @@ namespace {
     }
 
     Number get_first_root( const NumberKit& nums ) {
-        Number a = get_a( nums );
         Number neg_b = neg( get_b( nums ) );
         Number disc = get_discriminant( nums );
-        Number neg_disc = neg( disc );
-        Number two_a = mul( TWO_NUMBER, a );
+        Number disc_root = square_root( disc );
+        Number two_a = mul( TWO_NUMBER, get_a( nums ) );
 
-        return div( add( neg_b, neg_disc ), two_a );
+        return div( add( neg_b, disc_root ), two_a );
     }
 
     Number get_second_root( const NumberKit& nums ) {
         Number a = get_a( nums );
         Number neg_b = neg( get_b( nums ) );
         Number disc = get_discriminant( nums );
-        Number neg_disc = neg( disc );
+        Number disc_root = square_root( disc );
         Number two_a = mul( TWO_NUMBER, a );
 
-        return div( sub( neg_b, neg_disc ), two_a );
+        return div( sub( neg_b, disc_root ), two_a );
     }
 
     bool has_no_roots( const NumberKit& nums ) {
@@ -109,7 +108,7 @@ namespace {
         return is_equal( get_a( nums ), ZERO_NUMBER );
     }
 
-    Number get_root( const NumberKit& nums ) {
+    Number get_single_root( const NumberKit& nums ) {
         Number b = get_b( nums );
         Number neg_c = neg( get_c( nums ) );
 
@@ -125,7 +124,7 @@ namespace {
             return make_solution( INF_ROOTS, NULL_NUMBER, NULL_NUMBER );
         }
 
-        return make_solution( ONE_ROOT, get_root( nums ), NULL_NUMBER );
+        return make_solution( ONE_ROOT, get_single_root( nums ), NULL_NUMBER );
     }
 }
 
@@ -146,7 +145,7 @@ Solution get_solution( const NumberKit& nums ) {
     }
 
     return make_solution(
-        NO_SOLUTION, NULL_NUMBER, NULL_NUMBER, INVALID_NUMBER_KIT_ERROR );
+        NO_ROOTS, NULL_NUMBER, NULL_NUMBER, INVALID_NUMBER_KIT_ERROR );
 }
 
 SolutionType get_solution_type( const Solution& solution ) {
