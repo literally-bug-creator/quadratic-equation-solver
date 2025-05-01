@@ -2,9 +2,13 @@
 
 #include <cmath>
 #include <error.h>
+#include <iomanip>
+#include <sstream>
+#include <string>
 
 #include "../src/number.cpp"
 #include "tools.cpp"
+
 
 TEST_CASE( "make_number(rand_value, rand_error, not_null) in cycle",
            "[public]" ) {
@@ -31,6 +35,133 @@ TEST_CASE( "make_number(rand_value, rand_error, is_null) in cycle",
         REQUIRE( num.value == rand_value );
         REQUIRE( num.error.code == rand_error.code );
         REQUIRE( num.error.message == rand_error.message );
+    }
+}
+
+TEST_CASE( "is_null(0)", "[public]" ) {
+    Number number = make_number( 0 );
+
+    REQUIRE( !is_null( number ) );
+}
+
+TEST_CASE( "is_null(-5)", "[public]" ) {
+    Number number = make_number( -5 );
+
+    REQUIRE( !is_null( number ) );
+}
+
+TEST_CASE( "is_null(4)", "[public]" ) {
+    Number number = make_number( 4 );
+
+    REQUIRE( !is_null( number ) );
+}
+
+TEST_CASE( "is_null(4, ok, true)", "[public]" ) {
+    Number number = make_number( 4, DEFAULT_ERROR, true );
+
+    REQUIRE( is_null( number ) );
+}
+
+TEST_CASE( "is_null(4, rand_error) in cycle", "[public]" ) {
+    for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
+        Error error = random_error();
+        Number number = make_number( 4, error );
+
+        REQUIRE( !is_null( number ) );
+    }
+}
+
+TEST_CASE( "is_null(4, rand_error, true) in cycle", "[public]" ) {
+    for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
+        Error error = random_error();
+        Number number = make_number( 4, error, true );
+
+        REQUIRE( is_null( number ) );
+    }
+}
+
+TEST_CASE( "is_null(-4, rand_error) in cycle", "[public]" ) {
+    for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
+        Error error = random_error();
+        Number number = make_number( -4, error );
+
+        REQUIRE( !is_null( number ) );
+    }
+}
+
+TEST_CASE( "is_null(rand_value) in cycle", "[public]" ) {
+    for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
+        double value = random_double(DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT);
+        Number number = make_number( value );
+
+        REQUIRE( !is_null( number ) );
+    }
+}
+
+TEST_CASE( "is_null(rand_value, ok, true) in cycle", "[public]" ) {
+    for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
+        double value = random_double(DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT);
+        Number number = make_number( value, DEFAULT_ERROR, true );
+
+        REQUIRE( is_null( number ) );
+    }
+}
+
+TEST_CASE( "is_null(rand_value, rand_error) in cycle", "[public]" ) {
+    for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
+        Error error = random_error();
+        double value = random_double(DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT);
+        Number number = make_number( value, error );
+
+        REQUIRE( !is_null( number ) );
+    }
+}
+
+TEST_CASE( "is_null(rand_value, rand_error, true) in cycle", "[public]" ) {
+    for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
+        Error error = random_error();
+        double value = random_double(DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT);
+        Number number = make_number( value, error, true );
+
+        REQUIRE( is_null( number ) );
+    }
+}
+
+TEST_CASE( "get_error(rand_value) in cycle", "[public]" ) {
+    for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
+        double value = random_double(DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT);
+        Number number = make_number( value );
+
+        Error number_error = get_error(number);
+
+        REQUIRE( number_error.code == DEFAULT_ERROR.code );
+        REQUIRE( number_error.message == DEFAULT_ERROR.message );
+    }
+}
+
+TEST_CASE( "get_error(rand_value, rand_error) in cycle", "[public]" ) {
+    for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
+        Error error = random_error();
+        double value = random_double(DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT);
+        Number number = make_number( value, error );
+
+        Error number_error = get_error(number);
+
+        REQUIRE( number_error.code == error.code );
+        REQUIRE( number_error.message == error.message );
+    }
+}
+
+TEST_CASE( "get_error(rand_value, rand_error, true) in cycle", "[public]" ) {
+    for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
+        Error error = random_error();
+        double value = random_double(DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT);
+        Number number = make_number( value, error, true );
+
+        Error number_error = get_error(number);
+
+        REQUIRE( number_error.code == error.code );
+        REQUIRE( number_error.message == error.message );
     }
 }
 
@@ -234,6 +365,31 @@ TEST_CASE( "to_string(rand) in cycle", "[public]" ) {
 
         REQUIRE( !number.is_null );
         REQUIRE( to_string( number ) == std::to_string( value ) );
+        REQUIRE( number.error.code == OK );
+    }
+}
+
+TEST_CASE( "input_number(letter)", "[public]" ) {
+    std::string value = "abcdefg";
+    std::istringstream input( value );
+    Number number = input_number( input );
+
+    REQUIRE( number.is_null );
+    REQUIRE( number.value == 0 );
+    REQUIRE( number.error.code == INVALID_INPUT );
+}
+
+TEST_CASE( "input_number() in cycle", "[public]" ) {
+    for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
+        double value = random_double( DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT );
+        std::ostringstream oss;
+        oss << std::setprecision( std::numeric_limits<double>::max_digits10 )
+            << value;
+        std::istringstream input( oss.str() );
+        Number number = input_number( input );
+
+        REQUIRE( !number.is_null );
+        REQUIRE( number.value == value );
         REQUIRE( number.error.code == OK );
     }
 }
