@@ -33,22 +33,6 @@ TEST_CASE( "make_number_kit(rand, rand, rand, error) in cycle", "[public]" ) {
     }
 }
 
-TEST_CASE( "make_number_kit(rand, rand, rand, error) in cycle", "[public]" ) {
-    for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
-        Number a = random_number();
-        Number c = random_number();
-        Number b = random_number();
-        Error error = random_error();
-        NumberKit kit = make_number_kit( a, b, c, error );
-
-        REQUIRE( kit.error.code == error.code );
-        REQUIRE( kit.error.message == error.message );
-        REQUIRE( is_equal( kit.a, a ) );
-        REQUIRE( is_equal( kit.b, b ) );
-        REQUIRE( is_equal( kit.c, c ) );
-    }
-}
-
 TEST_CASE( "get_a(rand) in cycle", "[public]" ) {
     for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
         Number a = random_number();
