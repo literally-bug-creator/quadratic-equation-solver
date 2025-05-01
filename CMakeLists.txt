@@ -13,6 +13,10 @@ FetchContent_MakeAvailable(Catch2)
 add_executable(tests
     tests/test_error.cpp
     tests/test_number.cpp
+    tests/test_number_kit.cpp
 )
+
+target_compile_options(tests PRIVATE --coverage -O0 -g)
+target_link_options(tests PRIVATE --coverage)
 
 target_link_libraries(tests Catch2::Catch2WithMain)
