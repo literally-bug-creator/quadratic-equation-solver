@@ -40,6 +40,6 @@ Number mul( const Number& multiplicand, const Number& multiplier );
 
 Number div( const Number& dividend, const Number& divisor );
 
-Number square_root( const Number& radicand );
+Number sqrt( const Number& radicand );
 
 std::string to_string( const Number& number );
