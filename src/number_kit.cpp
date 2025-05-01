@@ -28,10 +28,10 @@ NumberKit make_number_kit( const Number& a,
     return NumberKit( a, b, c, error );
 }
 
-NumberKit input_number_kit() {
-    Number a = input_number();
-    Number b = input_number();
-    Number c = input_number();
+NumberKit input_number_kit( std::istream& in ) {
+    Number a = input_number( in );
+    Number b = input_number( in );
+    Number c = input_number( in );
 
     if ( has_error( a, b, c ) || has_null( a, b, c ) ) { // TODO: Обдумать
         return make_number_kit( a, b, c, INVALID_INPUT_ERROR );

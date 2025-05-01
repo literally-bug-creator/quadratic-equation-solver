@@ -18,9 +18,9 @@ namespace {
     const Error ROOT_FROM_NEG_ERROR =
         make_error( CALCULATION_ERROR, ROOT_FROM_NEG_MSG );
 
-    std::optional<double> read_value() {
+    std::optional<double> read_value( std::istream& in ) {
         double value;
-        if ( std::cin >> value ) { return value; }
+        if ( in >> value ) { return value; }
 
         return std::optional<double>{};
     }
@@ -33,8 +33,8 @@ make_number( const double value, const Error& error, const bool is_null ) {
     return Number( value, error, is_null );
 }
 
-Number input_number() {
-    std::optional<double> number = read_value();
+Number input_number( std::istream& in ) {
+    std::optional<double> number = read_value( in );
 
     if ( !number.has_value() ) {
         return make_number( ZERO, INVALID_INPUT_ERROR, true );
