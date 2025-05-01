@@ -53,7 +53,7 @@ namespace {
     Number get_first_root( const NumberKit& nums ) {
         Number neg_b = neg( get_b( nums ) );
         Number disc = get_discriminant( nums );
-        Number disc_root = square_root( disc );
+        Number disc_root = sqrt( disc );
         Number two_a = mul( TWO_NUMBER, get_a( nums ) );
 
         return div( add( neg_b, disc_root ), two_a );
@@ -63,7 +63,7 @@ namespace {
         Number a = get_a( nums );
         Number neg_b = neg( get_b( nums ) );
         Number disc = get_discriminant( nums );
-        Number disc_root = square_root( disc );
+        Number disc_root = sqrt( disc );
         Number two_a = mul( TWO_NUMBER, a );
 
         return div( sub( neg_b, disc_root ), two_a );
