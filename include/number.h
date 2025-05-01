@@ -20,7 +20,7 @@ Number make_number( const double value,
                     const Error& error = DEFAULT_ERROR,
                     const bool is_null = false );
 
-Number input_number();
+Number input_number( std::istream& in );
 
 Error get_error( const Number& number );
 
