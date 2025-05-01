@@ -86,7 +86,7 @@ Number div( const Number& dividend, const Number& divisor ) {
     return make_number( dividend_value / divisor_value );
 }
 
-Number square_root( const Number& radicand ) {
+Number sqrt( const Number& radicand ) {
     double value = get_value( radicand );
 
     if ( value < ZERO ) {
