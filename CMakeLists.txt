@@ -6,9 +6,13 @@ include(FetchContent)
 FetchContent_Declare(
     Catch2
     GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-    GIT_TAG        v3.8.1 # Укажите нужную версию
+    GIT_TAG        v3.8.1
 )
 FetchContent_MakeAvailable(Catch2)
 
-add_executable(tests tests/test.cpp)
-target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
+add_executable(tests
+    tests/test_error.cpp
+    tests/test_number.cpp
+)
+
+target_link_libraries(tests Catch2::Catch2WithMain)
