@@ -1,4 +1,6 @@
-# ============ ПАРАМЕТРЫ ============
+.SILENT:
+
+# ============ PARAMS ============
 CXX = g++
 CXXFLAGS = -Wall -Wextra -Iinclude
 SRC_DIR = src
@@ -8,7 +10,7 @@ BIN = main
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)
 OBJS = $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
 
-# ============ ЦЕЛИ ============
+# ============ AIM ============
 
 all: $(BIN)
 
@@ -21,7 +23,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@echo "Compiling $<"
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# ============ СБОРКА И ЗАПУСК ТЕСТОВ ============
+# ============ BUILD & RUN TESTS ============
 
 .PHONY: tests build_tests run_tests coverage report
 
@@ -48,7 +50,7 @@ report: coverage
 	genhtml coverage_filtered.info --output-directory coverage_report
 	@xdg-open coverage_report/index.html || open coverage_report/index.html || echo "Report generated at coverage_report/index.html"
 
-# ============ ОЧИСТКА ============
+# ============ CLEANING ============
 
 .PHONY: clean clean_tests clean_all
 
