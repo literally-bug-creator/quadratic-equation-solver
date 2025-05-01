@@ -20,7 +20,7 @@ NumberKit make_number_kit( const Number& a,
                            const Number& c,
                            const Error& error = DEFAULT_ERROR );
 
-NumberKit input_number_kit();
+NumberKit input_number_kit( std::istream& in );
 
 Number get_a( const NumberKit& nums );
 
