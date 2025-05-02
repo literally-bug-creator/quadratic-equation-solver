@@ -3,6 +3,7 @@
 #include "../include/error.h"
 #include "../include/number.h"
 #include "../include/number_kit.h"
+#include "../include/solution.h"
 
 
 const int DEFAULT_MIN_INT = 0;
@@ -10,6 +11,7 @@ const int DEFAULT_MIN_NEG_INT = -10000;
 const int DEFAULT_MAX_INT = 100;
 const int RAND_TESTS_AMOUNT = 10000;
 const int ERROR_CODES_AMOUNT = 4;
+const int SOLUTION_TYPES_AMOUNT = 4;
 
 inline std::string random_string( size_t length ) {
     const std::string chars = "abcdefghijklmnopqrstuvwxyz"
@@ -68,4 +70,20 @@ inline NumberKit random_number_kit(){
     Number c = random_number();
 
     return make_number_kit(a, b, c);
+}
+
+inline SolutionType random_solution_type(){
+    static std::random_device rd;
+    static std::mt19937 gen( rd() );
+    std::uniform_int_distribution<int> dist( 0, SOLUTION_TYPES_AMOUNT - 1 );
+    return static_cast<SolutionType>( dist( gen ) );
+}
+
+inline Solution random_solution(){
+    SolutionType type = random_solution_type();
+    Number x1 = random_number();
+    Number x2 = random_number();
+    Error error = random_error();
+
+    return make_solution(type, x1, x2, error);
 }
