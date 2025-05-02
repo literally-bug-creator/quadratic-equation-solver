@@ -9,11 +9,10 @@
 #include "../src/number.cpp"
 #include "tools.cpp"
 
-
 TEST_CASE( "make_number(rand_value, rand_error, not_null) in cycle",
            "[public]" ) {
-    for ( int i = 0; i < DEFAULT_MAX_INT; i++ ) {
-        double rand_value = random_double( DEFAULT_MIN_INT, DEFAULT_MAX_INT );
+    for ( int i = 0; i < MAX_INT; i++ ) {
+        double rand_value = random_double( MIN_INT, MAX_INT );
         Error rand_error = random_error();
         Number num = make_number( rand_value, rand_error, false );
 
@@ -26,8 +25,8 @@ TEST_CASE( "make_number(rand_value, rand_error, not_null) in cycle",
 
 TEST_CASE( "make_number(rand_value, rand_error, is_null) in cycle",
            "[public]" ) {
-    for ( int i = 0; i < DEFAULT_MAX_INT; i++ ) {
-        double rand_value = random_double( DEFAULT_MIN_INT, DEFAULT_MAX_INT );
+    for ( int i = 0; i < MAX_INT; i++ ) {
+        double rand_value = random_double( MIN_INT, MAX_INT );
         Error rand_error = random_error();
         Number num = make_number( rand_value, rand_error, true );
 
@@ -63,7 +62,7 @@ TEST_CASE( "is_null(4, ok, true)", "[public]" ) {
 }
 
 TEST_CASE( "is_null(4, rand_error) in cycle", "[public]" ) {
-    for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
         Error error = random_error();
         Number number = make_number( 4, error );
 
@@ -72,7 +71,7 @@ TEST_CASE( "is_null(4, rand_error) in cycle", "[public]" ) {
 }
 
 TEST_CASE( "is_null(4, rand_error, true) in cycle", "[public]" ) {
-    for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
         Error error = random_error();
         Number number = make_number( 4, error, true );
 
@@ -81,7 +80,7 @@ TEST_CASE( "is_null(4, rand_error, true) in cycle", "[public]" ) {
 }
 
 TEST_CASE( "is_null(-4, rand_error) in cycle", "[public]" ) {
-    for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
         Error error = random_error();
         Number number = make_number( -4, error );
 
@@ -90,8 +89,8 @@ TEST_CASE( "is_null(-4, rand_error) in cycle", "[public]" ) {
 }
 
 TEST_CASE( "is_null(rand_value) in cycle", "[public]" ) {
-    for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
-        double value = random_double(DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT);
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
+        double value = random_double( MIN_NEG_INT, MAX_INT );
         Number number = make_number( value );
 
         REQUIRE( !is_null( number ) );
@@ -99,8 +98,8 @@ TEST_CASE( "is_null(rand_value) in cycle", "[public]" ) {
 }
 
 TEST_CASE( "is_null(rand_value, ok, true) in cycle", "[public]" ) {
-    for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
-        double value = random_double(DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT);
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
+        double value = random_double( MIN_NEG_INT, MAX_INT );
         Number number = make_number( value, DEFAULT_ERROR, true );
 
         REQUIRE( is_null( number ) );
@@ -108,9 +107,9 @@ TEST_CASE( "is_null(rand_value, ok, true) in cycle", "[public]" ) {
 }
 
 TEST_CASE( "is_null(rand_value, rand_error) in cycle", "[public]" ) {
-    for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
         Error error = random_error();
-        double value = random_double(DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT);
+        double value = random_double( MIN_NEG_INT, MAX_INT );
         Number number = make_number( value, error );
 
         REQUIRE( !is_null( number ) );
@@ -118,9 +117,9 @@ TEST_CASE( "is_null(rand_value, rand_error) in cycle", "[public]" ) {
 }
 
 TEST_CASE( "is_null(rand_value, rand_error, true) in cycle", "[public]" ) {
-    for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
         Error error = random_error();
-        double value = random_double(DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT);
+        double value = random_double( MIN_NEG_INT, MAX_INT );
         Number number = make_number( value, error, true );
 
         REQUIRE( is_null( number ) );
@@ -128,11 +127,11 @@ TEST_CASE( "is_null(rand_value, rand_error, true) in cycle", "[public]" ) {
 }
 
 TEST_CASE( "get_error(rand_value) in cycle", "[public]" ) {
-    for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
-        double value = random_double(DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT);
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
+        double value = random_double( MIN_NEG_INT, MAX_INT );
         Number number = make_number( value );
 
-        Error number_error = get_error(number);
+        Error number_error = get_error( number );
 
         REQUIRE( number_error.code == DEFAULT_ERROR.code );
         REQUIRE( number_error.message == DEFAULT_ERROR.message );
@@ -140,12 +139,12 @@ TEST_CASE( "get_error(rand_value) in cycle", "[public]" ) {
 }
 
 TEST_CASE( "get_error(rand_value, rand_error) in cycle", "[public]" ) {
-    for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
         Error error = random_error();
-        double value = random_double(DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT);
+        double value = random_double( MIN_NEG_INT, MAX_INT );
         Number number = make_number( value, error );
 
-        Error number_error = get_error(number);
+        Error number_error = get_error( number );
 
         REQUIRE( number_error.code == error.code );
         REQUIRE( number_error.message == error.message );
@@ -153,12 +152,12 @@ TEST_CASE( "get_error(rand_value, rand_error) in cycle", "[public]" ) {
 }
 
 TEST_CASE( "get_error(rand_value, rand_error, true) in cycle", "[public]" ) {
-    for (int i = 0; i < RAND_TESTS_AMOUNT; i++){
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
         Error error = random_error();
-        double value = random_double(DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT);
+        double value = random_double( MIN_NEG_INT, MAX_INT );
         Number number = make_number( value, error, true );
 
-        Error number_error = get_error(number);
+        Error number_error = get_error( number );
 
         REQUIRE( number_error.code == error.code );
         REQUIRE( number_error.message == error.message );
@@ -173,11 +172,9 @@ TEST_CASE( "is_equal(0, 0)", "[public]" ) {
 }
 
 TEST_CASE( "is_equal(rand, rand) in cycle", "[public]" ) {
-    for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
-        double left_value =
-            random_double( DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT );
-        double right_value =
-            random_double( DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT );
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
+        double left_value = random_double( MIN_NEG_INT, MAX_INT );
+        double right_value = random_double( MIN_NEG_INT, MAX_INT );
         Number left = make_number( left_value );
         Number right = make_number( right_value );
         bool is_values_equal = left_value == right_value;
@@ -208,11 +205,9 @@ TEST_CASE( "is_lower_than(-1, -5)", "[public]" ) {
 }
 
 TEST_CASE( "is_lower_than(rand, rand) in cycle", "[public]" ) {
-    for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
-        double left_value =
-            random_double( DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT );
-        double right_value =
-            random_double( DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT );
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
+        double left_value = random_double( MIN_NEG_INT, MAX_INT );
+        double right_value = random_double( MIN_NEG_INT, MAX_INT );
         Number left = make_number( left_value );
         Number right = make_number( right_value );
         bool is_left_lower_than_right = left_value < right_value;
@@ -222,8 +217,8 @@ TEST_CASE( "is_lower_than(rand, rand) in cycle", "[public]" ) {
 }
 
 TEST_CASE( "neg(rand) in cycle", "[public]" ) {
-    for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
-        double value = random_double( DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT );
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
+        double value = random_double( MIN_NEG_INT, MAX_INT );
         Number number = make_number( value );
         Number neg_number = neg( number );
 
@@ -234,11 +229,9 @@ TEST_CASE( "neg(rand) in cycle", "[public]" ) {
 }
 
 TEST_CASE( "add(rand, rand) in cycle", "[public]" ) {
-    for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
-        double left_value =
-            random_double( DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT );
-        double right_value =
-            random_double( DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT );
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
+        double left_value = random_double( MIN_NEG_INT, MAX_INT );
+        double right_value = random_double( MIN_NEG_INT, MAX_INT );
         Number left_number = make_number( left_value );
         Number right_number = make_number( right_value );
         Number number_sum = add( left_number, right_number );
@@ -251,11 +244,9 @@ TEST_CASE( "add(rand, rand) in cycle", "[public]" ) {
 }
 
 TEST_CASE( "sub(rand, rand) in cycle", "[public]" ) {
-    for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
-        double left_value =
-            random_double( DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT );
-        double right_value =
-            random_double( DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT );
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
+        double left_value = random_double( MIN_NEG_INT, MAX_INT );
+        double right_value = random_double( MIN_NEG_INT, MAX_INT );
         Number left_number = make_number( left_value );
         Number right_number = make_number( right_value );
         Number number_sub = sub( left_number, right_number );
@@ -268,11 +259,9 @@ TEST_CASE( "sub(rand, rand) in cycle", "[public]" ) {
 }
 
 TEST_CASE( "mul(rand, rand) in cycle", "[public]" ) {
-    for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
-        double left_value =
-            random_double( DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT );
-        double right_value =
-            random_double( DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT );
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
+        double left_value = random_double( MIN_NEG_INT, MAX_INT );
+        double right_value = random_double( MIN_NEG_INT, MAX_INT );
         Number left_number = make_number( left_value );
         Number right_number = make_number( right_value );
         Number number_mul = mul( left_number, right_number );
@@ -285,9 +274,8 @@ TEST_CASE( "mul(rand, rand) in cycle", "[public]" ) {
 }
 
 TEST_CASE( "div(rand, 0) in cycle", "[public]" ) {
-    for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
-        double left_value =
-            random_double( DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT );
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
+        double left_value = random_double( MIN_NEG_INT, MAX_INT );
 
         Number left_number = make_number( left_value );
         Number right_number = make_number( 0 );
@@ -299,9 +287,8 @@ TEST_CASE( "div(rand, 0) in cycle", "[public]" ) {
 }
 
 TEST_CASE( "div(0, rand) in cycle", "[public]" ) {
-    for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
-        double right_value =
-            random_double( DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT );
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
+        double right_value = random_double( MIN_NEG_INT, MAX_INT );
 
         Number left_number = make_number( 0 );
         Number right_number = make_number( right_value );
@@ -314,11 +301,9 @@ TEST_CASE( "div(0, rand) in cycle", "[public]" ) {
 }
 
 TEST_CASE( "div(rand, rand != 0) in cycle", "[public]" ) {
-    for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
-        double left_value =
-            random_double( DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT );
-        double right_value =
-            random_double( DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT );
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
+        double left_value = random_double( MIN_NEG_INT, MAX_INT );
+        double right_value = random_double( MIN_NEG_INT, MAX_INT );
 
         if ( right_value == 0 ) { continue; }
 
@@ -334,8 +319,8 @@ TEST_CASE( "div(rand, rand != 0) in cycle", "[public]" ) {
 }
 
 TEST_CASE( "sqrt(rand < 0) in cycle", "[public]" ) {
-    for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
-        double value = random_double( DEFAULT_MIN_NEG_INT, 0 );
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
+        double value = random_double( MIN_NEG_INT, 0 );
 
         Number number = make_number( value );
         Number number_root = sqrt( number );
@@ -346,8 +331,8 @@ TEST_CASE( "sqrt(rand < 0) in cycle", "[public]" ) {
 }
 
 TEST_CASE( "sqrt(rand >= 0) in cycle", "[public]" ) {
-    for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
-        double value = random_double( 0, DEFAULT_MAX_INT );
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
+        double value = random_double( 0, MAX_INT );
         Number number = make_number( value );
         Number number_root = sqrt( number );
         double value_root = sqrt( value );
@@ -359,8 +344,8 @@ TEST_CASE( "sqrt(rand >= 0) in cycle", "[public]" ) {
 }
 
 TEST_CASE( "to_string(rand) in cycle", "[public]" ) {
-    for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
-        double value = random_double( DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT );
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
+        double value = random_double( MIN_NEG_INT, MAX_INT );
         Number number = make_number( value );
 
         REQUIRE( !number.is_null );
@@ -380,8 +365,8 @@ TEST_CASE( "input_number(letter)", "[public]" ) {
 }
 
 TEST_CASE( "input_number() in cycle", "[public]" ) {
-    for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
-        double value = random_double( DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT );
+    for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
+        double value = random_double( MIN_NEG_INT, MAX_INT );
         std::ostringstream oss;
         oss << std::setprecision( std::numeric_limits<double>::max_digits10 )
             << value;

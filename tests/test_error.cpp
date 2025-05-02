@@ -33,8 +33,8 @@ TEST_CASE( "make_error(SOLUTION_ERROR, empty)", "[public]" ) {
 }
 
 TEST_CASE( "make_error(RAND, RAND) in cycle", "[public]" ) {
-    for ( int _ = 0; _ < RAND_TESTS_AMOUNT; _++ ) {
-        int msg_length = random_int( DEFAULT_MIN_INT, DEFAULT_MAX_INT );
+    for ( int _ = 0; _ < TESTS_AMOUNT; _++ ) {
+        int msg_length = random_int( MIN_INT, MAX_INT );
         std::string msg = random_string( msg_length );
         ErrorCode code = random_error_code();
         Error error = make_error( code, msg );
@@ -45,8 +45,8 @@ TEST_CASE( "make_error(RAND, RAND) in cycle", "[public]" ) {
 }
 
 TEST_CASE( "get_error_code(random_error) in cycle", "[public]" ) {
-    for ( int _ = 0; _ < RAND_TESTS_AMOUNT; _++ ) {
-        int msg_length = random_int( DEFAULT_MIN_INT, DEFAULT_MAX_INT );
+    for ( int _ = 0; _ < TESTS_AMOUNT; _++ ) {
+        int msg_length = random_int( MIN_INT, MAX_INT );
         std::string msg = random_string( msg_length );
         ErrorCode code = random_error_code();
         Error error = make_error( code, msg );
@@ -63,8 +63,8 @@ TEST_CASE( "get_error_message(error_with_empty_msg)", "[public]" ) {
 }
 
 TEST_CASE( "get_error_message(random_error) in cycle", "[public]" ) {
-    for ( int _ = 0; _ < RAND_TESTS_AMOUNT; _++ ) {
-        int msg_length = random_int( DEFAULT_MIN_INT, DEFAULT_MAX_INT );
+    for ( int _ = 0; _ < TESTS_AMOUNT; _++ ) {
+        int msg_length = random_int( MIN_INT, MAX_INT );
         std::string msg = random_string( msg_length );
         ErrorCode code = random_error_code();
         Error error = make_error( code, msg );

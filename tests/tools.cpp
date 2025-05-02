@@ -1,15 +1,16 @@
+#include <catch2/generators/catch_generators.hpp>
+
 #include <random>
 
 #include "../include/error.h"
 #include "../include/number.h"
 #include "../include/number_kit.h"
 #include "../include/solution.h"
-#include <iostream>
 
-const int DEFAULT_MIN_INT = 0;
-const int DEFAULT_MIN_NEG_INT = -10000;
-const int DEFAULT_MAX_INT = 100;
-const int RAND_TESTS_AMOUNT = 10000;
+const int MIN_INT = 0;
+const int MIN_NEG_INT = -10000;
+const int MAX_INT = 100;
+const int TESTS_AMOUNT = 10000;
 const int ERROR_CODES_AMOUNT = 4;
 const int SOLUTION_TYPES_AMOUNT = 4;
 
@@ -54,13 +55,13 @@ inline ErrorCode random_error_code() {
 }
 
 inline Error random_error() {
-    std::string msg = random_string( DEFAULT_MAX_INT );
+    std::string msg = random_string( MAX_INT );
     ErrorCode code = random_error_code();
     return make_error( code, msg );
 }
 
 inline Number random_number() {
-    double value = random_double( DEFAULT_MIN_NEG_INT, DEFAULT_MAX_INT );
+    double value = random_double( MIN_NEG_INT, MAX_INT );
     return make_number( value );
 }
 
@@ -97,7 +98,7 @@ inline Solution random_two_roots_solution() {
     Number a = random_number();
     Number c = random_number();
     double min_b = mul( mul( make_number( 4 ), a ), c ).value;
-    double max_b = std::abs(min_b) * 2;
+    double max_b = std::abs( min_b ) * 2;
     Number b = random_number( min_b, max_b );
     NumberKit kit = make_number_kit( a, b, c );
 
@@ -117,8 +118,7 @@ inline Solution random_single_root_solution() {
 inline Solution random_linear_solution() {
     Number a = make_number( 0 );
     Number b = random_number();
-    Number c =
-        make_number( random_double( DEFAULT_MIN_INT, DEFAULT_MAX_INT ) + 1 );
+    Number c = make_number( random_double( MIN_INT, MAX_INT ) + 1 );
     NumberKit kit = make_number_kit( a, b, c );
 
     return get_solution( kit );
@@ -128,8 +128,7 @@ inline Solution random_no_roots_solution() {
     Number a = random_number();
     Number c = random_number();
     double max_b = mul( mul( make_number( 4 ), a ), c ).value - 1;
-    double min_b =
-        max_b - random_double( DEFAULT_MIN_INT, DEFAULT_MAX_INT );
+    double min_b = max_b - random_double( MIN_INT, MAX_INT );
     Number b = random_number( min_b, max_b );
     NumberKit kit = make_number_kit( a, b, c );
 
