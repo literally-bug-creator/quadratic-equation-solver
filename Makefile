@@ -43,7 +43,7 @@ coverage:
 	@echo "Collecting coverage..."
 	lcov --capture --directory build --output-file coverage.info
 	@echo "Filtering unwanted files..."
-	lcov --remove coverage.info "/usr/*" "*/_deps/*" -o coverage_filtered.info
+	lcov --remove coverage.info "/usr/*" "*/_deps/*" "*/tests/*" -o coverage_filtered.info
 
 report: coverage
 	@echo "Generating HTML report..."
