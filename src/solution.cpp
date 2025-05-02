@@ -1,5 +1,7 @@
 #include "../include/solution.h"
 
+#include <error.h>
+
 #include "../include/number.h"
 
 namespace {
@@ -12,9 +14,13 @@ namespace {
     const Number TWO_NUMBER = make_number( TWO_DOUBLE );
 
     const std::string INVALID_NUMBER_KIT_MSG = "Некорректный набор чисел";
+    const std::string DISCRIMINANT_BELOW_ZERO_MSG = "Дискриминант меньше нуля!";
 
     const Error INVALID_NUMBER_KIT_ERROR =
         make_error( SOLUTION_ERROR, INVALID_NUMBER_KIT_MSG );
+
+    const Error DISCRIMINANT_BELOW_ZERO_ERROR =
+        make_error( SOLUTION_ERROR, DISCRIMINANT_BELOW_ZERO_MSG );
 
     bool has_null( const NumberKit& nums ) {
         Number a = get_a( nums );
@@ -35,8 +41,6 @@ namespace {
     }
 
     bool is_quadratic_equation( const NumberKit& nums ) {
-        if ( !is_valid( nums ) ) { return false; }
-
         return !is_equal( get_a( nums ), ZERO_NUMBER );
     }
 
@@ -88,24 +92,21 @@ namespace {
     }
 
     Solution solve_quadratic_equation( const NumberKit& nums ) {
-        if ( has_no_roots( nums ) ) {
-            return make_solution( NO_ROOTS, NULL_NUMBER, NULL_NUMBER );
-        }
-
-        else if ( has_inf_roots( nums ) ) {
-            return make_solution( INF_ROOTS, NULL_NUMBER, NULL_NUMBER );
+        if ( is_lower_than( get_discriminant( nums ), ZERO_NUMBER ) ) {
+            return make_solution( NO_ROOTS,
+                                  NULL_NUMBER,
+                                  NULL_NUMBER,
+                                  DISCRIMINANT_BELOW_ZERO_ERROR );
         }
 
         Number x1 = get_first_root( nums );
         Number x2 = get_second_root( nums );
 
+        if ( is_equal( x1, x2 ) ) {
+            return make_solution( ONE_ROOT, x1, NULL_NUMBER );
+        }
+
         return make_solution( TWO_ROOTS, x1, x2 );
-    }
-
-    bool is_linear_equation( const NumberKit& nums ) {
-        if ( !is_valid( nums ) ) { return false; }
-
-        return is_equal( get_a( nums ), ZERO_NUMBER );
     }
 
     Number get_single_root( const NumberKit& nums ) {
@@ -136,16 +137,16 @@ Solution make_solution( const SolutionType& type,
 }
 
 Solution get_solution( const NumberKit& nums ) {
+    if ( !is_valid( nums ) ) {
+        return make_solution(
+            NO_ROOTS, NULL_NUMBER, NULL_NUMBER, INVALID_NUMBER_KIT_ERROR );
+    }
+
     if ( is_quadratic_equation( nums ) ) {
         return solve_quadratic_equation( nums );
     }
 
-    else if ( is_linear_equation( nums ) ) {
-        return solve_linear_equation( nums );
-    }
-
-    return make_solution(
-        NO_ROOTS, NULL_NUMBER, NULL_NUMBER, INVALID_NUMBER_KIT_ERROR );
+    return solve_linear_equation( nums );
 }
 
 SolutionType get_solution_type( const Solution& solution ) {

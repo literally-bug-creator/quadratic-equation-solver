@@ -5,7 +5,7 @@
 
 enum SolutionType {
     TWO_ROOTS,
-    ONE_ROOT,
+    ONE_ROOT,  // TODO: Rename
     NO_ROOTS,
     INF_ROOTS
 };
