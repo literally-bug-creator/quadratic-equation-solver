@@ -1,4 +1,4 @@
-#include "../include/error.h"
+#include "error.hpp"
 
 Error make_error( const ErrorCode code, const std::string& message ) {
     return Error( code, message );

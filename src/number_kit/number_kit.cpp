@@ -1,24 +1,19 @@
-#include "../include/number_kit.h"
+#include "number_kit.hpp"
 
-namespace {
-    const std::string INVALID_INPUT_MSG = "Некорректный ввод";
+#include "number_kit_constants.cpp"
 
-    const Error INVALID_INPUT_ERROR =
-        make_error( INVALID_INPUT, INVALID_INPUT_MSG );
+bool has_error( const Number& number ) {
+    Error error = get_error( number );
 
-    bool has_error( const Number& number ) {
-        Error error = get_error( number );
+    return error.code != OK;
+}
 
-        return error.code != OK;
-    }
+bool has_error( const Number& a, const Number& b, const Number& c ) {
+    return has_error( a ) || has_error( b ) || has_error( c );
+}
 
-    bool has_error( const Number& a, const Number& b, const Number& c ) {
-        return has_error( a ) || has_error( b ) || has_error( c );
-    }
-
-    bool has_null( const Number& a, const Number& b, const Number& c ) {
-        return is_null( a ) || is_null( b ) || is_null( c );
-    }
+bool has_null( const Number& a, const Number& b, const Number& c ) {
+    return is_null( a ) || is_null( b ) || is_null( c );
 }
 
 NumberKit make_number_kit( const Number& a,
@@ -34,7 +29,7 @@ NumberKit input_number_kit( std::istream& in ) {
     Number c = input_number( in );
 
     if ( has_error( a, b, c ) || has_null( a, b, c ) ) { // TODO: Обдумать
-        return make_number_kit( a, b, c, INVALID_INPUT_ERROR );
+        return make_number_kit( a, b, c, NumberKitErrors::INVALID_INPUT );
     }
 
     return make_number_kit( a, b, c );

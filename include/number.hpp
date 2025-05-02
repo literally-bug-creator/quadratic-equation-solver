@@ -2,10 +2,8 @@
 
 #include <string>
 
-#include "error.h"
-
-const std::string EMPTY_ERROR_MSG = "";
-const Error DEFAULT_ERROR = make_error( OK, EMPTY_ERROR_MSG );
+#include "constants.hpp"
+#include "error.hpp"
 
 struct Number {
     const double value;
@@ -17,7 +15,7 @@ struct Number {
 };
 
 Number make_number( const double value,
-                    const Error& error = DEFAULT_ERROR,
+                    const Error& error = Errors::DEFAULT_ERROR,
                     const bool is_null = false );
 
 Number input_number( std::istream& in );

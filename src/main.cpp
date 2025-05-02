@@ -1,11 +1,10 @@
-#include <iostream>
-
-#include "../include/number_kit.h"
-#include "../include/output.h"
-#include "../include/solution.h"
+#include "input.hpp"
+#include "number_kit.hpp"
+#include "output.hpp"
+#include "solution.hpp"
 
 int main() {
-    NumberKit nums = input_number_kit( std::cin );
+    NumberKit nums = input_number_kit( INPUT_STREAM );
     Solution solution = get_solution( nums );
-    output( solution );
+    output( OUTPUT_STREAM, solution );
 }

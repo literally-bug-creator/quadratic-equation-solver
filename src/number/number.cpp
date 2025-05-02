@@ -1,32 +1,13 @@
-#include "../include/number.h"
+#include "number.hpp"
 
 #include <cmath>
 #include <iostream>
 #include <optional>
 
-namespace {
-    const double ZERO = 0;
+#include "input.hpp"
+#include "number_constants.cpp"
 
-    const std::string INVALID_INPUT_MSG = "Некорректный ввод";
-    const std::string DIV_BY_ZERO_MSG = "Деление на ноль";
-    const std::string ROOT_FROM_NEG_MSG = "Корень из отрицательного числа";
-
-    const Error INVALID_INPUT_ERROR =
-        make_error( INVALID_INPUT, INVALID_INPUT_MSG );
-    const Error DIV_BY_ZERO_ERROR =
-        make_error( CALCULATION_ERROR, DIV_BY_ZERO_MSG );
-    const Error ROOT_FROM_NEG_ERROR =
-        make_error( CALCULATION_ERROR, ROOT_FROM_NEG_MSG );
-
-    std::optional<double> read_value( std::istream& in ) {
-        double value;
-        if ( in >> value ) { return value; }
-
-        return std::optional<double>{};
-    }
-
-    double get_value( const Number& coeff ) { return coeff.value; }
-}
+double get_value( const Number& coeff ) { return coeff.value; }
 
 Number
 make_number( const double value, const Error& error, const bool is_null ) {
@@ -37,7 +18,7 @@ Number input_number( std::istream& in ) {
     std::optional<double> number = read_value( in );
 
     if ( !number.has_value() ) {
-        return make_number( ZERO, INVALID_INPUT_ERROR, true );
+        return make_number( Numeric::ZERO, Errors::INVALID_INPUT, true );
     }
 
     return make_number( number.value() );
@@ -79,8 +60,8 @@ Number div( const Number& dividend, const Number& divisor ) {
     double dividend_value = get_value( dividend );
     double divisor_value = get_value( divisor );
 
-    if ( divisor_value == ZERO ) {
-        return make_number( ZERO, DIV_BY_ZERO_ERROR, true );
+    if ( divisor_value == Numeric::ZERO ) {
+        return make_number( Numeric::ZERO, Errors::DIV_BY_ZERO, true );
     }
 
     return make_number( dividend_value / divisor_value );
@@ -89,8 +70,8 @@ Number div( const Number& dividend, const Number& divisor ) {
 Number sqrt( const Number& radicand ) {
     double value = get_value( radicand );
 
-    if ( value < ZERO ) {
-        return make_number( ZERO, ROOT_FROM_NEG_ERROR, true );
+    if ( value < Numeric::ZERO ) {
+        return make_number( Numeric::ZERO, Errors::ROOT_FROM_NEG, true );
     }
 
     return make_number( sqrt( value ) );

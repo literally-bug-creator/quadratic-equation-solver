@@ -1,11 +1,11 @@
 #pragma once
 
-#include "number.h"
-#include "number_kit.h"
+#include "number.hpp"
+#include "number_kit.hpp"
 
 enum SolutionType {
     TWO_ROOTS,
-    ONE_ROOT,  // TODO: Rename
+    SINGLE_ROOT,
     NO_ROOTS,
     INF_ROOTS
 };
@@ -23,10 +23,11 @@ struct Solution {
         type( type ), x1( x1 ), x2( x2 ), error( error ) {}
 };
 
-Solution make_solution( const SolutionType& type,
-                        const Number& first_root,
-                        const Number& second_root,
-                        const Error& error = DEFAULT_ERROR );
+Solution make_solution(
+    const SolutionType& type,
+    const Number& first_root,
+    const Number& second_root,
+    const Error& error = Errors::DEFAULT_ERROR ); // Rethink error name
 
 Solution get_solution( const NumberKit& nums );
 

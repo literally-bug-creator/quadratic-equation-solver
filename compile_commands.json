@@ -1,0 +1,77 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Iinclude",
+      "-c",
+      "-o",
+      "obj/main.o",
+      "src/main.cpp"
+    ],
+    "directory": "/home/lbc/Documents/quadratic-equation-solver",
+    "file": "/home/lbc/Documents/quadratic-equation-solver/src/main.cpp",
+    "output": "/home/lbc/Documents/quadratic-equation-solver/obj/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Iinclude",
+      "-c",
+      "-o",
+      "obj/number.o",
+      "src/number.cpp"
+    ],
+    "directory": "/home/lbc/Documents/quadratic-equation-solver",
+    "file": "/home/lbc/Documents/quadratic-equation-solver/src/number.cpp",
+    "output": "/home/lbc/Documents/quadratic-equation-solver/obj/number.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Iinclude",
+      "-c",
+      "-o",
+      "obj/number_kit.o",
+      "src/number_kit.cpp"
+    ],
+    "directory": "/home/lbc/Documents/quadratic-equation-solver",
+    "file": "/home/lbc/Documents/quadratic-equation-solver/src/number_kit.cpp",
+    "output": "/home/lbc/Documents/quadratic-equation-solver/obj/number_kit.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Iinclude",
+      "-c",
+      "-o",
+      "obj/output.o",
+      "src/output.cpp"
+    ],
+    "directory": "/home/lbc/Documents/quadratic-equation-solver",
+    "file": "/home/lbc/Documents/quadratic-equation-solver/src/output.cpp",
+    "output": "/home/lbc/Documents/quadratic-equation-solver/obj/output.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Iinclude",
+      "-c",
+      "-o",
+      "obj/solution.o",
+      "src/solution.cpp"
+    ],
+    "directory": "/home/lbc/Documents/quadratic-equation-solver",
+    "file": "/home/lbc/Documents/quadratic-equation-solver/src/solution.cpp",
+    "output": "/home/lbc/Documents/quadratic-equation-solver/obj/solution.o"
+  }
+]

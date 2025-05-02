@@ -1,6 +1,7 @@
 #pragma once
 
-#include "number.h"
+#include "number.hpp"
+#include "constants.hpp"
 
 struct NumberKit {
     const Number a;
@@ -18,7 +19,7 @@ struct NumberKit {
 NumberKit make_number_kit( const Number& a,
                            const Number& b,
                            const Number& c,
-                           const Error& error = DEFAULT_ERROR );
+                           const Error& error = Errors::DEFAULT_ERROR ); // TODO: Rethink error name
 
 NumberKit input_number_kit( std::istream& in );
 
