@@ -1,10 +1,10 @@
 #include <catch2/catch_test_macros.hpp>
 
-#include <error.h>
 #include <iomanip>
 #include <sstream>
 
-#include "../src/number_kit.cpp"
+#include "../include/error.hpp"
+#include "../include/number_kit.hpp"
 #include "tools.cpp"
 
 TEST_CASE( "make_number_kit(rand, rand, rand) in cycle", "[public]" ) {

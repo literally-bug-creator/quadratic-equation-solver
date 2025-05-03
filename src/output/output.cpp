@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-#include "output_constants.cpp"
 #include "solution.hpp"
+#include "output_constants.cpp"
 
 std::ostream& OUTPUT_STREAM = std::cout;
 

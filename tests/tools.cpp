@@ -1,11 +1,14 @@
+#define CATCH_CONFIG_MAIN
+
+#include <catch2/catch_test_macros.hpp>
 #include <catch2/generators/catch_generators.hpp>
 
 #include <random>
 
-#include "../include/error.h"
-#include "../include/number.h"
-#include "../include/number_kit.h"
-#include "../include/solution.h"
+#include "../include/error.hpp"
+#include "../include/number.hpp"
+#include "../include/number_kit.hpp"
+#include "../include/solution.hpp"
 
 const int MIN_INT = 0;
 const int MIN_NEG_INT = -10000;

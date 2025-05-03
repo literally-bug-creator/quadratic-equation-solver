@@ -1,8 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 
-#include <error.h>
-
-#include "../src/solution.cpp"
+#include "../include/solution.hpp"
 #include "tools.cpp"
 
 TEST_CASE( "make_solution(rand, rand, rand, rand) in cycle", "[public]" ) {
@@ -104,7 +102,7 @@ TEST_CASE( "get_solution(0, 2, -4)", "[public][solution]" ) {
 
     Solution solution = get_solution( kit );
 
-    REQUIRE( solution.type == ONE_ROOT );
+    REQUIRE( solution.type == SolutionType::SINGLE_ROOT );
     REQUIRE( solution.error.code == OK );
     REQUIRE( solution.x1.value == 2 );
     REQUIRE( solution.x1.is_null == false );
@@ -175,7 +173,7 @@ TEST_CASE( "get_solution(1, 2, 1)", "[public][solution]" ) {
 
     Solution solution = get_solution( kit );
 
-    REQUIRE( solution.type == ONE_ROOT );
+    REQUIRE( solution.type == SolutionType::SINGLE_ROOT );
     REQUIRE( solution.error.code == OK );
     REQUIRE( solution.x1.value == -1 );
     REQUIRE( solution.x1.is_null == false );
@@ -190,7 +188,7 @@ TEST_CASE( "get_solution(4, -12, 9)", "[public][solution]" ) {
 
     Solution solution = get_solution( kit );
 
-    REQUIRE( solution.type == ONE_ROOT );
+    REQUIRE( solution.type == SolutionType::SINGLE_ROOT );
     REQUIRE( solution.error.code == OK );
     REQUIRE( solution.x1.value == 1.5 );
     REQUIRE( solution.x1.is_null == false );
@@ -205,7 +203,7 @@ TEST_CASE( "get_solution(0, 4, -8)", "[public][solution]" ) {
 
     Solution solution = get_solution( kit );
 
-    REQUIRE( solution.type == ONE_ROOT );
+    REQUIRE( solution.type == SolutionType::SINGLE_ROOT );
     REQUIRE( solution.error.code == OK );
     REQUIRE( solution.x1.value == 2 );
     REQUIRE( solution.x1.is_null == false );
@@ -220,7 +218,7 @@ TEST_CASE( "get_solution(0, -3, 9)", "[public][solution]" ) {
 
     Solution solution = get_solution( kit );
 
-    REQUIRE( solution.type == ONE_ROOT );
+    REQUIRE( solution.type == SolutionType::SINGLE_ROOT );
     REQUIRE( solution.error.code == OK );
     REQUIRE( solution.x1.value == 3 );
     REQUIRE( solution.x1.is_null == false );
@@ -235,7 +233,7 @@ TEST_CASE( "get_solution(0, 5, 0)", "[public][solution]" ) {
 
     Solution solution = get_solution( kit );
 
-    REQUIRE( solution.type == ONE_ROOT );
+    REQUIRE( solution.type == SolutionType::SINGLE_ROOT );
     REQUIRE( solution.error.code == OK );
     REQUIRE( solution.x1.value == 0 );
     REQUIRE( solution.x1.is_null == false );

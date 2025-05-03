@@ -10,6 +10,22 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(Catch2)
 
+add_library(quadratic_solver
+    src/input/input.cpp
+    src/input/input_constants.cpp
+    src/error.cpp
+    src/number/number.cpp
+    src/number/number_constants.cpp
+    src/number_kit/number_kit.cpp
+    src/number_kit/number_kit_constants.cpp
+    src/solution/solution.cpp
+    src/solution/solution_constants.cpp
+    src/output/output.cpp
+    src/output/output_constants.cpp
+)
+
+target_include_directories(quadratic_solver PUBLIC include)
+
 add_executable(tests
     tests/test_error.cpp
     tests/test_number.cpp
@@ -21,4 +37,4 @@ add_executable(tests
 target_compile_options(tests PRIVATE --coverage -O0 -g)
 target_link_options(tests PRIVATE --coverage)
 
-target_link_libraries(tests Catch2::Catch2WithMain)
+target_link_libraries(tests PRIVATE quadratic_solver Catch2::Catch2WithMain)

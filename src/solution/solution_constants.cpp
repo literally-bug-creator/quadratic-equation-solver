@@ -1,6 +1,5 @@
-#include <error.h>
-
 #include "constants.hpp"
+#include "error.hpp"
 #include "number.hpp"
 
 namespace SolutionNumbers {

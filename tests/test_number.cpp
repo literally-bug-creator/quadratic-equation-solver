@@ -1,12 +1,12 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include <cmath>
-#include <error.h>
 #include <iomanip>
 #include <sstream>
 #include <string>
 
-#include "../src/number.cpp"
+#include "../include/error.hpp"
+#include "../include/number.hpp"
 #include "tools.cpp"
 
 TEST_CASE( "make_number(rand_value, rand_error, not_null) in cycle",
@@ -56,7 +56,7 @@ TEST_CASE( "is_null(4)", "[public]" ) {
 }
 
 TEST_CASE( "is_null(4, ok, true)", "[public]" ) {
-    Number number = make_number( 4, DEFAULT_ERROR, true );
+    Number number = make_number( 4, Errors::DEFAULT_ERROR, true );
 
     REQUIRE( is_null( number ) );
 }
@@ -100,7 +100,7 @@ TEST_CASE( "is_null(rand_value) in cycle", "[public]" ) {
 TEST_CASE( "is_null(rand_value, ok, true) in cycle", "[public]" ) {
     for ( int i = 0; i < TESTS_AMOUNT; i++ ) {
         double value = random_double( MIN_NEG_INT, MAX_INT );
-        Number number = make_number( value, DEFAULT_ERROR, true );
+        Number number = make_number( value, Errors::DEFAULT_ERROR, true );
 
         REQUIRE( is_null( number ) );
     }
@@ -133,8 +133,8 @@ TEST_CASE( "get_error(rand_value) in cycle", "[public]" ) {
 
         Error number_error = get_error( number );
 
-        REQUIRE( number_error.code == DEFAULT_ERROR.code );
-        REQUIRE( number_error.message == DEFAULT_ERROR.message );
+        REQUIRE( number_error.code == Errors::DEFAULT_ERROR.code );
+        REQUIRE( number_error.message == Errors::DEFAULT_ERROR.message );
     }
 }
 

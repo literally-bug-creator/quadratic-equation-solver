@@ -1,7 +1,6 @@
-#define CATCH_CONFIG_MAIN
 #include <catch2/catch_test_macros.hpp>
 
-#include "../src/error.cpp"
+#include "../include/error.hpp"
 #include "tools.cpp"
 
 TEST_CASE( "make_error(OK, empty)", "[public]" ) {
