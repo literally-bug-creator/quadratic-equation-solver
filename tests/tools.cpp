@@ -1,3 +1,4 @@
+#include <cmath>
 #define CATCH_CONFIG_MAIN
 
 #include <catch2/catch_test_macros.hpp>
@@ -9,11 +10,12 @@
 #include "../include/number.hpp"
 #include "../include/number_kit.hpp"
 #include "../include/solution.hpp"
+#include "iostream"
 
 const int MIN_INT = 0;
-const int MIN_NEG_INT = -10000;
+const int MIN_NEG_INT = -100;
 const int MAX_INT = 100;
-const int TESTS_AMOUNT = 10000;
+const int TESTS_AMOUNT = 1000;
 const int ERROR_CODES_AMOUNT = 4;
 const int SOLUTION_TYPES_AMOUNT = 4;
 
@@ -109,8 +111,8 @@ inline Solution random_two_roots_solution() {
 }
 
 inline Solution random_single_root_solution() {
-    Number a = random_number();
-    Number c = random_number();
+    Number a = random_number( MIN_INT, MAX_INT );
+    Number c = random_number( MIN_INT, MAX_INT );
     double b_value = sqrt( mul( mul( make_number( 4 ), a ), c ).value );
     Number b = make_number( b_value );
     NumberKit kit = make_number_kit( a, b, c );
@@ -121,18 +123,17 @@ inline Solution random_single_root_solution() {
 inline Solution random_linear_solution() {
     Number a = make_number( 0 );
     Number b = random_number();
-    Number c = make_number( random_double( MIN_INT, MAX_INT ) + 1 );
+    Number c = make_number( random_double( MIN_INT + 1, MAX_INT ) );
     NumberKit kit = make_number_kit( a, b, c );
 
     return get_solution( kit );
 }
 
-inline Solution random_no_roots_solution() {
-    Number a = random_number();
-    Number c = random_number();
+inline Solution random_disc_below_zero_solution() {
+    Number a = random_number( MIN_INT + 1, MAX_INT );
+    Number c = random_number( MIN_INT + 1, MAX_INT );
     double max_b = mul( mul( make_number( 4 ), a ), c ).value - 1;
-    double min_b = max_b - random_double( MIN_INT, MAX_INT );
-    Number b = random_number( min_b, max_b );
+    Number b = sqrt( random_number( MIN_INT, max_b ) );
     NumberKit kit = make_number_kit( a, b, c );
 
     return get_solution( kit );

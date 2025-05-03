@@ -31,15 +31,15 @@ void output_two_roots( std::ostream& destination, const Solution& solution ) {
 void output_single_root( std::ostream& destination, const Solution& solution ) {
     Number x = get_first_root( solution );
 
-    destination << SINGLE_ROOT << to_string( x ) << std::endl;
+    destination << OutputMessages::SINGLE_ROOT << to_string( x ) << std::endl;
 }
 
 void output_inf_roots( std::ostream& destination ) {
-    destination << INF_ROOTS << std::endl;
+    destination << OutputMessages::INF_ROOTS << std::endl;
 }
 
 void output_no_roots( std::ostream& destination ) {
-    destination << NO_ROOTS << std::endl;
+    destination << OutputMessages::NO_ROOTS << std::endl;
 }
 
 void output_solution( std::ostream& destination, const Solution& solution ) {
