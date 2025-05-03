@@ -2,6 +2,7 @@
 
 #include "error.hpp"
 #include "number.hpp"
+#include "number_kit.hpp"
 #include "solution_constants.cpp"
 
 bool has_null( const NumberKit& nums ) {
@@ -14,8 +15,9 @@ bool has_null( const NumberKit& nums ) {
 
 bool has_error( const NumberKit& nums ) {
     Error error = get_error( nums );
+    ErrorCode code = get_error_code( error );
 
-    return error.code != OK; // TODO:Грубейшая ошибка
+    return code != ErrorCode::OK;
 }
 
 bool is_valid( const NumberKit& nums ) {
