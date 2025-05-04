@@ -3,7 +3,7 @@
 #include "number.hpp"
 #include "number_kit.hpp"
 
-enum SolutionType {
+enum SolutionType { // 5 состояний
     TWO_ROOTS,
     SINGLE_ROOT,
     NO_ROOTS,

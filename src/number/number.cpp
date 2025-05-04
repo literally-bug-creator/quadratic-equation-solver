@@ -1,7 +1,6 @@
 #include "number.hpp"
 
 #include <cmath>
-#include <iostream>
 #include <optional>
 
 #include "input.hpp"
@@ -26,7 +25,9 @@ Number input_number( std::istream& in ) {
 
 Error get_error( const Number& number ) { return number.error; }
 
-bool is_null( const Number& coeff ) { return coeff.is_null; }
+bool is_null( const Number& coeff ) {
+    return coeff.is_null;
+} // Избыточный функционал у "Number"
 
 bool is_equal( const Number& left, const Number& right ) {
     return get_value( left ) == get_value( right );

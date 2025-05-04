@@ -32,7 +32,7 @@ NumberKit input_number_kit( std::istream& in ) {
         return make_number_kit( a, b, c, NumberKitErrors::INVALID_INPUT );
     }
 
-    return make_number_kit( a, b, c );
+    return make_number_kit( a, b, c ); // Показывать различия вариантов
 }
 
 Number get_a( const NumberKit& nums ) { return nums.a; }

@@ -4,7 +4,7 @@
 #include "solution.hpp"
 
 int main() {
-    NumberKit nums = input_number_kit( INPUT_STREAM );
-    Solution solution = get_solution( nums );
+    NumberKit nums = input_number_kit( INPUT_STREAM ); // Rename interface
+    Solution solution = get_solution( nums ); // Не "получить решение", а "решить"
     output( OUTPUT_STREAM, solution );
 }

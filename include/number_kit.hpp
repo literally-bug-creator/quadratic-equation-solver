@@ -23,7 +23,7 @@ NumberKit make_number_kit( const Number& a,
 
 NumberKit input_number_kit( std::istream& in );
 
-Number get_a( const NumberKit& nums );
+Number get_a( const NumberKit& nums ); //Погуглить про константный геттер
 
 Number get_b( const NumberKit& nums );
 
