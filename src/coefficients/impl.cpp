@@ -2,15 +2,29 @@
 #include "constants.cpp"
 #include "constants.hpp"
 #include "error.hpp"
+#include "number.hpp"
 
 bool has_error( const Number& number ) {
     Error error = get_error( number );
-
     return !is_ok( error );
 }
 
-bool has_error( const Number& a, const Number& b, const Number& c ) {
-    return has_error( a ) || has_error( b ) || has_error( c );
+Error get_error_or_default( const Number& a,
+                            const Number& b,
+                            const Number& c ) {
+    if ( has_error( a ) ) {
+        return get_error( a );
+    }
+
+    else if ( has_error( b ) ) {
+        return get_error( b );
+    }
+
+    else if ( has_error( c ) ) {
+        return get_error( c );
+    }
+
+    return Errors::DEFAULT_ERROR;
 }
 
 Coefficients make_coefficients( const Number& a,
@@ -24,12 +38,9 @@ Coefficients input_coefficients() {
     Number a = input_number();
     Number b = input_number();
     Number c = input_number();
+    Error error = get_error_or_default( a, b, c );
 
-    if ( has_error( a, b, c ) ) {
-        return make_coefficients( a, b, c, CoefficientsErrors::INVALID_INPUT );
-    }
-
-    return make_coefficients( a, b, c, Errors::DEFAULT_ERROR );
+    return make_coefficients( a, b, c, error );
 }
 
 const Number& get_a( const Coefficients& nums ) { return nums.a; }
