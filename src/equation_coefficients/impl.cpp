@@ -7,7 +7,7 @@ bool has_error( const Number& number ) {
     Error error = get_error( number );
     ErrorCode code = get_error_code( error );
 
-    return code != ErrorCode::OK;
+    return code != ErrorCode::OK; // TODO: Fix abst. leak
 }
 
 bool has_error( const Number& a, const Number& b, const Number& c ) {
@@ -21,10 +21,10 @@ EquationCoefficients make_equation_coefficients( const Number& a,
     return EquationCoefficients( a, b, c, error );
 }
 
-EquationCoefficients input_equation_coefficients( std::istream& in ) {
-    Number a = input_number( in );
-    Number b = input_number( in );
-    Number c = input_number( in );
+EquationCoefficients input_equation_coefficients() {
+    Number a = input_number();
+    Number b = input_number();
+    Number c = input_number();
 
     if ( has_error( a, b, c ) ) {
         return make_equation_coefficients(

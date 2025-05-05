@@ -1,10 +1,11 @@
 #include <optional>
 
+#include "constants.cpp"
 #include "input.hpp"
 
-std::optional<double> read_value( std::istream& in ) {
+std::optional<double> read_value() {
     double value;
-    if ( in >> value ) { return value; }
+    if ( INPUT_STREAM >> value ) { return value; }
 
     return std::optional<double>{};
 }

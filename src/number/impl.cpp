@@ -2,6 +2,7 @@
 #include <optional>
 
 #include "constants.cpp"
+#include "constants.hpp"
 #include "input.hpp"
 #include "number.hpp"
 
@@ -11,14 +12,14 @@ Number make_number( const double value, const Error& error ) {
     return Number( value, error );
 }
 
-Number input_number( std::istream& in ) {
-    std::optional<double> number = read_value( in );
+Number input_number() {
+    std::optional<double> number = read_value();
 
     if ( !number.has_value() ) {
         return make_number( Numeric::ZERO, NumberErrors::INVALID_INPUT );
     }
 
-    return make_number( number.value() );
+    return make_number( number.value(), Errors::DEFAULT_ERROR );
 }
 
 Error get_error( const Number& number ) { return number.error; }
