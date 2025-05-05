@@ -16,7 +16,7 @@ struct Number {
 Number make_number( const double value,
                     const Error& error = Errors::DEFAULT_ERROR );
 
-Number input_number( std::istream& in );
+Number input_number();
 
 Error get_error( const Number& number );
 

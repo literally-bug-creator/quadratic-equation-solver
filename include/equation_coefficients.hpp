@@ -22,7 +22,7 @@ EquationCoefficients make_equation_coefficients(
     const Number& c,
     const Error& error = Errors::DEFAULT_ERROR ); // TODO: Rethink error name
 
-EquationCoefficients input_equation_coefficients( std::istream& in );
+EquationCoefficients input_equation_coefficients();
 
 Number
 get_a( const EquationCoefficients& nums ); // Погуглить про константный геттер
