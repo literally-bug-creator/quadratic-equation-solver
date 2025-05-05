@@ -4,14 +4,6 @@
 #include "number.hpp"
 #include "solution.hpp"
 
-bool has_null( const EquationCoefficients& coeffs ) {
-    Number a = get_a( coeffs );
-    Number b = get_b( coeffs );
-    Number c = get_c( coeffs );
-
-    return is_null( a ) || is_null( b ) || is_null( c );
-}
-
 bool has_error( const EquationCoefficients& nums ) {
     Error error = get_error( nums );
     ErrorCode code = get_error_code( error );
@@ -19,9 +11,7 @@ bool has_error( const EquationCoefficients& nums ) {
     return code != ErrorCode::OK;
 }
 
-bool is_valid( const EquationCoefficients& nums ) {
-    return !( has_error( nums ) || has_null( nums ) );
-}
+bool is_valid( const EquationCoefficients& nums ) { return !has_error( nums ); }
 
 bool is_quadratic_equation( const EquationCoefficients& nums ) {
     return !is_equal( get_a( nums ), SolutionNumbers::ZERO );
@@ -79,8 +69,8 @@ bool has_inf_roots( const EquationCoefficients& nums ) {
 Solution solve_quadratic_equation( const EquationCoefficients& nums ) {
     if ( is_lower_than( get_discriminant( nums ), SolutionNumbers::ZERO ) ) {
         return make_solution( NO_ROOTS,
-                              SolutionNumbers::NUL,
-                              SolutionNumbers::NUL,
+                              SolutionNumbers::ZERO,
+                              SolutionNumbers::ZERO,
                               SolutionErrors::DISCRIMINANT_BELOW_ZERO );
     }
 
@@ -89,7 +79,7 @@ Solution solve_quadratic_equation( const EquationCoefficients& nums ) {
 
     if ( is_equal( x1, x2 ) ) {
         return make_solution(
-            SolutionType::SINGLE_ROOT, x1, SolutionNumbers::NUL );
+            SolutionType::SINGLE_ROOT, x1, SolutionNumbers::ZERO );
     }
 
     return make_solution( SolutionType::TWO_ROOTS, x1, x2 );
@@ -105,19 +95,19 @@ Number get_single_root( const EquationCoefficients& nums ) {
 Solution solve_linear_equation( const EquationCoefficients& nums ) {
     if ( has_no_roots( nums ) ) {
         return make_solution( SolutionType::NO_ROOTS,
-                              SolutionNumbers::NUL,
-                              SolutionNumbers::NUL );
+                              SolutionNumbers::ZERO,
+                              SolutionNumbers::ZERO );
     }
 
     else if ( has_inf_roots( nums ) ) {
         return make_solution( SolutionType::INF_ROOTS,
-                              SolutionNumbers::NUL,
-                              SolutionNumbers::NUL );
+                              SolutionNumbers::ZERO,
+                              SolutionNumbers::ZERO );
     }
 
     return make_solution( SolutionType::SINGLE_ROOT,
                           get_single_root( nums ),
-                          SolutionNumbers::NUL );
+                          SolutionNumbers::ZERO );
 }
 
 Solution make_solution( const SolutionType& type,
@@ -127,19 +117,19 @@ Solution make_solution( const SolutionType& type,
     return Solution( type, first_root, second_root, error );
 }
 
-Solution get_solution( const EquationCoefficients& nums ) {
-    if ( !is_valid( nums ) ) {
+Solution get_solution( const EquationCoefficients& coeffs ) {
+    if ( has_error( coeffs ) ) {
         return make_solution( SolutionType::NO_ROOTS,
-                              SolutionNumbers::NUL,
-                              SolutionNumbers::NUL,
+                              SolutionNumbers::ZERO,
+                              SolutionNumbers::ZERO,
                               SolutionErrors::INVALID_NUMBER_KIT );
     }
 
-    if ( is_quadratic_equation( nums ) ) {
-        return solve_quadratic_equation( nums );
+    if ( is_quadratic_equation( coeffs ) ) {
+        return solve_quadratic_equation( coeffs );
     }
 
-    return solve_linear_equation( nums );
+    return solve_linear_equation( coeffs );
 }
 
 SolutionType get_solution_type( const Solution& solution ) {

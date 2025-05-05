@@ -1,11 +1,10 @@
 #include "constants.hpp"
+
 #include "error.hpp"
 #include "number.hpp"
 
 namespace SolutionNumbers {
     const Number ZERO = make_number( Numeric::ZERO );
-    const Number NUL =
-        make_number( Numeric::ZERO, Errors::DEFAULT_ERROR, true );
     const Number FOUR = make_number( Numeric::FOUR );
     const Number TWO = make_number( Numeric::TWO );
 }
