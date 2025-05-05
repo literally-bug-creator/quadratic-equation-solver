@@ -1,18 +1,17 @@
 #include "constants.cpp"
+#include "constants.hpp"
 #include "equation_coefficients.hpp"
+#include "error.hpp"
 
 bool has_error( const Number& number ) {
     Error error = get_error( number );
+    ErrorCode code = get_error_code( error );
 
-    return error.code != OK;
+    return code != ErrorCode::OK;
 }
 
 bool has_error( const Number& a, const Number& b, const Number& c ) {
     return has_error( a ) || has_error( b ) || has_error( c );
-}
-
-bool has_null( const Number& a, const Number& b, const Number& c ) {
-    return is_null( a ) || is_null( b ) || is_null( c );
 }
 
 EquationCoefficients make_equation_coefficients( const Number& a,
@@ -27,13 +26,12 @@ EquationCoefficients input_equation_coefficients( std::istream& in ) {
     Number b = input_number( in );
     Number c = input_number( in );
 
-    if ( has_error( a, b, c ) || has_null( a, b, c ) ) { // TODO: Обдумать
+    if ( has_error( a, b, c ) ) {
         return make_equation_coefficients(
             a, b, c, EquationCoefficientsErrors::INVALID_INPUT );
     }
 
-    return make_equation_coefficients(
-        a, b, c ); // Показывать различия вариантов
+    return make_equation_coefficients( a, b, c, Errors::DEFAULT_ERROR );
 }
 
 Number get_a( const EquationCoefficients& nums ) { return nums.a; }
