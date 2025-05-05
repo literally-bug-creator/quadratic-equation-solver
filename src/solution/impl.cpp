@@ -6,12 +6,8 @@
 
 bool has_error( const Coefficients& nums ) {
     Error error = get_error( nums );
-    ErrorCode code = get_error_code( error );
-
-    return code != ErrorCode::OK;
+    return !is_ok( error );
 }
-
-bool is_valid( const Coefficients& nums ) { return !has_error( nums ); }
 
 bool is_quadratic_equation( const Coefficients& nums ) {
     return !is_equal( get_a( nums ), SolutionNumbers::ZERO );
@@ -68,7 +64,7 @@ bool has_inf_roots( const Coefficients& nums ) {
 
 Solution solve_quadratic_equation( const Coefficients& nums ) {
     if ( is_lower_than( get_discriminant( nums ), SolutionNumbers::ZERO ) ) {
-        return make_solution( NO_ROOTS,
+        return make_solution( SolutionType::NO_ROOTS,
                               SolutionNumbers::ZERO,
                               SolutionNumbers::ZERO,
                               SolutionErrors::DISCRIMINANT_BELOW_ZERO );
