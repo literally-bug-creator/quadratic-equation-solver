@@ -9,9 +9,7 @@ bool has_error( const Number& number ) {
     return !is_ok( error );
 }
 
-Error get_error_or_default( const Number& a,
-                            const Number& b,
-                            const Number& c ) {
+Error get_error_or_ok( const Number& a, const Number& b, const Number& c ) {
     if ( has_error( a ) ) {
         return get_error( a );
     }
@@ -24,7 +22,7 @@ Error get_error_or_default( const Number& a,
         return get_error( c );
     }
 
-    return Errors::DEFAULT_ERROR;
+    return Errors::OK;
 }
 
 Coefficients make_coefficients( const Number& a,
@@ -38,7 +36,7 @@ Coefficients input_coefficients() {
     Number a = input_number();
     Number b = input_number();
     Number c = input_number();
-    Error error = get_error_or_default( a, b, c );
+    Error error = get_error_or_ok( a, b, c );
 
     return make_coefficients( a, b, c, error );
 }

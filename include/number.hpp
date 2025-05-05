@@ -13,8 +13,7 @@ struct Number {
         value( value ), error( error ) {}
 };
 
-Number make_number( const double value,
-                    const Error& error = Errors::DEFAULT_ERROR );
+Number make_number( const double value, const Error& error = Errors::OK );
 
 Number input_number();
 

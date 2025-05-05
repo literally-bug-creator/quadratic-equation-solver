@@ -5,11 +5,11 @@
 #include "error.hpp"
 
 namespace Messages {
-    const std::string DEFAULT_ERROR = "";
+    const std::string OK = "";
 }
 
 namespace Errors {
-    const Error DEFAULT_ERROR = make_error( OK, Messages::DEFAULT_ERROR );
+    const Error OK = make_error( ErrorCode::OK, Messages::OK );
 }
 
 namespace Numeric {

@@ -20,7 +20,7 @@ Coefficients make_coefficients(
     const Number& a,
     const Number& b,
     const Number& c,
-    const Error& error = Errors::DEFAULT_ERROR ); // TODO: Rethink error name
+    const Error& error = Errors::OK );
 
 Coefficients input_coefficients();
 

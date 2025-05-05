@@ -19,7 +19,7 @@ Number input_number() {
         return make_number( Numeric::ZERO, NumberErrors::INVALID_INPUT );
     }
 
-    return make_number( number.value(), Errors::DEFAULT_ERROR );
+    return make_number( number.value(), Errors::OK );
 }
 
 const Error& get_error( const Number& number ) { return number.error; }
