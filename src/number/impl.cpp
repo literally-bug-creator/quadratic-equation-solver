@@ -22,7 +22,7 @@ Number input_number() {
     return make_number( number.value(), Errors::DEFAULT_ERROR );
 }
 
-Error get_error( const Number& number ) { return number.error; }
+const Error& get_error( const Number& number ) { return number.error; }
 
 bool is_equal( const Number& left, const Number& right ) {
     return get_value( left ) == get_value( right );

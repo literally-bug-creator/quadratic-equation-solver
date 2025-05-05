@@ -18,7 +18,7 @@ Number make_number( const double value,
 
 Number input_number();
 
-Error get_error( const Number& number );
+const Error& get_error( const Number& number );
 
 bool is_equal( const Number& left, const Number& right );
 
