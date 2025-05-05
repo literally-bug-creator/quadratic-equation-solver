@@ -8,21 +8,17 @@
 struct Number {
     const double value;
     const Error error;
-    const bool is_null;
 
-    Number( const double value, const Error& error, const bool is_null ):
-        value( value ), error( error ), is_null( is_null ) {}
+    Number( const double value, const Error& error ):
+        value( value ), error( error ) {}
 };
 
 Number make_number( const double value,
-                    const Error& error = Errors::DEFAULT_ERROR,
-                    const bool is_null = false );
+                    const Error& error = Errors::DEFAULT_ERROR );
 
 Number input_number( std::istream& in );
 
 Error get_error( const Number& number );
-
-bool is_null( const Number& number );
 
 bool is_equal( const Number& left, const Number& right );
 
