@@ -60,7 +60,7 @@ Number div( const Number& dividend, const Number& divisor ) {
         return make_number( Numeric::ZERO, NumberErrors::DIV_BY_ZERO );
     }
 
-    return make_number( dividend_value / divisor_value );
+    return make_number( dividend_value / divisor_value, Errors::OK );
 }
 
 Number sqrt( const Number& radicand ) {
@@ -70,7 +70,7 @@ Number sqrt( const Number& radicand ) {
         return make_number( Numeric::ZERO, NumberErrors::ROOT_FROM_NEG );
     }
 
-    return make_number( sqrt( value ) );
+    return make_number( sqrt( value ), Errors::OK );
 }
 
 std::string to_string( const Number& coeff ) {
