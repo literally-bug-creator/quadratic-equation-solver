@@ -1,15 +1,15 @@
-#include "output.hpp"
-
 #include <iostream>
 
-#include "output_constants.cpp"
+#include "constants.cpp"
+#include "error.hpp"
+#include "output.hpp"
 #include "solution.hpp"
 
 std::ostream& OUTPUT_STREAM = std::cout;
 
 bool has_error( const Solution& solution ) {
     Error error = get_error( solution );
-    return get_error_code( error ) != OK;
+    return get_error_code( error ) != ErrorCode::OK;
 }
 
 void output_error_solution( std::ostream& destination,
