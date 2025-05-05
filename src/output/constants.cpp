@@ -1,7 +1,8 @@
 #include <iostream>
 #include <string>
 
-std::ostream& OUTPUT_STREAM = std::cout;
+inline std::ostream& OUTPUT_STREAM = std::cout;
+const std::string NEW_LINE = "\n";
 
 namespace OutputMessages {
     const std::string UNKNOWN_SOLUTION_TYPE = "Неизвестный тип решения!";
