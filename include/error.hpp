@@ -19,8 +19,8 @@ struct Error {
 
 Error make_error( const ErrorCode code, const std::string& message );
 
-ErrorCode get_error_code( const Error& error );
+const ErrorCode& get_error_code( const Error& error );
 
-std::string get_error_message( const Error& error );
+const std::string& get_error_message( const Error& error );
 
 bool is_ok( const Error& error );
