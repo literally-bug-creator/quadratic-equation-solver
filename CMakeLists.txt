@@ -11,17 +11,17 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Catch2)
 
 add_library(quadratic_solver
-    src/input/input.cpp
-    src/input/input_constants.cpp
+    src/input/impl.cpp
+    src/input/constants.cpp
     src/error.cpp
-    src/number/number.cpp
-    src/number/number_constants.cpp
-    src/number_kit/number_kit.cpp
-    src/number_kit/number_kit_constants.cpp
-    src/solution/solution.cpp
-    src/solution/solution_constants.cpp
-    src/output/output.cpp
-    src/output/output_constants.cpp
+    src/number/impl.cpp
+    src/number/constants.cpp
+    src/equation_coefficients/impl.cpp
+    src/equation_coefficients/constants.cpp
+    src/solution/impl.cpp
+    src/solution/constants.cpp
+    src/output/impl.cpp
+    src/output/constants.cpp
 )
 
 target_include_directories(quadratic_solver PUBLIC include)
