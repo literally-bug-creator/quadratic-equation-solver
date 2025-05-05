@@ -132,12 +132,14 @@ Solution get_solution( const EquationCoefficients& coeffs ) {
     return solve_linear_equation( coeffs );
 }
 
-SolutionType get_solution_type( const Solution& solution ) {
+const SolutionType& get_solution_type( const Solution& solution ) {
     return solution.type;
 }
 
-Number get_first_root( const Solution& solution ) { return solution.x1; }
+const Number& get_first_root( const Solution& solution ) { return solution.x1; }
 
-Number get_second_root( const Solution& solution ) { return solution.x2; }
+const Number& get_second_root( const Solution& solution ) {
+    return solution.x2;
+}
 
-Error get_error( const Solution& solution ) { return solution.error; }
+const Error& get_error( const Solution& solution ) { return solution.error; }

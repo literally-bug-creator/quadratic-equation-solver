@@ -1,9 +1,9 @@
 #pragma once
 
-#include "number.hpp"
 #include "equation_coefficients.hpp"
+#include "number.hpp"
 
-enum SolutionType { // 5 состояний
+enum SolutionType { // TODO: Обдумать состояния
     TWO_ROOTS,
     SINGLE_ROOT,
     NO_ROOTS,
@@ -29,12 +29,12 @@ Solution make_solution(
     const Number& second_root,
     const Error& error = Errors::DEFAULT_ERROR ); // Rethink error name
 
-Solution get_solution( const EquationCoefficients& coeffs );
+Solution get_solution( const EquationCoefficients& coeffs ); // TODO: Rename
 
-SolutionType get_solution_type( const Solution& solution );
+const SolutionType& get_solution_type( const Solution& solution );
 
-Number get_first_root( const Solution& solution );
+const Number& get_first_root( const Solution& solution );
 
-Number get_second_root( const Solution& solution );
+const Number& get_second_root( const Solution& solution );
 
-Error get_error( const Solution& solution );
+const Error& get_error( const Solution& solution );
