@@ -29,7 +29,7 @@ Solution make_solution(
     const Number& second_root,
     const Error& error = Errors::DEFAULT_ERROR ); // Rethink error name
 
-Solution get_solution( const EquationCoefficients& coeffs ); // TODO: Rename
+Solution solve_equation( const EquationCoefficients& coeffs );
 
 const SolutionType& get_solution_type( const Solution& solution );
 

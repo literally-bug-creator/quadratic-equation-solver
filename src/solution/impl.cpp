@@ -117,7 +117,7 @@ Solution make_solution( const SolutionType& type,
     return Solution( type, first_root, second_root, error );
 }
 
-Solution get_solution( const EquationCoefficients& coeffs ) {
+Solution solve_equation( const EquationCoefficients& coeffs ) {
     if ( has_error( coeffs ) ) {
         return make_solution( SolutionType::NO_ROOTS,
                               SolutionNumbers::ZERO,
