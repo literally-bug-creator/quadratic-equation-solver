@@ -4,6 +4,6 @@
 
 int main() {
     EquationCoefficients coeffs = input_equation_coefficients();
-    Solution solution = get_solution( coeffs ); // Не "получить решение", а "решить"
+    Solution solution = get_solution( coeffs );
     output( solution );
 }
