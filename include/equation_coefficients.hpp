@@ -24,11 +24,10 @@ EquationCoefficients make_equation_coefficients(
 
 EquationCoefficients input_equation_coefficients();
 
-Number
-get_a( const EquationCoefficients& nums ); // Погуглить про константный геттер
+const Number& get_a( const EquationCoefficients& nums );
 
-Number get_b( const EquationCoefficients& nums );
+const Number& get_b( const EquationCoefficients& nums );
 
-Number get_c( const EquationCoefficients& nums );
+const Number& get_c( const EquationCoefficients& nums );
 
-Error get_error( const EquationCoefficients& nums );
+const Error& get_error( const EquationCoefficients& nums );

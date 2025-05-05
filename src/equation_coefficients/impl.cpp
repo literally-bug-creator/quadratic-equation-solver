@@ -5,9 +5,8 @@
 
 bool has_error( const Number& number ) {
     Error error = get_error( number );
-    ErrorCode code = get_error_code( error );
 
-    return code != ErrorCode::OK; // TODO: Fix abst. leak
+    return !is_ok( error );
 }
 
 bool has_error( const Number& a, const Number& b, const Number& c ) {
@@ -34,10 +33,12 @@ EquationCoefficients input_equation_coefficients() {
     return make_equation_coefficients( a, b, c, Errors::DEFAULT_ERROR );
 }
 
-Number get_a( const EquationCoefficients& nums ) { return nums.a; }
+const Number& get_a( const EquationCoefficients& nums ) { return nums.a; }
 
-Number get_b( const EquationCoefficients& nums ) { return nums.b; }
+const Number& get_b( const EquationCoefficients& nums ) { return nums.b; }
 
-Number get_c( const EquationCoefficients& nums ) { return nums.c; }
+const Number& get_c( const EquationCoefficients& nums ) { return nums.c; }
 
-Error get_error( const EquationCoefficients& nums ) { return nums.error; }
+const Error& get_error( const EquationCoefficients& nums ) {
+    return nums.error;
+}
