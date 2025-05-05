@@ -1,23 +1,23 @@
+#include "coefficients.hpp"
 #include "constants.cpp"
-#include "equation_coefficients.hpp"
 #include "error.hpp"
 #include "number.hpp"
 #include "solution.hpp"
 
-bool has_error( const EquationCoefficients& nums ) {
+bool has_error( const Coefficients& nums ) {
     Error error = get_error( nums );
     ErrorCode code = get_error_code( error );
 
     return code != ErrorCode::OK;
 }
 
-bool is_valid( const EquationCoefficients& nums ) { return !has_error( nums ); }
+bool is_valid( const Coefficients& nums ) { return !has_error( nums ); }
 
-bool is_quadratic_equation( const EquationCoefficients& nums ) {
+bool is_quadratic_equation( const Coefficients& nums ) {
     return !is_equal( get_a( nums ), SolutionNumbers::ZERO );
 }
 
-Number get_discriminant( const EquationCoefficients& nums ) {
+Number get_discriminant( const Coefficients& nums ) {
     Number a = get_a( nums );
     Number b = get_b( nums );
     Number c = get_c( nums );
@@ -27,7 +27,7 @@ Number get_discriminant( const EquationCoefficients& nums ) {
     return sub( square_b, semi_disc );
 }
 
-Number get_first_root( const EquationCoefficients& nums ) {
+Number get_first_root( const Coefficients& nums ) {
     Number neg_b = neg( get_b( nums ) );
     Number disc = get_discriminant( nums );
     Number disc_root = sqrt( disc );
@@ -36,7 +36,7 @@ Number get_first_root( const EquationCoefficients& nums ) {
     return div( add( neg_b, disc_root ), two_a );
 }
 
-Number get_second_root( const EquationCoefficients& nums ) {
+Number get_second_root( const Coefficients& nums ) {
     Number a = get_a( nums );
     Number neg_b = neg( get_b( nums ) );
     Number disc = get_discriminant( nums );
@@ -46,7 +46,7 @@ Number get_second_root( const EquationCoefficients& nums ) {
     return div( sub( neg_b, disc_root ), two_a );
 }
 
-bool has_no_roots( const EquationCoefficients& nums ) {
+bool has_no_roots( const Coefficients& nums ) {
     Number a = get_a( nums );
     Number b = get_b( nums );
     Number c = get_c( nums );
@@ -56,7 +56,7 @@ bool has_no_roots( const EquationCoefficients& nums ) {
            !is_equal( c, SolutionNumbers::ZERO );
 }
 
-bool has_inf_roots( const EquationCoefficients& nums ) {
+bool has_inf_roots( const Coefficients& nums ) {
     Number a = get_a( nums );
     Number b = get_b( nums );
     Number c = get_c( nums );
@@ -66,7 +66,7 @@ bool has_inf_roots( const EquationCoefficients& nums ) {
            is_equal( c, SolutionNumbers::ZERO );
 }
 
-Solution solve_quadratic_equation( const EquationCoefficients& nums ) {
+Solution solve_quadratic_equation( const Coefficients& nums ) {
     if ( is_lower_than( get_discriminant( nums ), SolutionNumbers::ZERO ) ) {
         return make_solution( NO_ROOTS,
                               SolutionNumbers::ZERO,
@@ -85,14 +85,14 @@ Solution solve_quadratic_equation( const EquationCoefficients& nums ) {
     return make_solution( SolutionType::TWO_ROOTS, x1, x2 );
 }
 
-Number get_single_root( const EquationCoefficients& nums ) {
+Number get_single_root( const Coefficients& nums ) {
     Number b = get_b( nums );
     Number neg_c = neg( get_c( nums ) );
 
     return div( neg_c, b );
 }
 
-Solution solve_linear_equation( const EquationCoefficients& nums ) {
+Solution solve_linear_equation( const Coefficients& nums ) {
     if ( has_no_roots( nums ) ) {
         return make_solution( SolutionType::NO_ROOTS,
                               SolutionNumbers::ZERO,
@@ -117,7 +117,7 @@ Solution make_solution( const SolutionType& type,
     return Solution( type, first_root, second_root, error );
 }
 
-Solution solve_equation( const EquationCoefficients& coeffs ) {
+Solution solve_equation( const Coefficients& coeffs ) {
     if ( has_error( coeffs ) ) {
         return make_solution( SolutionType::NO_ROOTS,
                               SolutionNumbers::ZERO,

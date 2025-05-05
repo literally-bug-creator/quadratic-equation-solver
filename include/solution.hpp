@@ -1,6 +1,6 @@
 #pragma once
 
-#include "equation_coefficients.hpp"
+#include "coefficients.hpp"
 #include "number.hpp"
 
 enum SolutionType { // TODO: Обдумать состояния
@@ -29,7 +29,7 @@ Solution make_solution(
     const Number& second_root,
     const Error& error = Errors::DEFAULT_ERROR ); // Rethink error name
 
-Solution solve_equation( const EquationCoefficients& coeffs );
+Solution solve_equation( const Coefficients& coeffs );
 
 const SolutionType& get_solution_type( const Solution& solution );
 

@@ -1,9 +1,9 @@
-#include "equation_coefficients.hpp"
+#include "coefficients.hpp"
 #include "output.hpp"
 #include "solution.hpp"
 
 int main() {
-    EquationCoefficients coeffs = input_equation_coefficients();
-    Solution solution = get_solution( coeffs );
+    Coefficients coeffs = input_coefficients();
+    Solution solution = solve_equation( coeffs );
     output( solution );
 }
