@@ -1,72 +1,66 @@
 #include <iostream>
+#include <string>
 
 #include "constants.cpp"
 #include "error.hpp"
+#include "number.hpp"
 #include "output.hpp"
 #include "solution.hpp"
 
-std::ostream& OUTPUT_STREAM = std::cout;
-
 bool has_error( const Solution& solution ) {
     Error error = get_error( solution );
-    return get_error_code( error ) != ErrorCode::OK;
+    return get_error_code( error ) != ErrorCode::OK; // TODO: Fix abst. leak
 }
 
-void output_error_solution( std::ostream& destination,
-                            const Solution& solution ) {
-    Error error = get_error( solution );
-    std::string error_msg = get_error_message( error );
-
-    destination << error_msg << std::endl;
+std::string get_single_root_solution_message( const Solution& solution ) {
+    Number x = get_first_root( solution );
+    return OutputMessages::SINGLE_ROOT + to_string( x );
 }
 
-void output_two_roots( std::ostream& destination, const Solution& solution ) {
+std::string get_two_roots_solution_message( const Solution& solution ) {
     Number x1 = get_first_root( solution );
     Number x2 = get_second_root( solution );
 
-    destination << OutputMessages::FIRST_ROOT << to_string( x1 ) << std::endl;
-    destination << OutputMessages::SECOND_ROOT << to_string( x2 ) << std::endl;
+    std::string first_root_msg = OutputMessages::FIRST_ROOT + to_string( x1 );
+    std::string second_root_msg = OutputMessages::SECOND_ROOT + to_string( x2 );
+
+    return first_root_msg + "\n" + second_root_msg +
+           "\n"; // TODO: Fix abst. level leak
 }
 
-void output_single_root( std::ostream& destination, const Solution& solution ) {
-    Number x = get_first_root( solution );
-
-    destination << OutputMessages::SINGLE_ROOT << to_string( x ) << std::endl;
+std::string get_error_message( const Solution& solution ) {
+    Error error = get_error( solution );
+    return get_error_message( error );
 }
 
-void output_inf_roots( std::ostream& destination ) {
-    destination << OutputMessages::INF_ROOTS << std::endl;
-}
+std::string get_solution_message( const Solution& solution ) {
+    if ( has_error( solution ) ) { return get_error_message( solution ); }
 
-void output_no_roots( std::ostream& destination ) {
-    destination << OutputMessages::NO_ROOTS << std::endl;
-}
-
-void output_solution( std::ostream& destination, const Solution& solution ) {
     SolutionType type = get_solution_type( solution );
 
-    if ( type == SolutionType::TWO_ROOTS ) {
-        output_two_roots( destination, solution );
-    }
+    switch ( type ) {
+    case SolutionType::TWO_ROOTS:
+        return get_two_roots_solution_message( solution );
 
-    else if ( type == SolutionType::SINGLE_ROOT ) {
-        output_single_root( destination, solution );
-    }
+    case SolutionType::SINGLE_ROOT:
+        return get_single_root_solution_message( solution );
 
-    else if ( type == SolutionType::INF_ROOTS ) {
-        output_inf_roots( destination );
-    }
+    case SolutionType::NO_ROOTS:
+        return OutputMessages::NO_ROOTS;
 
-    else {
-        output_no_roots( destination );
+    case SolutionType::INF_ROOTS:
+        return OutputMessages::INF_ROOTS;
+
+    default:
+        return OutputMessages::UNKNOWN_SOLUTION_TYPE;
     }
 }
 
-void output( std::ostream& destination, const Solution& solution ) {
-    if ( has_error( solution ) ) {
-        output_error_solution( destination, solution );
-        return;
-    }
+void output_string( const std::string& str ) {
+    OUTPUT_STREAM << str << std::endl;
+}
 
-    output_solution( destination, solution );
+void output( const Solution& solution ) {
+    std::string message = get_solution_message( solution );
+    output_string( message );
 }
