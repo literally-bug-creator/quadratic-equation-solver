@@ -6,5 +6,5 @@
 int main() {
     EquationCoefficients coeffs = input_equation_coefficients( INPUT_STREAM ); // Rename interface
     Solution solution = get_solution( coeffs ); // Не "получить решение", а "решить"
-    output( OUTPUT_STREAM, solution );
+    output( solution );
 }
