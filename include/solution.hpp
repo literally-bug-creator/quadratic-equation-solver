@@ -1,7 +1,7 @@
 #pragma once
 
 #include "number.hpp"
-#include "number_kit.hpp"
+#include "equation_coefficients.hpp"
 
 enum SolutionType { // 5 состояний
     TWO_ROOTS,
@@ -29,7 +29,7 @@ Solution make_solution(
     const Number& second_root,
     const Error& error = Errors::DEFAULT_ERROR ); // Rethink error name
 
-Solution get_solution( const NumberKit& nums );
+Solution get_solution( const EquationCoefficients& coeffs );
 
 SolutionType get_solution_type( const Solution& solution );
 
