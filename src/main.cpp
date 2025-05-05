@@ -1,10 +1,10 @@
 #include "input.hpp"
-#include "number_kit.hpp"
+#include "equation_coefficients.hpp"
 #include "output.hpp"
 #include "solution.hpp"
 
 int main() {
-    NumberKit nums = input_number_kit( INPUT_STREAM ); // Rename interface
-    Solution solution = get_solution( nums ); // Не "получить решение", а "решить"
+    EquationCoefficients coeffs = input_equation_coefficients( INPUT_STREAM ); // Rename interface
+    Solution solution = get_solution( coeffs ); // Не "получить решение", а "решить"
     output( OUTPUT_STREAM, solution );
 }
