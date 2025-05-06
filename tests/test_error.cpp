@@ -3,39 +3,11 @@
 #include "../include/error.hpp"
 #include "tools.cpp"
 
-TEST_CASE( "make_error(OK, empty)", "[public]" ) {
-    Error error = make_error( OK, "" );
+const int RAND_TESTS_AMOUNT = 1000;
 
-    REQUIRE( error.code == OK );
-    REQUIRE( error.message.empty() );
-}
-
-TEST_CASE( "make_error(INVALID_INPUT, empty)", "[public]" ) {
-    Error error = make_error( INVALID_INPUT, "" );
-
-    REQUIRE( error.code == INVALID_INPUT );
-    REQUIRE( error.message.empty() );
-}
-
-TEST_CASE( "make_error(CALCULATION_ERROR, empty)", "[public]" ) {
-    Error error = make_error( CALCULATION_ERROR, "" );
-
-    REQUIRE( error.code == CALCULATION_ERROR );
-    REQUIRE( error.message.empty() );
-}
-
-TEST_CASE( "make_error(SOLUTION_ERROR, empty)", "[public]" ) {
-    Error error = make_error( SOLUTION_ERROR, "" );
-
-    REQUIRE( error.code == SOLUTION_ERROR );
-    REQUIRE( error.message.empty() );
-}
-
-TEST_CASE( "make_error(RAND, RAND) in cycle", "[public]" ) {
-    for ( int _ = 0; _ < TESTS_AMOUNT; _++ ) {
-        int msg_length = random_int( MIN_INT, MAX_INT );
-        std::string msg = random_string( msg_length );
-        ErrorCode code = random_error_code();
+TEST_CASE( "make_error(each_type, random)", "[error]" ) {
+    for ( auto code : get_all_error_codes() ) {
+        std::string msg = random_string( random_int( ZERO, MAX_INT ) );
         Error error = make_error( code, msg );
 
         REQUIRE( error.code == code );
@@ -43,31 +15,31 @@ TEST_CASE( "make_error(RAND, RAND) in cycle", "[public]" ) {
     }
 }
 
-TEST_CASE( "get_error_code(random_error) in cycle", "[public]" ) {
-    for ( int _ = 0; _ < TESTS_AMOUNT; _++ ) {
-        int msg_length = random_int( MIN_INT, MAX_INT );
-        std::string msg = random_string( msg_length );
+TEST_CASE( "get_error_code(random_error)", "[error]" ) {
+    for ( int _ = 0; _ < RAND_TESTS_AMOUNT; _++ ) {
         ErrorCode code = random_error_code();
+        std::string msg = random_string( random_int( ZERO, MAX_INT ) );
         Error error = make_error( code, msg );
 
         REQUIRE( get_error_code( error ) == code );
     }
 }
 
-TEST_CASE( "get_error_message(error_with_empty_msg)", "[public]" ) {
-    ErrorCode code = random_error_code();
-    Error error = make_error( code, "" );
-
-    REQUIRE( get_error_message( error ).empty() );
-}
-
-TEST_CASE( "get_error_message(random_error) in cycle", "[public]" ) {
-    for ( int _ = 0; _ < TESTS_AMOUNT; _++ ) {
-        int msg_length = random_int( MIN_INT, MAX_INT );
-        std::string msg = random_string( msg_length );
+TEST_CASE( "get_error_message(random_error)", "[error]" ) {
+    for ( int _ = 0; _ < RAND_TESTS_AMOUNT; _++ ) {
         ErrorCode code = random_error_code();
+        std::string msg = random_string( random_int( ZERO, MAX_INT ) );
         Error error = make_error( code, msg );
 
         REQUIRE( get_error_message( error ) == msg );
+    }
+}
+
+TEST_CASE( "is_ok(each_type_errors)", "[error]" ) {
+    for ( auto code : get_all_error_codes() ) {
+        std::string msg = random_string( random_int( ZERO, MAX_INT ) );
+        Error error = make_error( code, msg );
+
+        REQUIRE( is_ok( error ) == ( code == ErrorCode::OK ) );
     }
 }
