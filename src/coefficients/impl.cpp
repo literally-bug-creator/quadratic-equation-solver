@@ -28,7 +28,7 @@ Error get_error_or_ok( const Number& a, const Number& b, const Number& c ) {
 Coefficients make_coefficients( const Number& a,
                                 const Number& b,
                                 const Number& c,
-                                const Error& error ) {
+                                const Error& error = Errors::OK ) {
     return Coefficients( a, b, c, error );
 }
 
