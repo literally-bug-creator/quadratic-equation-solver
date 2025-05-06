@@ -1,6 +1,5 @@
 #pragma once
 
-#include "constants.hpp"
 #include "number.hpp"
 
 struct Coefficients {
@@ -15,12 +14,6 @@ struct Coefficients {
                   const Error& error ):
         a( a ), b( b ), c( c ), error( error ) {}
 };
-
-Coefficients make_coefficients(
-    const Number& a,
-    const Number& b,
-    const Number& c,
-    const Error& error = Errors::OK );
 
 Coefficients input_coefficients();
 
