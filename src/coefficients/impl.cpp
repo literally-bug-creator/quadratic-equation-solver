@@ -36,9 +36,8 @@ Coefficients input_coefficients() {
     Number a = input_number();
     Number b = input_number();
     Number c = input_number();
-    Error error = get_error_or_ok( a, b, c );
 
-    return make_coefficients( a, b, c, error );
+    return make_coefficients( a, b, c, get_error_or_ok( a, b, c ) );
 }
 
 const Number& get_a( const Coefficients& nums ) { return nums.a; }
