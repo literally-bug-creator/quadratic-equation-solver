@@ -16,8 +16,8 @@ add_library(quadratic_solver
     src/error.cpp
     src/number/impl.cpp
     src/number/constants.cpp
-    src/equation_coefficients/impl.cpp
-    src/equation_coefficients/constants.cpp
+    src/coefficients/impl.cpp
+    src/coefficients/constants.cpp
     src/solution/impl.cpp
     src/solution/constants.cpp
     src/output/impl.cpp
@@ -29,9 +29,7 @@ target_include_directories(quadratic_solver PUBLIC include)
 add_executable(tests
     tests/test_error.cpp
     tests/test_number.cpp
-    tests/test_number_kit.cpp
-    tests/test_solution.cpp
-    tests/test_output.cpp
+    tests/test_coefficients.cpp
 )
 
 target_compile_options(tests PRIVATE --coverage -O0 -g)
