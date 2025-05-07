@@ -87,7 +87,7 @@ Number compute_discriminant( const Coefficients& nums ) {
     Number b = get_b( nums );
     Number c = get_c( nums );
     Number square_b = mul( b, b );
-    Number semi_disc = mul( mul( SolutionNumbers::FOUR, a ), c );
+    Number semi_disc = mul( SolutionNumbers::FOUR, mul( a, c ) );
 
     return sub( square_b, semi_disc );
 }

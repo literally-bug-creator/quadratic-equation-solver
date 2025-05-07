@@ -26,7 +26,7 @@ struct Solution {
 
 const Error& get_error( const Solution& solution );
 
-const SolutionType& get_solution_type( const Solution& solution );
+const SolutionType& get_solution_type( const Solution& solution ); // TODO: Maybe remove this getter?
 
 const Number& get_first_root( const Solution& solution );
 
