@@ -3,6 +3,7 @@
 #include <cmath>
 #include <string>
 
+#include "../include/constants.hpp"
 #include "../include/error.hpp"
 #include "../include/number.hpp"
 #include "tools.cpp"

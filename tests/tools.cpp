@@ -6,14 +6,16 @@
 #include <array>
 #include <random>
 
-#include "../include/constants.hpp"
 #include "../include/error.hpp"
 #include "../include/number.hpp"
+#include "../include/solution.hpp"
+#include "iostream"
 
 const int MIN_INT = -10000;
 const int ZERO = 0;
 const int MAX_INT = 10000;
 const int ERROR_CODES_AMOUNT = 4;
+const int SOLUTION_TYPES_AMOUNT = 5;
 
 inline std::string random_string( size_t length ) {
     const std::string chars = "abcdefghijklmnopqrstuvwxyz"
@@ -66,6 +68,23 @@ inline Error random_error() {
     return make_error( code, msg );
 }
 
+inline std::array<SolutionType, SOLUTION_TYPES_AMOUNT>
+get_all_solution_types() {
+    return {
+        SolutionType::NO_ROOTS,
+        SolutionType::INF_ROOTS,
+        SolutionType::SINGLE_ROOT,
+        SolutionType::TWO_ROOTS,
+        SolutionType::TWO_SAME_ROOTS,
+    };
+}
+
+inline SolutionType random_solution_type() {
+    SolutionType type =
+        get_all_solution_types()[random_int( ZERO, ERROR_CODES_AMOUNT - 1 )];
+    return type;
+}
+
 inline Number random_number() {
     Error error = random_error();
     double value = random_double( MIN_INT, MAX_INT );
@@ -87,13 +106,27 @@ inline Number random_number_ge_zero() {
     return make_number( value, error );
 }
 
+inline Number random_number_gt_zero() {
+    Error error = random_error();
+    double value = random_double( ZERO + 1, MAX_INT );
+
+    return make_number( value, error );
+}
+
 inline Number random_number_ne_zero() {
     Error error = random_error();
     double value = random_double( MIN_INT, MAX_INT );
 
-    if (value == 0){
-        value += 1;
-    }
+    if ( value == 0 ) { value += 1; }
 
     return make_number( value, error );
+}
+
+inline Coefficients random_two_roots_coefficients() {
+    Number a = random_number_gt_zero();
+    Number b = random_number();
+    Number four = Number( 4, Errors::OK );
+    Number c =
+        sub( div( mul( b, b ), mul( four, a ) ), random_number_ge_zero() );
+    return Coefficients( a, b, c, Errors::OK );
 }
