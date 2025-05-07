@@ -30,6 +30,7 @@ add_executable(tests
     tests/test_error.cpp
     tests/test_number.cpp
     tests/test_coefficients.cpp
+    tests/test_solution.cpp
 )
 
 target_compile_options(tests PRIVATE --coverage -O0 -g)
