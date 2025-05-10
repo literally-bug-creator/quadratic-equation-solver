@@ -42,4 +42,4 @@ bool has_no_roots( const Solution& solution );
 
 bool has_inf_roots( const Solution& solution );
 
-Solution solve_equation( const Coefficients& coeffs );
+Solution solve_equation( const Coefficients& coeffs ); // Вынести решение в отдельную сущность

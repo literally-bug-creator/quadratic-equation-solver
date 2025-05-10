@@ -157,21 +157,21 @@ const Number& get_second_root( const Solution& solution ) {
 const Error& get_error( const Solution& solution ) { return solution.error; }
 
 bool has_two_roots( const Solution& solution ) {
-    return get_solution_type( solution ) == SolutionType::TWO_ROOTS;
+    return get_solution_type( solution ) == SolutionType::TWO_ROOTS; // change to `is_equal`
 }
 
 bool has_two_same_roots( const Solution& solution ) {
-    return get_solution_type( solution ) == SolutionType::TWO_SAME_ROOTS;
+    return get_solution_type( solution ) == SolutionType::TWO_SAME_ROOTS;  // change to `is_equal`
 }
 
 bool has_single_root( const Solution& solution ) {
-    return get_solution_type( solution ) == SolutionType::SINGLE_ROOT;
+    return get_solution_type( solution ) == SolutionType::SINGLE_ROOT;  // change to `is_equal`
 }
 
 bool has_no_roots( const Solution& solution ) {
-    return get_solution_type( solution ) == SolutionType::NO_ROOTS;
+    return get_solution_type( solution ) == SolutionType::NO_ROOTS;  // change to `is_equal`
 }
 
 bool has_inf_roots( const Solution& solution ) {
-    return get_solution_type( solution ) == SolutionType::INF_ROOTS;
+    return get_solution_type( solution ) == SolutionType::INF_ROOTS; // change to `is_equal`
 }
