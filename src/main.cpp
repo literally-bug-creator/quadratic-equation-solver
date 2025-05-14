@@ -1,6 +1,6 @@
 #include "coefficients.hpp"
 #include "output.hpp"
-#include "solution.hpp"
+#include "solver.hpp"
 
 int main() {
     Coefficients coeffs = input_coefficients();
