@@ -18,8 +18,9 @@ add_library(quadratic_solver
     src/number/constants.cpp
     src/coefficients/impl.cpp
     src/coefficients/constants.cpp
-    src/solution/impl.cpp
-    src/solution/constants.cpp
+    src/solution.cpp
+    src/solver/impl.cpp
+    src/solver/constants.cpp
     src/output/impl.cpp
     src/output/constants.cpp
 )

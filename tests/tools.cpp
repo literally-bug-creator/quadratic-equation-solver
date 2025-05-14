@@ -6,10 +6,10 @@
 #include <array>
 #include <random>
 
+#include "../include/coefficients.hpp"
 #include "../include/error.hpp"
 #include "../include/number.hpp"
 #include "../include/solution.hpp"
-#include "iostream"
 
 const int MIN_INT = -10000;
 const int ZERO = 0;
