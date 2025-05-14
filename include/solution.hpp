@@ -1,6 +1,4 @@
 #pragma once
-
-#include "coefficients.hpp"
 #include "number.hpp"
 
 enum SolutionType {
@@ -24,6 +22,11 @@ struct Solution {
         type( type ), x1( x1 ), x2( x2 ), error( error ) {}
 };
 
+const Solution make_solution( const SolutionType& type,
+                              const Number& first_root,
+                              const Number& second_root,
+                              const Error& error = Errors::OK );
+
 const Error& get_error( const Solution& solution );
 
 const SolutionType& get_solution_type( const Solution& solution );
@@ -41,5 +44,3 @@ bool has_single_root( const Solution& solution );
 bool has_no_roots( const Solution& solution );
 
 bool has_inf_roots( const Solution& solution );
-
-Solution solve_equation( const Coefficients& coeffs ); // Вынести решение в отдельную сущность
