@@ -19,20 +19,28 @@ Number input_number();
 
 const Error& get_error( const Number& number );
 
-bool is_equal( const Number& left, const Number& right );
+const bool operator==( const Number& left, const Number& right );
 
-bool is_lower_than( const Number& left, const Number& right );
+const bool operator!=( const Number& left, const Number& right );
 
-Number neg( const Number& operand );
+const bool operator<( const Number& left, const Number& right );
 
-Number add( const Number& augend, const Number& addend );
+const bool operator>( const Number& left, const Number& right );
 
-Number sub( const Number& minuend, const Number& subtrahend );
+const bool operator<=( const Number& left, const Number& right );
 
-Number mul( const Number& multiplicand, const Number& multiplier );
+const bool operator>=( const Number& left, const Number& right );
 
-Number div( const Number& dividend, const Number& divisor );
+const Number operator-( const Number& operand );
 
-Number sqrt( const Number& radicand );
+const Number operator+( const Number& augend, const Number& addend );
 
-std::string to_string( const Number& number );
+const Number operator-( const Number& minuend, const Number& subtrahend );
+
+const Number operator*( const Number& multiplicand, const Number& multiplier );
+
+const Number operator/( const Number& dividend, const Number& divisor );
+
+const Number sqrt( const Number& radicand );
+
+const std::string to_string( const Number& number );
