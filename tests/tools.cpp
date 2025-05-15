@@ -13,6 +13,7 @@
 
 const int MIN_INT = -10000;
 const int ZERO = 0;
+const Number ZERO_NUMBER = make_number( ZERO );
 const int MAX_INT = 10000;
 const int ERROR_CODES_AMOUNT = 4;
 const int SOLUTION_TYPES_AMOUNT = 5;
@@ -122,11 +123,25 @@ inline Number random_number_ne_zero() {
     return make_number( value, error );
 }
 
+inline Coefficients no_roots_coefficients() {
+    Number c = random_number_ne_zero();
+    return Coefficients( ZERO_NUMBER, ZERO_NUMBER, c, Errors::OK );
+}
+
+inline Coefficients inf_roots_coefficients() {
+    return Coefficients( ZERO_NUMBER, ZERO_NUMBER, ZERO_NUMBER, Errors::OK );
+}
+
+inline Coefficients random_single_root_coefficients() {
+    Number b = random_number_ne_zero();
+    Number c = random_number();
+    return Coefficients( ZERO_NUMBER, b, c, Errors::OK );
+}
+
 inline Coefficients random_two_roots_coefficients() {
     Number a = random_number_gt_zero();
     Number b = random_number();
     Number four = Number( 4, Errors::OK );
-    Number c =
-        (( b * b ) / ( four * a )) - random_number_ge_zero();
+    Number c = ( ( b * b ) / ( four * a ) ) - random_number_ge_zero();
     return Coefficients( a, b, c, Errors::OK );
 }

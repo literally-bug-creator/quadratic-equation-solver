@@ -5,7 +5,6 @@
 
 const int RAND_TESTS_AMOUNT = 1000;
 const double ZERO_DOUBLE = 0;
-const Number ZERO_NUMBER = Number( ZERO_DOUBLE, Errors::OK );
 
 TEST_CASE( "get_error(random error & x1 & x2 & type)", "[solution]" ) {
     for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {

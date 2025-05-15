@@ -10,7 +10,6 @@
 
 const int RAND_TESTS_AMOUNT = 1000;
 const int ZERO_INT = 0;
-const Number ZERO_NUMBER = make_number( ZERO_INT );
 
 TEST_CASE( "make_number(rand_value, rand_error)", "[number]" ) {
     for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
