@@ -49,28 +49,64 @@ TEST_CASE( "get_error(number(rand_value, rand_error))", "[number]" ) {
     }
 }
 
-TEST_CASE( "is_equal(rand, rand)", "[number]" ) {
+TEST_CASE( "==(rand, rand)", "[number]" ) {
     for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
         Number left = random_number();
         Number right = random_number();
 
-        REQUIRE( is_equal( left, right ) == ( left.value == right.value ) );
+        REQUIRE( ( left == right ) == ( left.value == right.value ) );
     }
 }
 
-TEST_CASE( "is_lower_than(rand, rand)", "[number]" ) {
+TEST_CASE( "<(rand, rand)", "[number]" ) {
     for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
         Number left = random_number();
         Number right = random_number();
 
-        REQUIRE( is_lower_than( left, right ) == ( left.value < right.value ) );
+        REQUIRE( ( left < right ) == ( left.value < right.value ) );
+    }
+}
+
+TEST_CASE( ">(rand, rand)", "[number]" ) {
+    for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
+        Number left = random_number();
+        Number right = random_number();
+
+        REQUIRE( ( left > right ) == ( left.value > right.value ) );
+    }
+}
+
+TEST_CASE( "<=(rand, rand)", "[number]" ) {
+    for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
+        Number left = random_number();
+        Number right = random_number();
+
+        REQUIRE( ( left <= right ) == ( left.value <= right.value ) );
+    }
+}
+
+TEST_CASE( ">=(rand, rand)", "[number]" ) {
+    for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
+        Number left = random_number();
+        Number right = random_number();
+
+        REQUIRE( ( left >= right ) == ( left.value >= right.value ) );
+    }
+}
+
+TEST_CASE( "!=(rand, rand)", "[number]" ) {
+    for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
+        Number left = random_number();
+        Number right = random_number();
+
+        REQUIRE( ( left != right ) == ( left.value != right.value ) );
     }
 }
 
 TEST_CASE( "neg(rand)", "[number]" ) {
     for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
         Number number = random_number();
-        Number neg_number = neg( number );
+        Number neg_number = -number;
 
         REQUIRE( number.value == -neg_number.value );
     }
@@ -80,9 +116,11 @@ TEST_CASE( "add(rand, rand)", "[number]" ) {
     for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
         Number left = random_number();
         Number right = random_number();
-        Number sum = add( left, right );
+        double expected = left.value + right.value;
 
-        REQUIRE( sum.value == ( left.value + right.value ) );
+        Number sum = left + right;
+
+        REQUIRE( sum.value == expected );
     }
 }
 
@@ -90,9 +128,11 @@ TEST_CASE( "sub(rand, rand)", "[number]" ) {
     for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
         Number left = random_number();
         Number right = random_number();
-        Number diff = sub( left, right );
+        double expected = left.value - right.value;
 
-        REQUIRE( diff.value == ( left.value - right.value ) );
+        Number diff = left - right;
+
+        REQUIRE( diff.value == expected );
     }
 }
 
@@ -100,16 +140,19 @@ TEST_CASE( "mul(rand, rand)", "[number]" ) {
     for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
         Number left = random_number();
         Number right = random_number();
-        Number prod = mul( left, right );
+        double expected = left.value * right.value;
 
-        REQUIRE( prod.value == ( left.value * right.value ) );
+        Number prod = left * right;
+
+        REQUIRE( prod.value == expected );
     }
 }
 
 TEST_CASE( "div(rand, 0)", "[number]" ) {
     for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
         Number num = random_number();
-        Number res = div( num, ZERO_NUMBER );
+
+        Number res = num / ZERO_NUMBER;
 
         REQUIRE( res.value == ZERO_NUMBER.value );
         REQUIRE( res.error.code == ErrorCode::CALCULATION_ERROR );
@@ -119,7 +162,8 @@ TEST_CASE( "div(rand, 0)", "[number]" ) {
 TEST_CASE( "div(0, rand)", "[number]" ) {
     for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
         Number num = random_number();
-        Number res = div( ZERO_NUMBER, num );
+
+        Number res = ZERO_NUMBER / num;
 
         REQUIRE( res.value == ZERO_NUMBER.value );
         REQUIRE( res.error.code == Errors::OK.code );
@@ -130,9 +174,11 @@ TEST_CASE( "div(rand, rand != 0)", "[number]" ) {
     for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
         Number left = random_number();
         Number right = random_number_ne_zero();
-        Number res = div( left, right );
+        double expected = left.value / right.value;
 
-        REQUIRE( res.value == ( left.value / right.value ) );
+        Number res = left / right;
+
+        REQUIRE( res.value == expected );
         REQUIRE( res.error.code == ErrorCode::OK );
     }
 }
@@ -140,6 +186,7 @@ TEST_CASE( "div(rand, rand != 0)", "[number]" ) {
 TEST_CASE( "sqrt(rand < 0)", "[number]" ) {
     for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
         Number num = random_number_lt_zero();
+
         Number res = sqrt( num );
 
         REQUIRE( res.value == ZERO_NUMBER.value );
@@ -150,6 +197,7 @@ TEST_CASE( "sqrt(rand < 0)", "[number]" ) {
 TEST_CASE( "sqrt(rand >= 0)", "[number]" ) {
     for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
         Number num = random_number_ge_zero();
+
         Number res = sqrt( num );
 
         REQUIRE( res.value >= ZERO_NUMBER.value );
