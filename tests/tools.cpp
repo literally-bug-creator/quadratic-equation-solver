@@ -127,6 +127,6 @@ inline Coefficients random_two_roots_coefficients() {
     Number b = random_number();
     Number four = Number( 4, Errors::OK );
     Number c =
-        sub( div( mul( b, b ), mul( four, a ) ), random_number_ge_zero() );
+        (( b * b ) / ( four * a )) - random_number_ge_zero();
     return Coefficients( a, b, c, Errors::OK );
 }

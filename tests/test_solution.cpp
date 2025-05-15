@@ -46,7 +46,7 @@ TEST_CASE( "get_first_root(random error & x1 & x2 & type)", "[solution]" ) {
 
         Number real_root = get_first_root( solution );
 
-        REQUIRE( is_equal( expected_root, real_root ) );
+        REQUIRE( expected_root == real_root );
     }
 }
 
@@ -60,7 +60,7 @@ TEST_CASE( "get_second_root(random error & x1 & x2 & type)", "[solution]" ) {
 
         Number real_root = get_second_root( solution );
 
-        REQUIRE( is_equal( expected_root, real_root ) );
+        REQUIRE( expected_root == real_root );
     }
 }
 
