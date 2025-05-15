@@ -24,27 +24,27 @@ Number input_number() {
 
 const Error& get_error( const Number& number ) { return number.error; }
 
-const bool operator==( const Number& left, const Number& right ) {
+bool operator==( const Number& left, const Number& right ) {
     return get_value( left ) == get_value( right );
 }
 
-const bool operator!=( const Number& left, const Number& right ) {
+bool operator!=( const Number& left, const Number& right ) {
     return !( left == right );
 }
 
-const bool operator<( const Number& left, const Number& right ) {
+bool operator<( const Number& left, const Number& right ) {
     return get_value( left ) < get_value( right );
 }
 
-const bool operator>( const Number& left, const Number& right ) {
+bool operator>( const Number& left, const Number& right ) {
     return !( left < right ) && !( left == right );
 }
 
-const bool operator<=( const Number& left, const Number& right ) {
+bool operator<=( const Number& left, const Number& right ) {
     return !( left > right );
 }
 
-const bool operator>=( const Number& left, const Number& right ) {
+bool operator>=( const Number& left, const Number& right ) {
     return !( left < right );
 }
 

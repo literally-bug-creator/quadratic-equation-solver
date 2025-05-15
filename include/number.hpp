@@ -19,17 +19,17 @@ Number input_number();
 
 const Error& get_error( const Number& number );
 
-const bool operator==( const Number& left, const Number& right );
+bool operator==( const Number& left, const Number& right );
 
-const bool operator!=( const Number& left, const Number& right );
+bool operator!=( const Number& left, const Number& right );
 
-const bool operator<( const Number& left, const Number& right );
+bool operator<( const Number& left, const Number& right );
 
-const bool operator>( const Number& left, const Number& right );
+bool operator>( const Number& left, const Number& right );
 
-const bool operator<=( const Number& left, const Number& right );
+bool operator<=( const Number& left, const Number& right );
 
-const bool operator>=( const Number& left, const Number& right );
+bool operator>=( const Number& left, const Number& right );
 
 const Number operator-( const Number& operand );
 
