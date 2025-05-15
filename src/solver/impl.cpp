@@ -24,7 +24,7 @@ Solution make_single_root_solution( const Number& root ) {
 }
 
 Solution make_two_roots_solution( const Number& x1, const Number& x2 ) {
-    if ( is_equal( x1, x2 ) ) {
+    if ( x1 == x2 ) {
         return make_solution( SolutionType::TWO_SAME_ROOTS, x1, x2 );
     }
 
@@ -32,10 +32,7 @@ Solution make_two_roots_solution( const Number& x1, const Number& x2 ) {
 }
 
 Number compute_single_root( const Coefficients& coeffs ) {
-    Number b = get_b( coeffs );
-    Number neg_c = neg( get_c( coeffs ) );
-
-    return div( neg_c, b );
+    return ( -get_c( coeffs ) ) / get_b( coeffs );
 }
 
 bool has_inf_roots( const Coefficients& nums ) {
@@ -43,9 +40,8 @@ bool has_inf_roots( const Coefficients& nums ) {
     Number b = get_b( nums );
     Number c = get_c( nums );
 
-    return is_equal( a, SolverNumbers::ZERO ) &&
-           is_equal( b, SolverNumbers::ZERO ) &&
-           is_equal( c, SolverNumbers::ZERO );
+    return ( a == SolverNumbers::ZERO ) && ( b == SolverNumbers::ZERO ) &&
+           ( c == SolverNumbers::ZERO );
 }
 
 bool has_no_roots( const Coefficients& nums ) {
@@ -53,13 +49,12 @@ bool has_no_roots( const Coefficients& nums ) {
     Number b = get_b( nums );
     Number c = get_c( nums );
 
-    return is_equal( a, SolverNumbers::ZERO ) &&
-           is_equal( b, SolverNumbers::ZERO ) &&
-           !is_equal( c, SolverNumbers::ZERO );
+    return ( a == SolverNumbers::ZERO ) && ( b == SolverNumbers::ZERO ) &&
+           ( c != SolverNumbers::ZERO );
 }
 
 bool is_quadratic_equation( const Coefficients& nums ) {
-    return !is_equal( get_a( nums ), SolverNumbers::ZERO );
+    return get_a( nums ) != SolverNumbers::ZERO;
 }
 
 bool has_error( const Coefficients& nums ) {
@@ -84,33 +79,28 @@ Number compute_discriminant( const Coefficients& nums ) {
     Number a = get_a( nums );
     Number b = get_b( nums );
     Number c = get_c( nums );
-    Number square_b = mul( b, b );
-    Number semi_disc = mul( SolverNumbers::FOUR, mul( a, c ) );
 
-    return sub( square_b, semi_disc );
+    return ( b * b ) - ( SolverNumbers::FOUR * ( a * c ) );
 }
 
 Number compute_second_root( const Coefficients& nums ) {
     Number a = get_a( nums );
-    Number neg_b = neg( get_b( nums ) );
+    Number b = get_b( nums );
     Number disc = compute_discriminant( nums );
-    Number disc_root = sqrt( disc );
-    Number two_a = mul( SolverNumbers::TWO, a );
 
-    return div( sub( neg_b, disc_root ), two_a );
+    return ( ( -b ) - sqrt( disc ) ) / ( SolverNumbers::TWO * a );
 }
 
 Number compute_first_root( const Coefficients& nums ) {
-    Number neg_b = neg( get_b( nums ) );
+    Number a = get_a( nums );
+    Number b = get_b( nums );
     Number disc = compute_discriminant( nums );
-    Number disc_root = sqrt( disc );
-    Number two_a = mul( SolverNumbers::TWO, get_a( nums ) );
 
-    return div( add( neg_b, disc_root ), two_a );
+    return ( ( -b ) + sqrt( disc ) ) / ( SolverNumbers::TWO * a );
 }
 
 Solution solve_quadratic_equation( const Coefficients& nums ) {
-    if ( is_lower_than( compute_discriminant( nums ), SolverNumbers::ZERO ) ) {
+    if ( ( compute_discriminant( nums ) < SolverNumbers::ZERO ) ) {
         return make_error_solution( SolverErrors::DISCRIMINANT_BELOW_ZERO );
     }
 
