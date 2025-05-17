@@ -17,8 +17,9 @@ TEST_CASE( "make_number(rand_value, rand_error)", "[number]" ) {
         Error rand_error = random_error();
         Number num = make_number( rand_value, rand_error );
 
+
         Error num_error = get_error( num );
-        REQUIRE( num.value == rand_value );
+        REQUIRE( num.first == rand_value );
         REQUIRE( get_error_code( num_error ) == get_error_code( rand_error ) );
         REQUIRE( get_error_message( num_error ) ==
                  get_error_message( rand_error ) );
@@ -58,7 +59,7 @@ TEST_CASE( "==(rand, rand)", "[number]" ) {
         Number left = random_number();
         Number right = random_number();
 
-        REQUIRE( ( left == right ) == ( left.value == right.value ) );
+        REQUIRE( ( left == right ) == ( left.first == right.first ) );
     }
 }
 
@@ -67,7 +68,7 @@ TEST_CASE( "<(rand, rand)", "[number]" ) {
         Number left = random_number();
         Number right = random_number();
 
-        REQUIRE( ( left < right ) == ( left.value < right.value ) );
+        REQUIRE( ( left < right ) == ( left.first < right.first ) );
     }
 }
 
@@ -76,7 +77,7 @@ TEST_CASE( ">(rand, rand)", "[number]" ) {
         Number left = random_number();
         Number right = random_number();
 
-        REQUIRE( ( left > right ) == ( left.value > right.value ) );
+        REQUIRE( ( left > right ) == ( left.first > right.first ) );
     }
 }
 
@@ -85,7 +86,7 @@ TEST_CASE( "<=(rand, rand)", "[number]" ) {
         Number left = random_number();
         Number right = random_number();
 
-        REQUIRE( ( left <= right ) == ( left.value <= right.value ) );
+        REQUIRE( ( left <= right ) == ( left.first <= right.first ) );
     }
 }
 
@@ -94,7 +95,7 @@ TEST_CASE( ">=(rand, rand)", "[number]" ) {
         Number left = random_number();
         Number right = random_number();
 
-        REQUIRE( ( left >= right ) == ( left.value >= right.value ) );
+        REQUIRE( ( left >= right ) == ( left.first >= right.first ) );
     }
 }
 
@@ -103,7 +104,7 @@ TEST_CASE( "!=(rand, rand)", "[number]" ) {
         Number left = random_number();
         Number right = random_number();
 
-        REQUIRE( ( left != right ) == ( left.value != right.value ) );
+        REQUIRE( ( left != right ) == ( left.first != right.first ) );
     }
 }
 
@@ -112,7 +113,7 @@ TEST_CASE( "neg(rand)", "[number]" ) {
         Number number = random_number();
         Number neg_number = -number;
 
-        REQUIRE( number.value == -neg_number.value );
+        REQUIRE( number.first == -neg_number.first );
     }
 }
 
@@ -120,11 +121,11 @@ TEST_CASE( "add(rand, rand)", "[number]" ) {
     for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
         Number left = random_number();
         Number right = random_number();
-        double expected = left.value + right.value;
+        double expected = left.first + right.first;
 
         Number sum = left + right;
 
-        REQUIRE( sum.value == expected );
+        REQUIRE( sum.first == expected );
     }
 }
 
@@ -132,11 +133,11 @@ TEST_CASE( "sub(rand, rand)", "[number]" ) {
     for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
         Number left = random_number();
         Number right = random_number();
-        double expected = left.value - right.value;
+        double expected = left.first - right.first;
 
         Number diff = left - right;
 
-        REQUIRE( diff.value == expected );
+        REQUIRE( diff.first == expected );
     }
 }
 
@@ -144,11 +145,11 @@ TEST_CASE( "mul(rand, rand)", "[number]" ) {
     for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
         Number left = random_number();
         Number right = random_number();
-        double expected = left.value * right.value;
+        double expected = left.first * right.first;
 
         Number prod = left * right;
 
-        REQUIRE( prod.value == expected );
+        REQUIRE( prod.first == expected );
     }
 }
 
@@ -159,7 +160,7 @@ TEST_CASE( "div(rand, 0)", "[number]" ) {
         Number res = num / ZERO_NUMBER;
         Error error = get_error( res );
 
-        REQUIRE( res.value == ZERO_NUMBER.value );
+        REQUIRE( res.first == ZERO_NUMBER.first );
         REQUIRE( get_error_code( error ) == ErrorCode::CALCULATION_ERROR );
     }
 }
@@ -171,7 +172,7 @@ TEST_CASE( "div(0, rand)", "[number]" ) {
         Number res = ZERO_NUMBER / num;
         Error error = get_error( res );
 
-        REQUIRE( res.value == ZERO_NUMBER.value );
+        REQUIRE( res.first == ZERO_NUMBER.first );
         REQUIRE( get_error_code( error ) == get_error_code( Errors::OK ) );
     }
 }
@@ -180,12 +181,12 @@ TEST_CASE( "div(rand, rand != 0)", "[number]" ) {
     for ( int i = 0; i < RAND_TESTS_AMOUNT; i++ ) {
         Number left = random_number();
         Number right = random_number_ne_zero();
-        double expected = left.value / right.value;
+        double expected = left.first / right.first;
 
         Number res = left / right;
         Error error = get_error( res );
 
-        REQUIRE( res.value == expected );
+        REQUIRE( res.first == expected );
         REQUIRE( get_error_code( error ) == get_error_code( Errors::OK ) );
     }
 }
@@ -197,7 +198,7 @@ TEST_CASE( "sqrt(rand < 0)", "[number]" ) {
         Number res = sqrt( num );
         Error error = get_error( res );
 
-        REQUIRE( res.value == ZERO_NUMBER.value );
+        REQUIRE( res.first == ZERO_NUMBER.first );
         REQUIRE( get_error_code( error ) == ErrorCode::CALCULATION_ERROR );
     }
 }
@@ -209,7 +210,7 @@ TEST_CASE( "sqrt(rand >= 0)", "[number]" ) {
         Number res = sqrt( num );
         Error error = get_error( res );
 
-        REQUIRE( res.value >= ZERO_NUMBER.value );
+        REQUIRE( res.first >= ZERO_NUMBER.first );
         REQUIRE( get_error_code( error ) == ErrorCode::OK );
     }
 }
@@ -219,6 +220,6 @@ TEST_CASE( "to_string(rand)", "[number]" ) {
         Number num = random_number();
         std::string str = to_string( num );
 
-        REQUIRE( str == std::to_string( num.value ) );
+        REQUIRE( str == std::to_string( num.first ) );
     }
 }

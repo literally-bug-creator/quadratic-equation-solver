@@ -3,7 +3,6 @@
 #include "../include/solver.hpp"
 #include "coefficients.hpp"
 #include "constants.hpp"
-#include "number.hpp"
 #include "solution.hpp"
 #include "tools.cpp"
 
