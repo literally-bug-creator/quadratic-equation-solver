@@ -1,35 +1,32 @@
 #include "error.hpp"
 
-#include <any>
-#include <functional>
 #include <string>
 
-using Selector = std::function<std::any( int selector )>;
+#include "selector.hpp"
 
-Error make_error( const ErrorCode code, const std::string& message ) {
-    return Error( code, message );
-}
-
-Selector get_selector( Error e ) {
-    std::function<std::any( int index )> field = [e]( int index ) -> std::any {
+Selector get_selector( Error error ) {
+    std::function<std::any( int index )> field =
+        [error]( int index ) -> std::any {
         if ( index == 0 ) {
-            return std::any( e.first );
+            return std::any( error.first );
         } else {
-            return std::any( e.second );
+            return std::any( error.second );
         }
     };
 
     return field;
 }
 
+Error make_error( const ErrorCode code, const std::string& message ) {
+    return Error( code, message );
+}
+
 ErrorCode get_error_code( const Error& error ) {
-    Selector selector = get_selector( error );
-    return std::any_cast<ErrorCode>( selector( 0 ) );
+    return std::any_cast<ErrorCode>( get_selector( error )( 0 ) );
 }
 
 const std::string get_error_message( const Error& error ) {
-    Selector selector = get_selector( error );
-    return std::any_cast<std::string>( selector( 1 ) );
+    return std::any_cast<std::string>( get_selector( error )( 1 ) );
 }
 
 bool is_ok( const Error& error ) {
