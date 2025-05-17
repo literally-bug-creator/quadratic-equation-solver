@@ -10,8 +10,8 @@ TEST_CASE( "make_error(each_type, random)", "[error]" ) {
         std::string msg = random_string( random_int( ZERO, MAX_INT ) );
         Error error = make_error( code, msg );
 
-        REQUIRE( error.code == code );
-        REQUIRE( error.message == msg );
+        REQUIRE( get_error_code( error ) == code );
+        REQUIRE( get_error_message( error ) == msg );
     }
 }
 

@@ -3,6 +3,7 @@
 #include "../include/solver.hpp"
 #include "coefficients.hpp"
 #include "constants.hpp"
+#include "number.hpp"
 #include "solution.hpp"
 #include "tools.cpp"
 
@@ -15,9 +16,10 @@ TEST_CASE( "solve_equation(no_roots_coefficients)", "[solver]" ) {
     Error expected_error = Errors::OK;
 
     Solution solution = solve_equation( coeffs );
+    Error real_error = get_error( solution );
 
     REQUIRE( get_solution_type( solution ) == expected_type );
-    REQUIRE( get_error( solution ).code == expected_error.code );
+    REQUIRE( get_error_code( real_error ) == get_error_code( expected_error ) );
 }
 
 TEST_CASE( "solve_equation(inf_roots_coefficients)", "[solver]" ) {
@@ -26,9 +28,10 @@ TEST_CASE( "solve_equation(inf_roots_coefficients)", "[solver]" ) {
     Error expected_error = Errors::OK;
 
     Solution solution = solve_equation( coeffs );
+    Error real_error = get_error( solution );
 
     REQUIRE( get_solution_type( solution ) == expected_type );
-    REQUIRE( get_error( solution ).code == expected_error.code );
+    REQUIRE( get_error_code( real_error ) == get_error_code( expected_error ) );
 }
 
 TEST_CASE( "solve_equation(single_root_coefficients)", "[solver]" ) {
@@ -38,9 +41,11 @@ TEST_CASE( "solve_equation(single_root_coefficients)", "[solver]" ) {
         Error expected_error = Errors::OK;
 
         Solution solution = solve_equation( coeffs );
+        Error real_error = get_error( solution );
 
         REQUIRE( get_solution_type( solution ) == expected_type );
-        REQUIRE( get_error( solution ).code == expected_error.code );
+        REQUIRE( get_error_code( real_error ) ==
+                 get_error_code( expected_error ) );
     }
 }
 
@@ -51,8 +56,10 @@ TEST_CASE( "solve_equation(two_roots_coefficients)", "[solver]" ) {
         Error expected_error = Errors::OK;
 
         Solution solution = solve_equation( coeffs );
+        Error real_error = get_error( solution );
 
         REQUIRE( get_solution_type( solution ) == expected_type );
-        REQUIRE( get_error( solution ).code == expected_error.code );
+        REQUIRE( get_error_code( real_error ) ==
+                 get_error_code( expected_error ) );
     }
 }

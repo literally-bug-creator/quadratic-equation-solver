@@ -1,6 +1,7 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include "../include/solution.hpp"
+#include "error.hpp"
 #include "tools.cpp"
 
 const int RAND_TESTS_AMOUNT = 1000;
@@ -16,8 +17,10 @@ TEST_CASE( "get_error(random error & x1 & x2 & type)", "[solution]" ) {
 
         Error real_error = get_error( solution );
 
-        REQUIRE( expected_error.code == real_error.code );
-        REQUIRE( expected_error.message == real_error.message );
+        REQUIRE( get_error_code( real_error ) ==
+                 get_error_code( expected_error ) );
+        REQUIRE( get_error_message( real_error ) ==
+                 get_error_message( expected_error ) );
     }
 }
 

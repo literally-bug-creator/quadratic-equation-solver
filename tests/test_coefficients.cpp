@@ -59,7 +59,7 @@ TEST_CASE( "get_error(random_coeffs)", "[coefficients]" ) {
 
         Error res_error = get_error( coeffs );
 
-        REQUIRE( res_error.code == error.code );
-        REQUIRE( res_error.message == error.message );
+        REQUIRE( get_error_code( res_error ) == get_error_code( error ) );
+        REQUIRE( get_error_message( res_error ) == get_error_message( error ) );
     }
 }

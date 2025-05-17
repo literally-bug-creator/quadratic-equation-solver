@@ -17,9 +17,11 @@ TEST_CASE( "make_number(rand_value, rand_error)", "[number]" ) {
         Error rand_error = random_error();
         Number num = make_number( rand_value, rand_error );
 
+        Error num_error = get_error( num );
         REQUIRE( num.value == rand_value );
-        REQUIRE( num.error.code == rand_error.code );
-        REQUIRE( num.error.message == rand_error.message );
+        REQUIRE( get_error_code( num_error ) == get_error_code( rand_error ) );
+        REQUIRE( get_error_message( num_error ) ==
+                 get_error_message( rand_error ) );
     }
 }
 
@@ -30,8 +32,10 @@ TEST_CASE( "get_error(number(rand_value, default_error))", "[number]" ) {
 
         Error number_error = get_error( number );
 
-        REQUIRE( number_error.code == Errors::OK.code );
-        REQUIRE( number_error.message == Errors::OK.message );
+        REQUIRE( get_error_code( number_error ) ==
+                 get_error_code( Errors::OK ) );
+        REQUIRE( get_error_message( number_error ) ==
+                 get_error_message( Errors::OK ) );
     }
 }
 
@@ -43,8 +47,9 @@ TEST_CASE( "get_error(number(rand_value, rand_error))", "[number]" ) {
 
         Error number_error = get_error( number );
 
-        REQUIRE( number_error.code == error.code );
-        REQUIRE( number_error.message == error.message );
+        REQUIRE( get_error_code( number_error ) == get_error_code( error ) );
+        REQUIRE( get_error_message( number_error ) ==
+                 get_error_message( error ) );
     }
 }
 
@@ -152,9 +157,10 @@ TEST_CASE( "div(rand, 0)", "[number]" ) {
         Number num = random_number();
 
         Number res = num / ZERO_NUMBER;
+        Error error = get_error( res );
 
         REQUIRE( res.value == ZERO_NUMBER.value );
-        REQUIRE( res.error.code == ErrorCode::CALCULATION_ERROR );
+        REQUIRE( get_error_code( error ) == ErrorCode::CALCULATION_ERROR );
     }
 }
 
@@ -163,9 +169,10 @@ TEST_CASE( "div(0, rand)", "[number]" ) {
         Number num = random_number();
 
         Number res = ZERO_NUMBER / num;
+        Error error = get_error( res );
 
         REQUIRE( res.value == ZERO_NUMBER.value );
-        REQUIRE( res.error.code == Errors::OK.code );
+        REQUIRE( get_error_code( error ) == get_error_code( Errors::OK ) );
     }
 }
 
@@ -176,9 +183,10 @@ TEST_CASE( "div(rand, rand != 0)", "[number]" ) {
         double expected = left.value / right.value;
 
         Number res = left / right;
+        Error error = get_error( res );
 
         REQUIRE( res.value == expected );
-        REQUIRE( res.error.code == ErrorCode::OK );
+        REQUIRE( get_error_code( error ) == get_error_code( Errors::OK ) );
     }
 }
 
@@ -187,9 +195,10 @@ TEST_CASE( "sqrt(rand < 0)", "[number]" ) {
         Number num = random_number_lt_zero();
 
         Number res = sqrt( num );
+        Error error = get_error( res );
 
         REQUIRE( res.value == ZERO_NUMBER.value );
-        REQUIRE( res.error.code == ErrorCode::CALCULATION_ERROR );
+        REQUIRE( get_error_code( error ) == ErrorCode::CALCULATION_ERROR );
     }
 }
 
@@ -198,9 +207,10 @@ TEST_CASE( "sqrt(rand >= 0)", "[number]" ) {
         Number num = random_number_ge_zero();
 
         Number res = sqrt( num );
+        Error error = get_error( res );
 
         REQUIRE( res.value >= ZERO_NUMBER.value );
-        REQUIRE( res.error.code == ErrorCode::OK );
+        REQUIRE( get_error_code( error ) == ErrorCode::OK );
     }
 }
 
