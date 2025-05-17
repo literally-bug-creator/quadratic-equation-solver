@@ -5,19 +5,13 @@
 #include "constants.hpp"
 #include "error.hpp"
 
-struct Number {
-    const double value;
-    const Error error;
-
-    Number( const double value, const Error& error ):
-        value( value ), error( error ) {}
-};
+using Number = std::pair<double, Error>;
 
 Number make_number( const double value, const Error& error = Errors::OK );
 
 Number input_number();
 
-const Error& get_error( const Number& number );
+const Error get_error( const Number& number );
 
 bool operator==( const Number& left, const Number& right );
 

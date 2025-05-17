@@ -1,3 +1,4 @@
+#include <any>
 #include <cmath>
 #include <optional>
 
@@ -5,8 +6,20 @@
 #include "constants.hpp"
 #include "input.hpp"
 #include "number.hpp"
+#include "selector.hpp"
 
-double get_value( const Number& coeff ) { return coeff.value; }
+Selector get_selector( const Number& number ) {
+    std::function<std::any( int index )> field =
+        [number]( int index ) -> std::any {
+        if ( index == 0 ) {
+            return std::any( number.first );
+        } else {
+            return std::any( number.second );
+        }
+    };
+
+    return field;
+}
 
 Number make_number( const double value, const Error& error ) {
     return Number( value, error );
@@ -22,7 +35,13 @@ Number input_number() {
     return make_number( number.value(), Errors::OK );
 }
 
-const Error& get_error( const Number& number ) { return number.error; }
+double get_value( const Number& number ) {
+    return std::any_cast<double>( get_selector( number )( 0 ) );
+}
+
+const Error get_error( const Number& number ) {
+    return std::any_cast<Error>( get_selector( number )( 1 ) );
+}
 
 bool operator==( const Number& left, const Number& right ) {
     return get_value( left ) == get_value( right );
