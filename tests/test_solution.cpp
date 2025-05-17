@@ -13,7 +13,7 @@ TEST_CASE( "get_error(random error & x1 & x2 & type)", "[solution]" ) {
         Number x1 = random_number();
         Number x2 = random_number();
         Error expected_error = random_error();
-        Solution solution = Solution( type, x1, x2, expected_error );
+        Solution solution = make_solution( type, x1, x2, expected_error );
 
         Error real_error = get_error( solution );
 
@@ -30,7 +30,7 @@ TEST_CASE( "get_solution_type(each_type, random error & values)",
         Error error = random_error();
         Number x1 = random_number();
         Number x2 = random_number();
-        Solution solution = Solution( expected_type, x1, x2, error );
+        Solution solution = make_solution( expected_type, x1, x2, error );
 
         SolutionType real_type = get_solution_type( solution );
 
@@ -44,7 +44,7 @@ TEST_CASE( "get_first_root(random error & x1 & x2 & type)", "[solution]" ) {
         Number expected_root = random_number();
         Number x2 = random_number();
         Error error = random_error();
-        Solution solution = Solution( type, expected_root, x2, error );
+        Solution solution = make_solution( type, expected_root, x2, error );
 
         Number real_root = get_first_root( solution );
 
@@ -58,7 +58,7 @@ TEST_CASE( "get_second_root(random error & x1 & x2 & type)", "[solution]" ) {
         Number x1 = random_number();
         Number expected_root = random_number();
         Error error = random_error();
-        Solution solution = Solution( type, x1, expected_root, error );
+        Solution solution = make_solution( type, x1, expected_root, error );
 
         Number real_root = get_second_root( solution );
 
@@ -71,7 +71,7 @@ TEST_CASE( "has_no_roots(each type, random error & x1 & x2)", "[solution]" ) {
         Number x1 = random_number();
         Number x2 = random_number();
         Error error = random_error();
-        Solution solution = Solution( type, x1, x2, error );
+        Solution solution = make_solution( type, x1, x2, error );
 
         bool real_has_no_roots = type == SolutionType::NO_ROOTS;
 
@@ -84,7 +84,7 @@ TEST_CASE( "has_inf_roots(each type, random error & x1 & x2)", "[solution]" ) {
         Number x1 = random_number();
         Number x2 = random_number();
         Error error = random_error();
-        Solution solution = Solution( type, x1, x2, error );
+        Solution solution = make_solution( type, x1, x2, error );
 
         bool real_has_inf_roots = type == SolutionType::INF_ROOTS;
 
@@ -98,7 +98,7 @@ TEST_CASE( "has_single_root(each type, random error & x1 & x2)",
         Number x1 = random_number();
         Number x2 = random_number();
         Error error = random_error();
-        Solution solution = Solution( type, x1, x2, error );
+        Solution solution = make_solution( type, x1, x2, error );
 
         bool real_has_single_root = type == SolutionType::SINGLE_ROOT;
 
@@ -111,7 +111,7 @@ TEST_CASE( "has_two_roots(each type, random error & x1 & x2)", "[solution]" ) {
         Number x1 = random_number();
         Number x2 = random_number();
         Error error = random_error();
-        Solution solution = Solution( type, x1, x2, error );
+        Solution solution = make_solution( type, x1, x2, error );
 
         bool real_has_two_roots = type == SolutionType::TWO_ROOTS;
 
@@ -125,7 +125,7 @@ TEST_CASE( "has_two_same_roots(each type, random error & x1 & x2)",
         Number x1 = random_number();
         Number x2 = random_number();
         Error error = random_error();
-        Solution solution = Solution( type, x1, x2, error );
+        Solution solution = make_solution( type, x1, x2, error );
 
         bool real_has_two_same_roots = type == SolutionType::TWO_SAME_ROOTS;
 
