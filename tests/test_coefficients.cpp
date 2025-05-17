@@ -14,7 +14,7 @@ TEST_CASE( "get_a(random_coeffs)", "[coefficients]" ) {
         Number b = random_number();
         Number c = random_number();
         Error error = random_error();
-        Coefficients coeffs = Coefficients( a, b, c, error );
+        Coefficients coeffs = make_coefficients( a, b, c, error );
 
 
         Number res_a = get_a( coeffs );
@@ -29,7 +29,7 @@ TEST_CASE( "get_b(random_coeffs)", "[coefficients]" ) {
         Number b = random_number();
         Number c = random_number();
         Error error = random_error();
-        Coefficients coeffs = Coefficients( a, b, c, error );
+        Coefficients coeffs = make_coefficients( a, b, c, error );
 
         Number res_b = get_b( coeffs );
 
@@ -43,7 +43,7 @@ TEST_CASE( "get_c(random_coeffs)", "[coefficients]" ) {
         Number b = random_number();
         Number c = random_number();
         Error error = random_error();
-        Coefficients coeffs = Coefficients( a, b, c, error );
+        Coefficients coeffs = make_coefficients( a, b, c, error );
 
         Number res_c = get_c( coeffs );
 
@@ -57,7 +57,7 @@ TEST_CASE( "get_error(random_coeffs)", "[coefficients]" ) {
         Number b = random_number();
         Number c = random_number();
         Error error = random_error();
-        Coefficients coeffs = Coefficients( a, b, c, error );
+        Coefficients coeffs = make_coefficients( a, b, c, error );
 
         Error res_error = get_error( coeffs );
 
