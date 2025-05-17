@@ -9,18 +9,12 @@ enum ErrorCode {
     SOLUTION_ERROR,
 };
 
-struct Error {
-    const ErrorCode code;
-    const std::string message;
-
-    Error( const ErrorCode code, const std::string& message ):
-        code( code ), message( message ) {}
-};
+using Error = std::pair<ErrorCode, std::string>;
 
 Error make_error( const ErrorCode code, const std::string& message );
 
-const ErrorCode& get_error_code( const Error& error );
+ErrorCode get_error_code( const Error& error );
 
-const std::string& get_error_message( const Error& error );
+const std::string get_error_message( const Error& error );
 
 bool is_ok( const Error& error );
