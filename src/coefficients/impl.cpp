@@ -40,10 +40,10 @@ Coefficients input_coefficients() {
     return make_coefficients( a, b, c, get_error_or_ok( a, b, c ) );
 }
 
-const Number& get_a( const Coefficients& nums ) { return nums.a; }
+const Number& get_a( const Coefficients& coeffs ) { return coeffs.a; }
 
-const Number& get_b( const Coefficients& nums ) { return nums.b; }
+const Number& get_b( const Coefficients& coeffs ) { return coeffs.b; }
 
-const Number& get_c( const Coefficients& nums ) { return nums.c; }
+const Number& get_c( const Coefficients& coeffs ) { return coeffs.c; }
 
-const Error& get_error( const Coefficients& nums ) { return nums.error; }
+const Error& get_error( const Coefficients& coeffs ) { return coeffs.error; }
