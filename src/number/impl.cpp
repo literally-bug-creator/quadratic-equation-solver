@@ -8,8 +8,8 @@
 
 double get_value( const Number& coeff ) { return coeff.value; }
 
-Number make_number( const double value, const Error& error ) {
-    return Number( value, error );
+Number make_number( double value, const Error& error ) {
+    return Number{ value, error };
 }
 
 Number input_number() {
@@ -24,51 +24,35 @@ Number input_number() {
 
 const Error& get_error( const Number& number ) { return number.error; }
 
-bool operator==( const Number& left, const Number& right ) {
+bool is_equal( const Number& left, const Number& right ) {
     return get_value( left ) == get_value( right );
 }
 
-bool operator!=( const Number& left, const Number& right ) {
-    return !( left == right );
+bool is_greater_than( const Number& left, const Number& right ) {
+    return get_value( left ) > get_value( right );
 }
 
-bool operator<( const Number& left, const Number& right ) {
-    return get_value( left ) < get_value( right );
-}
-
-bool operator>( const Number& left, const Number& right ) {
-    return !( left < right ) && !( left == right );
-}
-
-bool operator<=( const Number& left, const Number& right ) {
-    return !( left > right );
-}
-
-bool operator>=( const Number& left, const Number& right ) {
-    return !( left < right );
-}
-
-const Number operator-( const Number& operand ) {
+Number neg( const Number& operand ) {
     double value = get_value( operand );
     return make_number( -value );
 }
 
-const Number operator+( const Number& augend, const Number& addend ) {
+Number add( const Number& augend, const Number& addend ) {
     double sum = get_value( augend ) + get_value( addend );
     return make_number( sum );
 }
 
-const Number operator-( const Number& minuend, const Number& subtrahend ) {
+Number sub( const Number& minuend, const Number& subtrahend ) {
     double difference = get_value( minuend ) - get_value( subtrahend );
     return make_number( difference );
 }
 
-const Number operator*( const Number& multiplicand, const Number& multiplier ) {
+Number mul( const Number& multiplicand, const Number& multiplier ) {
     double product = get_value( multiplicand ) * get_value( multiplier );
     return make_number( product );
 }
 
-const Number operator/( const Number& dividend, const Number& divisor ) {
+Number div( const Number& dividend, const Number& divisor ) {
     double dividend_value = get_value( dividend );
     double divisor_value = get_value( divisor );
 
@@ -79,7 +63,7 @@ const Number operator/( const Number& dividend, const Number& divisor ) {
     return make_number( dividend_value / divisor_value, Errors::OK );
 }
 
-const Number sqrt( const Number& radicand ) {
+Number sqrt( const Number& radicand ) {
     double value = get_value( radicand );
 
     if ( value < Numeric::ZERO ) {
@@ -89,6 +73,6 @@ const Number sqrt( const Number& radicand ) {
     return make_number( sqrt( value ), Errors::OK );
 }
 
-const std::string to_string( const Number& coeff ) {
+std::string to_string( const Number& coeff ) {
     return std::to_string( get_value( coeff ) );
 }

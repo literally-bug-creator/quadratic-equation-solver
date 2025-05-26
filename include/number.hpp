@@ -6,41 +6,30 @@
 #include "error.hpp"
 
 struct Number {
-    const double value;
-    const Error error;
-
-    Number( const double value, const Error& error ):
-        value( value ), error( error ) {}
+    double value;
+    Error error;
 };
 
-Number make_number( const double value, const Error& error = Errors::OK );
+Number make_number( double value, const Error& error = Errors::OK );
 
 Number input_number();
 
 const Error& get_error( const Number& number );
 
-bool operator==( const Number& left, const Number& right );
+bool is_equal( const Number& left, const Number& right );
 
-bool operator!=( const Number& left, const Number& right );
+bool is_greater_than( const Number& left, const Number& right );
 
-bool operator<( const Number& left, const Number& right );
+Number neg( const Number& operand );
 
-bool operator>( const Number& left, const Number& right );
+Number add( const Number& augend, const Number& addend );
 
-bool operator<=( const Number& left, const Number& right );
+Number sub( const Number& minuend, const Number& subtrahend );
 
-bool operator>=( const Number& left, const Number& right );
+Number mul( const Number& multiplicand, const Number& multiplier );
 
-const Number operator-( const Number& operand );
+Number div( const Number& dividend, const Number& divisor );
 
-const Number operator+( const Number& augend, const Number& addend );
+Number sqrt( const Number& radicand );
 
-const Number operator-( const Number& minuend, const Number& subtrahend );
-
-const Number operator*( const Number& multiplicand, const Number& multiplier );
-
-const Number operator/( const Number& dividend, const Number& divisor );
-
-const Number sqrt( const Number& radicand );
-
-const std::string to_string( const Number& number );
+std::string to_string( const Number& number );
