@@ -3,10 +3,10 @@
 #include "number.hpp"
 
 struct Coefficients {
-    const Number a;
-    const Number b;
-    const Number c;
-    const Error error;
+    Number a;
+    Number b;
+    Number c;
+    Error error;
 };
 
 Coefficients make_coefficients( const Number& a,
