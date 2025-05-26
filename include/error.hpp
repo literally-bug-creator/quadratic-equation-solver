@@ -10,14 +10,11 @@ enum ErrorCode {
 };
 
 struct Error {
-    const ErrorCode code;
-    const std::string message;
-
-    Error( const ErrorCode code, const std::string& message ):
-        code( code ), message( message ) {}
+    ErrorCode code;
+    std::string message;
 };
 
-Error make_error( const ErrorCode code, const std::string& message );
+Error make_error( ErrorCode code, const std::string& message );
 
 const ErrorCode& get_error_code( const Error& error );
 
