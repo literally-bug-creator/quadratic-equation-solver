@@ -7,7 +7,7 @@ const Solution make_solution( const SolutionType& type,
                               const Number& first_root,
                               const Number& second_root,
                               const Error& error ) {
-    return Solution( type, first_root, second_root, error );
+    return Solution{ type, first_root, second_root, error };
 }
 
 const SolutionType& get_solution_type( const Solution& solution ) {

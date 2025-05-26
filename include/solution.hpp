@@ -10,16 +10,10 @@ enum SolutionType {
 };
 
 struct Solution {
-    const SolutionType type;
-    const Number x1;
-    const Number x2;
-    const Error error;
-
-    Solution( const SolutionType& type,
-              const Number& x1,
-              const Number& x2,
-              const Error& error ):
-        type( type ), x1( x1 ), x2( x2 ), error( error ) {}
+    SolutionType type;
+    Number x1;
+    Number x2;
+    Error error;
 };
 
 const Solution make_solution( const SolutionType& type,
