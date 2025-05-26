@@ -1,5 +1,6 @@
 #pragma once
 #include "number.hpp"
+#include <vector>
 
 enum SolutionType {
     TWO_ROOTS,
@@ -25,16 +26,4 @@ const Error& get_error( const Solution& solution );
 
 const SolutionType& get_solution_type( const Solution& solution );
 
-const Number& get_first_root( const Solution& solution );
-
-const Number& get_second_root( const Solution& solution );
-
-bool has_two_roots( const Solution& solution ); // TODO: Remove
-
-bool has_two_same_roots( const Solution& solution ); // TODO: Remove
-
-bool has_single_root( const Solution& solution ); // TODO: Remove
-
-bool has_no_roots( const Solution& solution ); // TODO: Remove
-
-bool has_inf_roots( const Solution& solution ); // TODO: Remove
+std::vector<Number> get_roots( const Solution& solution );
