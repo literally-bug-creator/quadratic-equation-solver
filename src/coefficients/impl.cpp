@@ -10,17 +10,14 @@ bool has_error( const Number& number ) {
 }
 
 Error get_error_or_ok( const Number& a, const Number& b, const Number& c ) {
-    if ( has_error( a ) ) {
+    if ( has_error( a ) )
         return get_error( a );
-    }
 
-    else if ( has_error( b ) ) {
+    else if ( has_error( b ) )
         return get_error( b );
-    }
 
-    else if ( has_error( c ) ) {
+    else if ( has_error( c ) )
         return get_error( c );
-    }
 
     return Errors::OK;
 }

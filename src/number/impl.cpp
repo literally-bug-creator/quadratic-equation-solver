@@ -15,9 +15,8 @@ Number make_number( double value, const Error& error ) {
 Number input_number() {
     std::optional<double> number = read_value();
 
-    if ( !number.has_value() ) {
+    if ( !number.has_value() )
         return make_number( Numeric::ZERO, NumberErrors::INVALID_INPUT );
-    }
 
     return make_number( number.value(), Errors::OK );
 }
@@ -56,9 +55,8 @@ Number div( const Number& dividend, const Number& divisor ) {
     double dividend_value = get_value( dividend );
     double divisor_value = get_value( divisor );
 
-    if ( divisor_value == Numeric::ZERO ) {
+    if ( divisor_value == Numeric::ZERO )
         return make_number( Numeric::ZERO, NumberErrors::DIV_BY_ZERO );
-    }
 
     return make_number( dividend_value / divisor_value, Errors::OK );
 }
@@ -66,9 +64,8 @@ Number div( const Number& dividend, const Number& divisor ) {
 Number sqrt( const Number& radicand ) {
     double value = get_value( radicand );
 
-    if ( value < Numeric::ZERO ) {
+    if ( value < Numeric::ZERO )
         return make_number( Numeric::ZERO, NumberErrors::ROOT_FROM_NEG );
-    }
 
     return make_number( sqrt( value ), Errors::OK );
 }

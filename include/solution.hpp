@@ -29,12 +29,12 @@ const Number& get_first_root( const Solution& solution );
 
 const Number& get_second_root( const Solution& solution );
 
-bool has_two_roots( const Solution& solution );
+bool has_two_roots( const Solution& solution ); // TODO: Remove
 
-bool has_two_same_roots( const Solution& solution );
+bool has_two_same_roots( const Solution& solution ); // TODO: Remove
 
-bool has_single_root( const Solution& solution );
+bool has_single_root( const Solution& solution ); // TODO: Remove
 
-bool has_no_roots( const Solution& solution );
+bool has_no_roots( const Solution& solution ); // TODO: Remove
 
-bool has_inf_roots( const Solution& solution );
+bool has_inf_roots( const Solution& solution ); // TODO: Remove

@@ -59,25 +59,20 @@ bool has_error( const Solution& solution ) {
 std::string get_solution_msg( const Solution& solution ) {
     if ( has_error( solution ) ) { return get_error_msg( solution ); }
 
-    if ( has_two_roots( solution ) ) {
+    if ( has_two_roots( solution ) )
         return get_two_roots_solution_msg( solution );
-    }
 
-    else if ( has_two_same_roots( solution ) ) {
+    else if ( has_two_same_roots( solution ) )
         return get_two_same_roots_solution_msg( solution );
-    }
 
-    else if ( has_single_root( solution ) ) {
+    else if ( has_single_root( solution ) )
         return get_single_root_solution_msg( solution );
-    }
 
-    else if ( has_inf_roots( solution ) ) {
+    else if ( has_inf_roots( solution ) )
         return get_inf_roots_solution_msg( solution );
-    }
 
-    else if ( has_no_roots( solution ) ) {
+    else if ( has_no_roots( solution ) )
         return get_no_roots_solution_msg( solution );
-    }
 
     return get_unknown_solution_type_msg( solution );
 }

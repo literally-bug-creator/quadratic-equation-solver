@@ -24,9 +24,8 @@ Solution make_single_root_solution( const Number& root ) {
 }
 
 Solution make_two_roots_solution( const Number& x1, const Number& x2 ) {
-    if ( x1 == x2 ) {
+    if ( x1 == x2 )
         return make_solution( SolutionType::TWO_SAME_ROOTS, x1, x2 );
-    }
 
     return make_solution( SolutionType::TWO_ROOTS, x1, x2 );
 }
@@ -63,13 +62,11 @@ bool has_error( const Coefficients& nums ) {
 }
 
 Solution solve_linear_equation( const Coefficients& coeffs ) {
-    if ( has_no_roots( coeffs ) ) {
+    if ( has_no_roots( coeffs ) )
         return make_no_roots_solution();
-    }
 
-    else if ( has_inf_roots( coeffs ) ) {
+    else if ( has_inf_roots( coeffs ) )
         return make_inf_roots_solution();
-    }
 
     Number x = compute_single_root( coeffs );
     return make_single_root_solution( x );
@@ -100,9 +97,8 @@ Number compute_first_root( const Coefficients& nums ) {
 }
 
 Solution solve_quadratic_equation( const Coefficients& nums ) {
-    if ( ( compute_discriminant( nums ) < SolverNumbers::ZERO ) ) {
+    if ( ( compute_discriminant( nums ) < SolverNumbers::ZERO ) )
         return make_error_solution( SolverErrors::DISCRIMINANT_BELOW_ZERO );
-    }
 
     Number x1 = compute_first_root( nums );
     Number x2 = compute_second_root( nums );
@@ -111,13 +107,11 @@ Solution solve_quadratic_equation( const Coefficients& nums ) {
 }
 
 Solution solve_equation( const Coefficients& coeffs ) {
-    if ( has_error( coeffs ) ) {
+    if ( has_error( coeffs ) )
         return make_error_solution( get_error( coeffs ) );
-    }
 
-    if ( is_quadratic_equation( coeffs ) ) {
+    if ( is_quadratic_equation( coeffs ) )
         return solve_quadratic_equation( coeffs );
-    }
 
     return solve_linear_equation( coeffs );
 }
