@@ -18,7 +18,7 @@ const Error& get_error( const Number& number );
 
 bool is_equal( const Number& left, const Number& right );
 
-bool is_greater_than( const Number& left, const Number& right );
+bool is_lower_than( const Number& left, const Number& right );
 
 Number neg( const Number& operand );
 

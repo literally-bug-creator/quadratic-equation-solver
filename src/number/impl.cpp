@@ -27,8 +27,8 @@ bool is_equal( const Number& left, const Number& right ) {
     return get_value( left ) == get_value( right );
 }
 
-bool is_greater_than( const Number& left, const Number& right ) {
-    return get_value( left ) > get_value( right );
+bool is_lower_than( const Number& left, const Number& right ) {
+    return get_value( left ) < get_value( right );
 }
 
 Number neg( const Number& operand ) {
