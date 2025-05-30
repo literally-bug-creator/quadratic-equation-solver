@@ -1,8 +1,6 @@
 #pragma once
 
-#include <vector>
-
-#include "t_expression.hpp"
+#include "expression.hpp"
 
 TerminalExpression::TerminalExpression( std::vector<Token> valid_tokens ):
     valid_tokens( valid_tokens ) {};

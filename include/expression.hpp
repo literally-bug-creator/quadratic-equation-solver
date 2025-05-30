@@ -1,8 +1,14 @@
 #pragma once
 
-#include <vector>
+#include "context.hpp"
 
-#include "aexpression.hpp"
+class AbstractExpression {
+public:
+    virtual ~AbstractExpression() = default;
+    virtual bool interpret( const Context& context ) const = 0;
+};
+
+class NonTerminalExpression : public AbstractExpression {};
 
 class TerminalExpression : public AbstractExpression {
 public:
