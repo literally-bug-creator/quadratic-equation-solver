@@ -15,7 +15,7 @@ public:
     Context( std::vector<Token> tokens );
 
     bool is_finished() const;
-    const TokenSequenceView get_tokens( size_t index, size_t length ) const;
+    const TokenSequenceView get_tokens( size_t length ) const;
     void next( size_t length );
     void dump();
     void rollback();
