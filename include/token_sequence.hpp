@@ -13,8 +13,10 @@ public:
     virtual size_t size() const = 0;
     virtual Token at( size_t index ) const = 0;
     virtual bool equals( const TokenSequence& other ) const = 0;
+    virtual bool equals( const Token& other ) const = 0;
 
     bool operator==( const TokenSequence& other ) const;
+    bool operator==( const Token& other ) const;
 };
 
 class TokenSequenceView : public TokenSequence {
@@ -24,6 +26,7 @@ public:
     size_t size() const override;
     Token at( size_t index ) const override;
     bool equals( const TokenSequence& other ) const override;
+    bool equals( const Token& token ) const override;
 
 private:
     std::span<const Token> view_;
@@ -36,6 +39,7 @@ public:
     size_t size() const override;
     Token at( size_t index ) const override;
     bool equals( const TokenSequence& other ) const override;
+    bool equals( const Token& token ) const override;
 
 private:
     std::vector<Token> data_;

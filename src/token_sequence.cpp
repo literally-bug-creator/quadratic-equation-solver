@@ -6,6 +6,10 @@ bool TokenSequence::operator==( const TokenSequence& other ) const {
     return equals( other );
 }
 
+bool TokenSequence::operator==( const Token& other ) const {
+    return equals( other );
+}
+
 TokenSequenceView::TokenSequenceView( std::span<const Token> view ):
     view_( view ) {}
 
@@ -43,6 +47,11 @@ bool TokenSequenceOwner::equals( const TokenSequence& other ) const {
     }
 
     return true;
+}
+
+bool TokenSequenceOwner::equals( const Token& token ) const {
+    if ( size() != ::size( token ) ) return false;
+    return is_equal( at( 0 ), token );
 }
 
 TokenSequenceView
