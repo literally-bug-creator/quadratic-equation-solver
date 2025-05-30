@@ -1,10 +1,11 @@
 #include "context.hpp"
 
 #include <cstddef>
-#include <stdexcept>
 #include <vector>
 
 #include "token_sequence.hpp"
+
+ContextImage::ContextImage( size_t index ): index( index ) {}
 
 Context::Context( std::vector<Token> tokens ): tokens( tokens ) {};
 
@@ -16,9 +17,6 @@ const TokenSequenceView Context::get_tokens( size_t length ) const {
 
 void Context::next( size_t length ) { index += length; }
 
-void Context::dump() { history.push_back( index ); }
+ContextImage Context::dump() { return ContextImage( index ); }
 
-void Context::rollback() {
-    if ( history.empty() ) throw std::runtime_error( "" );
-    index = history.back();
-}
+void Context::restore( ContextImage& dump ) { index = dump.index; }

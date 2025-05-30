@@ -5,11 +5,19 @@
 
 #include "token_sequence.hpp"
 
+class ContextImage {
+private:
+    size_t index;
+    friend class Context;
+
+public:
+    ContextImage( size_t index );
+};
+
 class Context {
 private:
     TokenSequenceOwner tokens;
     size_t index = 0;
-    std::vector<size_t> history;
 
 public:
     Context( std::vector<Token> tokens );
@@ -17,6 +25,6 @@ public:
     bool is_finished() const;
     const TokenSequenceView get_tokens( size_t length ) const;
     void next( size_t length );
-    void dump();
-    void rollback();
+    ContextImage dump();
+    void restore( ContextImage& dump );
 };
