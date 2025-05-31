@@ -1,9 +1,9 @@
-#include "context.hpp"
+#include "interpreter/context.hpp"
 
 #include <cstddef>
 #include <vector>
 
-#include "token_sequence.hpp"
+#include "interpreter/token_sequence.hpp"
 
 ContextImage::ContextImage( size_t index ): index( index ) {}
 
