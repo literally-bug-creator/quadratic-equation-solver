@@ -1,8 +1,6 @@
 #include "interpreter/float.hpp"
 
 bool FloatExpression::interpret( Context& context ) const {
-    ContextImage dump = context.dump();
-
     if ( !signed_int.interpret( context ) ) { return false; }
 
     fraction.interpret( context );

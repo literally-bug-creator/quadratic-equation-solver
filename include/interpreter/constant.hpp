@@ -1,8 +1,8 @@
 #pragma once
 
-#include "interpreter/inf.hpp"
-#include "interpreter/nan.hpp"
-#include "interpreter/sign.hpp"
+#include "inf.hpp"
+#include "nan.hpp"
+#include "sign.hpp"
 
 class ConstantExpression : public NonTerminalExpression {
 public:
