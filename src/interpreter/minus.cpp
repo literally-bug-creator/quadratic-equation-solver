@@ -1,6 +1,8 @@
 #include "interpreter/minus.hpp"
 
 bool MinusExpression::interpret( Context& context ) const {
+    if ( context.is_finished() ) return false;
+
     TokenSequenceView view = context.get_tokens( size( token ) );
 
     if ( view == token ) {
