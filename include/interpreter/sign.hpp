@@ -1,15 +1,14 @@
 #pragma once
 
 #include "expression.hpp"
-#include "token.hpp"
+#include "minus.hpp"
+#include "plus.hpp"
 
-class SignExpression : NonTerminalExpression {
+class SignExpression : public TerminalExpression {
 public:
     bool interpret( Context& context ) const override;
 
 private:
-    inline static TerminalExpression plus =
-        TerminalExpression( std::vector<Token>{ make_token( '+' ) } );
-    inline static TerminalExpression minus =
-        TerminalExpression( std::vector<Token>{ make_token( '-' ) } );
+    const MinusExpression minus = MinusExpression();
+    const PlusExpression plus = PlusExpression();
 };
