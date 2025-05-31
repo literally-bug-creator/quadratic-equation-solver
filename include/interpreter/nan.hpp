@@ -2,7 +2,7 @@
 
 #include "expression.hpp"
 
-class NanExpression : TerminalExpression {
+class NanExpression : public TerminalExpression {
 public:
     bool interpret( Context& context ) const override;
 

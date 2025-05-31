@@ -5,7 +5,7 @@
 class OrExpression : public NonTerminalExpression {
 public:
     OrExpression( const Expression& left, const Expression& right );
-    virtual bool interpret( Context& context ) const override;
+    bool interpret( Context& context ) const override;
 
 private:
     const Expression& left;

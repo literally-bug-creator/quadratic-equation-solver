@@ -2,7 +2,7 @@
 
 #include "expression.hpp"
 
-class InfExpression : TerminalExpression {
+class InfExpression : public TerminalExpression {
 public:
     bool interpret( Context& context ) const override;
 
