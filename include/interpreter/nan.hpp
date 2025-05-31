@@ -1,13 +1,13 @@
 #pragma once
 
 #include "expression.hpp"
-#include "token.hpp"
-#include "token_sequence.hpp"
 
 class NanExpression : TerminalExpression {
 public:
     bool interpret( Context& context ) const override;
 
 private:
-    TokenSequenceOwner nan;
+    inline static std::vector<Token> tokens = {
+        make_token( 'n' ), make_token( 'a' ), make_token( 'n' ) };
+    inline static TokenSequenceOwner nan = TokenSequenceOwner( tokens );
 };

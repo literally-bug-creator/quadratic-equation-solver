@@ -1,17 +1,13 @@
 #pragma once
 
 #include "expression.hpp"
-#include "token.hpp"
 
-class InfExpression : NonTerminalExpression {
+class InfExpression : TerminalExpression {
 public:
     bool interpret( Context& context ) const override;
 
 private:
-    inline static TerminalExpression i_exp =
-        TerminalExpression( std::vector<Token>{ make_token( 'i' ) } );
-    inline static TerminalExpression n_exp =
-        TerminalExpression( std::vector<Token>{ make_token( 'n' ) } );
-    inline static TerminalExpression f_exp =
-        TerminalExpression( std::vector<Token>{ make_token( 'f' ) } );
+    inline static std::vector<Token> tokens = {
+        make_token( 'i' ), make_token( 'n' ), make_token( 'f' ) };
+    inline static TokenSequenceOwner inf = TokenSequenceOwner( tokens );
 };
