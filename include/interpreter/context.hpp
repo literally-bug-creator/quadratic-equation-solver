@@ -1,8 +1,5 @@
 #pragma once
 
-#include <cstddef>
-#include <vector>
-
 #include "token_sequence.hpp"
 
 class ContextImage {
