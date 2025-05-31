@@ -3,7 +3,7 @@
 #include "expression.hpp"
 #include "token.hpp"
 
-class DigitExpression : public TerminalExpression {
+class DigitExpression : public NonTerminalExpression {
 public:
     bool interpret( Context& context ) const override;
 
