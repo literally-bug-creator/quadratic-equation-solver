@@ -1,8 +1,22 @@
 #pragma once
 
 #include "expression.hpp"
-#include "minus.hpp"
-#include "plus.hpp"
+
+class PlusExpression : public TerminalExpression {
+public:
+    bool interpret( Context& context ) const override;
+
+private:
+    inline static Token token = make_token( '+' );
+};
+
+class MinusExpression : public TerminalExpression {
+public:
+    bool interpret( Context& context ) const override;
+
+private:
+    inline static Token token = make_token( '-' );
+};
 
 class SignExpression : public NonTerminalExpression {
 public:

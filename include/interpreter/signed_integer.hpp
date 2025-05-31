@@ -2,7 +2,14 @@
 
 #include "digits.hpp"
 #include "sign.hpp"
-#include "zero.hpp"
+
+class ZeroExpression : public TerminalExpression {
+public:
+    bool interpret( Context& context ) const override;
+
+private:
+    const Token token = make_token( '0' );
+};
 
 class SignedIntegerExpression : public NonTerminalExpression {
 public:
