@@ -5,13 +5,16 @@
 
 #include "interpreter/token_sequence.hpp"
 
-ContextImage::ContextImage( size_t index ): index( index ) {}
+ContextImage::ContextImage( size_t index ): index( index ) {};
 
 Context::Context( std::vector<Token> tokens ): tokens( tokens ) {};
 
-bool Context::is_finished() const { return index >= tokens.size(); }
+size_t Context::size() const { return tokens.size(); }
+
+bool Context::is_finished() const { return index >= size(); }
 
 const TokenSequenceView Context::get_tokens( size_t length ) const {
+    if ( length == DEFAULT_LENGTH ) length = size() - ( index + 1 );
     return make_view( tokens, index, length );
 }
 
