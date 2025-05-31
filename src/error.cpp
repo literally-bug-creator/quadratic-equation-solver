@@ -1,7 +1,7 @@
 #include "error.hpp"
 
-Error make_error( const ErrorCode code, const std::string& message ) {
-    return Error( code, message );
+Error make_error( ErrorCode code, const std::string& message ) {
+    return Error{ code, message };
 }
 
 const ErrorCode& get_error_code( const Error& error ) { return error.code; }

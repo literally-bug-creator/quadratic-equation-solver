@@ -3,17 +3,16 @@
 #include "number.hpp"
 
 struct Coefficients {
-    const Number a;
-    const Number b;
-    const Number c;
-    const Error error;
-
-    Coefficients( const Number& a,
-                  const Number& b,
-                  const Number& c,
-                  const Error& error ):
-        a( a ), b( b ), c( c ), error( error ) {}
+    Number a;
+    Number b;
+    Number c;
+    Error error;
 };
+
+Coefficients make_coefficients( const Number& a,
+                                const Number& b,
+                                const Number& c,
+                                const Error& error = Errors::OK );
 
 Coefficients input_coefficients();
 
