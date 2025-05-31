@@ -1,6 +1,8 @@
 #include "interpreter/zero.hpp"
 
 bool ZeroExpression::interpret( Context& context ) const {
+    if ( context.is_finished() ) return false;
+
     TokenSequenceView view = context.get_tokens( size( token ) );
 
     if ( view == token ) {
