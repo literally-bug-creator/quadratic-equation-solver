@@ -32,6 +32,11 @@ bool TokenSequenceView::equals( const TokenSequence& other ) const {
     return true;
 }
 
+bool TokenSequenceView::equals( const Token& token ) const {
+    if ( size() != ::size( token ) ) return false;
+    return is_equal( at( 0 ), token );
+}
+
 TokenSequenceOwner::TokenSequenceOwner( std::vector<Token> tokens ):
     data_( std::move( tokens ) ) {}
 
