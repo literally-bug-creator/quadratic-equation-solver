@@ -4,7 +4,7 @@
 #include "minus.hpp"
 #include "plus.hpp"
 
-class SignExpression : public TerminalExpression {
+class SignExpression : public NonTerminalExpression {
 public:
     bool interpret( Context& context ) const override;
 

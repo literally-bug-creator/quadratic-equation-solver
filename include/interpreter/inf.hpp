@@ -7,7 +7,7 @@ public:
     bool interpret( Context& context ) const override;
 
 private:
-    inline static std::vector<Token> tokens = {
+    const std::vector<Token> tokens = {
         make_token( 'i' ), make_token( 'n' ), make_token( 'f' ) };
-    inline static TokenSequenceOwner inf = TokenSequenceOwner( tokens );
+    const TokenSequenceOwner inf = TokenSequenceOwner( tokens );
 };
