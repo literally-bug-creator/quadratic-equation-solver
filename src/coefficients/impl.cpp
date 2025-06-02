@@ -5,7 +5,7 @@
 #include "number.hpp"
 
 bool has_error( const Number& number ) {
-    Error error = get_error( number );
+    const Error& error = get_error( number );
     return !is_ok( error );
 }
 

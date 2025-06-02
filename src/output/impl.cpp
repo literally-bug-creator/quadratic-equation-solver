@@ -63,12 +63,12 @@ std::string build_solution_roots_msg( const Solution& solution ) {
 }
 
 std::string get_error_msg( const Solution& solution ) {
-    Error error = get_error( solution );
+    const Error& error = get_error( solution );
     return get_error_message( error );
 }
 
 bool has_error( const Solution& solution ) {
-    Error error = get_error( solution );
+    const Error& error = get_error( solution );
     return !is_ok( error );
 }
 

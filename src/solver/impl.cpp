@@ -36,9 +36,9 @@ Number compute_single_root( const Coefficients& coeffs ) {
 }
 
 bool has_inf_roots( const Coefficients& nums ) {
-    Number a = get_a( nums );
-    Number b = get_b( nums );
-    Number c = get_c( nums );
+    const Number& a = get_a( nums );
+    const Number& b = get_b( nums );
+    const Number& c = get_c( nums );
 
     return is_equal( a, SolverNumbers::ZERO ) &&
            is_equal( b, SolverNumbers::ZERO ) &&
@@ -46,9 +46,9 @@ bool has_inf_roots( const Coefficients& nums ) {
 }
 
 bool has_no_roots( const Coefficients& nums ) {
-    Number a = get_a( nums );
-    Number b = get_b( nums );
-    Number c = get_c( nums );
+    const Number& a = get_a( nums );
+    const Number& b = get_b( nums );
+    const Number& c = get_c( nums );
 
     return is_equal( a, SolverNumbers::ZERO ) &&
            is_equal( b, SolverNumbers::ZERO ) &&
@@ -60,7 +60,7 @@ bool is_quadratic_equation( const Coefficients& nums ) {
 }
 
 bool has_error( const Coefficients& nums ) {
-    Error error = get_error( nums );
+    const Error& error = get_error( nums );
     return !is_ok( error );
 }
 
@@ -76,9 +76,9 @@ Solution solve_linear_equation( const Coefficients& coeffs ) {
 }
 
 Number compute_discriminant( const Coefficients& nums ) {
-    Number a = get_a( nums );
-    Number b = get_b( nums );
-    Number c = get_c( nums );
+    const Number& a = get_a( nums );
+    const Number& b = get_b( nums );
+    const Number& c = get_c( nums );
     Number sqr_b = mul( b, b );
     Number correctibe_term = mul( SolverNumbers::FOUR, mul( a, c ) );
 
