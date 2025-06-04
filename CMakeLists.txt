@@ -1,40 +1,21 @@
 cmake_minimum_required(VERSION 3.14)
 project(quadratic-equation-solver)
 
-include(FetchContent)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-FetchContent_Declare(
-    Catch2
-    GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-    GIT_TAG        v3.8.1
-)
-FetchContent_MakeAvailable(Catch2)
+add_subdirectory(quadratic-equation-solver)
+# add_subdirectory(benchmark)
 
-add_library(quadratic_solver
-    src/input/impl.cpp
-    src/input/constants.cpp
-    src/error.cpp
-    src/number/impl.cpp
-    src/number/constants.cpp
-    src/coefficients/impl.cpp
-    src/coefficients/constants.cpp
-    src/solution.cpp
-    src/solver/impl.cpp
-    src/solver/constants.cpp
-    src/output/impl.cpp
-    src/output/constants.cpp
-)
+enable_testing()
+add_subdirectory(tests)
 
-target_include_directories(quadratic_solver PUBLIC include)
+set(CMAKE_CXX_FLAGS_DEBUG "-Wall -g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2 -Wall -DNDEBUG")
 
-add_executable(tests
-    tests/test_error.cpp
-    tests/test_number.cpp
-    tests/test_coefficients.cpp
-    tests/test_solution.cpp
-)
+message(STATUS "CMAKE_CXX_FLAGS_DEBUG: ${CMAKE_CXX_FLAGS_DEBUG}")
+message(STATUS "CMAKE_CXX_FLAGS_RELEASE: ${CMAKE_CXX_FLAGS_RELEASE}")
+message(STATUS "CURRENT ENVIRONMENT: ${CMAKE_BUILD_TYPE}")
 
-target_compile_options(tests PRIVATE --coverage -O0 -g)
-target_link_options(tests PRIVATE --coverage)
-
-target_link_libraries(tests PRIVATE quadratic_solver Catch2::Catch2WithMain)
+add_executable(main main.cpp)
+target_link_libraries(main quadratic-equation-solver)
