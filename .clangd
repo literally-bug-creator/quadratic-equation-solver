@@ -1,4 +1,8 @@
-
 CompileFlags:
   Add:
-    - '-std=c++20'
+    - "-I./include"
+    - "-I./src"
+    - "-I./source"
+    - "-std=c++20"
+  Remove:
+    - "-W*"
