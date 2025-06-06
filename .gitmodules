@@ -10,3 +10,6 @@
 [submodule "quadratic-equation-solver/third-party/interpreter"]
 	path = quadratic-equation-solver/third-party/interpreter
 	url = git@github.com:literally-bug-creator/number-interpreter.git
+[submodule "quadratic-equation-solver/third-party/number-interpreter"]
+	path = quadratic-equation-solver/third-party/number-interpreter
+	url = git@github.com:literally-bug-creator/number-interpreter.git
