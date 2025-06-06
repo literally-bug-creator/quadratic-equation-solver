@@ -7,3 +7,6 @@
 [submodule "quadratic-equation-solver/third-party/long-arithmetic"]
 	path = quadratic-equation-solver/third-party/long-arithmetic
 	url = git@github.com:literally-bug-creator/long-arithmetic.git
+[submodule "quadratic-equation-solver/third-party/interpreter"]
+	path = quadratic-equation-solver/third-party/interpreter
+	url = git@github.com:literally-bug-creator/number-interpreter.git
