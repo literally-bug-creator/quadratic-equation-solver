@@ -4,3 +4,6 @@
 [submodule "benchmark/third-party/benchmark"]
 	path = benchmark/third-party/benchmark
 	url = https://github.com/google/benchmark.git
+[submodule "quadratic-equation-solver/third-party/long-arithmetic"]
+	path = quadratic-equation-solver/third-party/long-arithmetic
+	url = git@github.com:literally-bug-creator/long-arithmetic.git
