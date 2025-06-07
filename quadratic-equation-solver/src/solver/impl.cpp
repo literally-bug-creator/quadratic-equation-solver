@@ -1,5 +1,8 @@
+#include "coefficients.hpp"
+#include "complex_number.hpp"
 #include "constants.cpp"
 #include "number.hpp"
+#include "numbers.hpp"
 #include "solver.hpp"
 
 Solution make_error_solution( const Error& error ) {
@@ -24,7 +27,7 @@ Solution make_single_root_solution( const Number& root ) {
         SolutionType::SINGLE_ROOT, root, SolverNumbers::ZERO );
 }
 
-Solution make_two_roots_solution( const Number& x1, const Number& x2 ) {
+Solution make_two_roots_solution( const Numbers& x1, const Numbers& x2 ) {
     if ( is_equal( x1, x2 ) )
         return make_solution( SolutionType::TWO_SAME_ROOTS, x1, x2 );
 
@@ -85,28 +88,39 @@ Number compute_discriminant( const Coefficients& nums ) {
     return sub( sqr_b, correctibe_term );
 }
 
-Number compute_second_root( const Coefficients& nums ) {
+Numbers compute_second_root( const Coefficients& nums ) {
     Number neg_b = neg( get_b( nums ) );
     Number disc = compute_discriminant( nums );
     Number double_a = mul( SolverNumbers::TWO, get_a( nums ) );
+
+    if ( is_lower_than( disc, SolverNumbers::ZERO ) ) {
+        Number imaginary_part = neg( div( sqrt( neg( disc ) ), double_a ) );
+        Number real_part = div( neg_b, double_a );
+
+        return make_complex_number( real_part, imaginary_part );
+    }
 
     return div( sub( neg_b, sqrt( disc ) ), double_a );
 }
 
-Number compute_first_root( const Coefficients& nums ) {
+Numbers compute_first_root( const Coefficients& nums ) {
     Number neg_b = neg( get_b( nums ) );
     Number disc = compute_discriminant( nums );
     Number double_a = mul( SolverNumbers::TWO, get_a( nums ) );
+
+    if ( is_lower_than( disc, SolverNumbers::ZERO ) ) {
+        Number imaginary_part = div( sqrt( neg( disc ) ), double_a );
+        Number real_part = div( neg_b, double_a );
+
+        return make_complex_number( real_part, imaginary_part );
+    }
 
     return div( add( neg_b, sqrt( disc ) ), double_a );
 }
 
 Solution solve_quadratic_equation( const Coefficients& nums ) {
-    if ( is_lower_than( compute_discriminant( nums ), SolverNumbers::ZERO ) )
-        return make_error_solution( SolverErrors::DISCRIMINANT_BELOW_ZERO );
-
-    Number x1 = compute_first_root( nums );
-    Number x2 = compute_second_root( nums );
+    Numbers x1 = compute_first_root( nums );
+    Numbers x2 = compute_second_root( nums );
 
     return make_two_roots_solution( x1, x2 );
 }

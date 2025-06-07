@@ -2,15 +2,17 @@
 
 #include <string>
 
+#include "big_number.hpp"
 #include "constants.hpp"
 #include "error.hpp"
 
 struct Number {
-    double value;
+    big_number::BigNumber value;
     Error error;
 };
 
-Number make_number( double value, const Error& error = Errors::OK );
+Number make_number( big_number::BigNumber value,
+                    const Error& error = Errors::OK );
 
 Number input_number();
 

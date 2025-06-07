@@ -2,6 +2,7 @@
 
 #include <string>
 
+#include "big_number.hpp"
 #include "error.hpp"
 
 namespace Messages {
@@ -13,7 +14,7 @@ namespace Errors {
 }
 
 namespace Numeric {
-    const double ZERO = 0;
-    const double FOUR = 4;
-    const double TWO = 2;
+    const big_number::BigNumber ZERO = big_number::make_big_number( "0" );
+    const big_number::BigNumber TWO = big_number::make_big_number( "2" );
+    const big_number::BigNumber FOUR = big_number::make_big_number( "4" );
 }

@@ -1,6 +1,8 @@
 #pragma once
-#include "number.hpp"
+
 #include <vector>
+
+#include "numbers.hpp"
 
 enum SolutionType {
     TWO_ROOTS,
@@ -12,18 +14,18 @@ enum SolutionType {
 
 struct Solution {
     SolutionType type;
-    Number x1;
-    Number x2;
+    Numbers x1;
+    Numbers x2;
     Error error;
 };
 
 const Solution make_solution( const SolutionType& type,
-                              const Number& first_root,
-                              const Number& second_root,
+                              const Numbers& first_root,
+                              const Numbers& second_root,
                               const Error& error = Errors::OK );
 
 const Error& get_error( const Solution& solution );
 
 const SolutionType& get_solution_type( const Solution& solution );
 
-std::vector<Number> get_roots( const Solution& solution );
+std::vector<Numbers> get_roots( const Solution& solution );

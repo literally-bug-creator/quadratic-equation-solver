@@ -4,7 +4,7 @@
 
 #include "constants.cpp"
 #include "error.hpp"
-#include "number.hpp"
+#include "numbers.hpp"
 #include "output.hpp"
 #include "solution.hpp"
 
@@ -21,7 +21,7 @@ std::string build_solution_type_msg( const Solution& solution ) {
     }
 }
 
-bool is_roots_equals( std::vector<Number> roots ) {
+bool is_roots_equals( std::vector<Numbers> roots ) {
     if ( roots.empty() ) return false;
     if ( roots.size() == ONE ) return true;
 
@@ -32,22 +32,22 @@ bool is_roots_equals( std::vector<Number> roots ) {
     return true;
 }
 
-std::string get_no_index_root_msg( const Number& root ) {
+std::string get_no_index_root_msg( const Numbers& root ) {
     return X_STR + EQUAL_SIGN_STR + to_string( root );
 }
 
-std::string get_index_root_msg( const Number& root, size_t index ) {
+std::string get_index_root_msg( const Numbers& root, size_t index ) {
     return X_STR + std::to_string( index ) + EQUAL_SIGN_STR + to_string( root );
 }
 
-std::string build_root_msg( const Number& root,
+std::string build_root_msg( const Numbers& root,
                             size_t index = OUTBOUND_INDEX ) {
     if ( index == OUTBOUND_INDEX ) return get_no_index_root_msg( root );
     return get_index_root_msg( root, index );
 }
 
 std::string build_solution_roots_msg( const Solution& solution ) {
-    std::vector<Number> roots = get_roots( solution );
+    std::vector<Numbers> roots = get_roots( solution );
 
     if ( is_roots_equals( roots ) ) return build_root_msg( roots[ZERO] );
 
