@@ -285,3 +285,66 @@ TEST( TestEquationSolver, TwoSameRoots4 ) {
     EXPECT_EQ( is_equal( get_roots( solution )[0], second_root ), true );
     EXPECT_EQ( is_equal( get_roots( solution )[1], first_root ), true );
 }
+
+TEST( TestEquationSolver, TwoSameRoots5 ) {
+    big_number::BigNumber first_v = big_number::make_big_number( "0.001" );
+    big_number::BigNumber second_v = big_number::make_big_number( "0.002" );
+    big_number::BigNumber third_v = big_number::make_big_number( "0.001" );
+    Number first = make_number( first_v );
+    Number second = make_number( second_v );
+    Number third = make_number( third_v );
+    Coefficients coeffs = make_coefficients( first, second, third );
+    big_number::BigNumber first_root_v = big_number::make_big_number( "-1" );
+    big_number::BigNumber second_root_v = big_number::make_big_number( "-1" );
+
+    Number first_root = make_number( first_root_v );
+    Number second_root = make_number( second_root_v );
+
+    Solution solution = solve_equation( coeffs );
+
+    EXPECT_EQ( get_solution_type( solution ), SolutionType::TWO_SAME_ROOTS );
+    EXPECT_EQ( is_equal( get_roots( solution )[0], second_root ), true );
+    EXPECT_EQ( is_equal( get_roots( solution )[1], first_root ), true );
+}
+
+TEST( TestEquationSolver, BEqualZero ) {
+    big_number::BigNumber first_v = big_number::make_big_number( "4" );
+    big_number::BigNumber second_v = big_number::make_big_number( "0" );
+    big_number::BigNumber third_v = big_number::make_big_number( "-16" );
+    Number first = make_number( first_v );
+    Number second = make_number( second_v );
+    Number third = make_number( third_v );
+    Coefficients coeffs = make_coefficients( first, second, third );
+    big_number::BigNumber first_root_v = big_number::make_big_number( "2" );
+    big_number::BigNumber second_root_v = big_number::make_big_number( "-2" );
+
+    Number first_root = make_number( first_root_v );
+    Number second_root = make_number( second_root_v );
+
+    Solution solution = solve_equation( coeffs );
+
+    EXPECT_EQ( get_solution_type( solution ), SolutionType::TWO_ROOTS );
+    EXPECT_EQ( is_equal( get_roots( solution )[0], first_root ), true );
+    EXPECT_EQ( is_equal( get_roots( solution )[1], second_root ), true );
+}
+
+TEST( TestEquationSolver, CEqualZero ) {
+    big_number::BigNumber first_v = big_number::make_big_number( "2" );
+    big_number::BigNumber second_v = big_number::make_big_number( "8" );
+    big_number::BigNumber third_v = big_number::make_big_number( "0" );
+    Number first = make_number( first_v );
+    Number second = make_number( second_v );
+    Number third = make_number( third_v );
+    Coefficients coeffs = make_coefficients( first, second, third );
+    big_number::BigNumber first_root_v = big_number::make_big_number( "0" );
+    big_number::BigNumber second_root_v = big_number::make_big_number( "-4" );
+
+    Number first_root = make_number( first_root_v );
+    Number second_root = make_number( second_root_v );
+
+    Solution solution = solve_equation( coeffs );
+
+    EXPECT_EQ( get_solution_type( solution ), SolutionType::TWO_ROOTS );
+    EXPECT_EQ( is_equal( get_roots( solution )[0], first_root ), true );
+    EXPECT_EQ( is_equal( get_roots( solution )[1], second_root ), true );
+}
