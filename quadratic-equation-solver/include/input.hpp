@@ -2,4 +2,6 @@
 
 #include <optional>
 
-std::optional<double> read_value();
+#include "big_number.hpp"
+
+std::optional<big_number::BigNumber> read_value();
